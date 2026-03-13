@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playr.ai</Playr></title>
+ <style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY */
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background: linear-gradient(135deg, #0f0f18 0%, #1a0033 50%, #2d0066 100%);
+  min-height: 100vh;
+  padding: 1.5rem;
+  color: #f5f5f5;
+  line-height: 1.8;
+  font-size: 1.125rem; /* larger body font */
+  letter-spacing: 0.5px;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #111118;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(to right, #3b0066, #6a00cc);
+  color: white;
+  padding: 2rem;
+}
+
+.header h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 2.5rem; /* bigger heading */
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+/* CONTENT */
+.content {
+  padding: 2.5rem;
+}
+
+/* FORM */
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1.125rem; /* larger labels */
+  font-weight: 600;
+  color: #d8d8ff;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 1rem; /* bigger input height */
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.125rem; /* bigger text inside input */
+  background: #1a1a26;
+  color: #ffffff;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #9d4edd;
+  box-shadow: 0 0 0 3px rgba(157, 78, 221, 0.3);
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-block;
+  background: linear-gradient(to right, #6a00cc, #9d4edd);
+  color: white;
+  border: none;
+  padding: 1rem 2rem; /* bigger button */
+  font-size: 1.125rem; /* larger font */
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(157, 78, 221, 0.4);
+}
+
+.btn-secondary {
+  background: #2a2a38;
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background: #3a3a55;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+/* CARDS */
+.card {
+  background-color: #1a1a26;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(157, 78, 221, 0.25);
+}
+
+.card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem; /* bigger card titles */
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.card-description,
+.summary-text,
+.list li {
+  color: #d0d0ff;
+  font-size: 1.125rem; /* larger text */
+}
+
+/* LIST */
+.list li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #9d4edd;
+  font-size: 1.25rem;
+}
+
+/* ALERT */
+.alert {
+  background-color: rgba(157, 78, 221, 0.1);
+  border-left: 4px solid #9d4edd;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.alert-text {
+  color: #e0d4ff;
+  font-size: 1.125rem;
+}
+
+/* SUMMARY */
+.summary {
+  background-color: #151521;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.summary-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* PRINT */
+@media print {
+  body { background: white; color: black; }
+  .container { box-shadow: none; }
+  .btn-print, .btn-back { display: none; }
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Playr.AI</h1>
+            <p>Get personalized training and recovery plans based on your position and physical condition</p>
+        </div>
+
+        <div class="content">
+            <div id="input-form">
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" class="form-control" min="1" max="120" placeholder="Enter your age">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="position">Soccer Position</label>
+                        <select id="position" class="form-control">
+                            <option value="">Select your position</option>
+                            <option value="goalkeeper">Goalkeeper</option>
+                            <option value="centerback">Center Back</option>
+                            <option value="outsideback">Outside Back/Fullback</option>
+                            <option value="cdm">Center Defensive Midfielder</option>
+                            <option value="cm">Central Midfielder</option>
+                            <option value="cam">Central Attacking Midfielder</option>
+                            <option value="outsideMid">Outside Midfielder</option>
+                            <option value="wing">Winger</option>
+                            <option value="striker">Striker/Forward</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <label for="intensity">Current Fitness Level</label>
+                        <select id="intensity" class="form-control">
+                            <option value="">Select your fitness level</option>
+                            <option value="beginner">Beginner (New to soccer training)</option>
+                            <option value="moderate">Moderate (Recreational player)</option>
+                            <option value="active">Active (Regular team player)</option>
+                            <option value="elite">Elite (Competitive/Professional)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="soreness">Current Soreness Level</label>
+                        <select id="soreness" class="form-control">
+                            <option value="">Select soreness level</option>
+                            <option value="none">None (Feel fresh)</option>
+                            <option value="mild">Mild (Slightly sore but manageable)</option>
+                            <option value="moderate">Moderate (Noticeable soreness)</option>
+                            <option value="severe">Severe (Very sore, affecting movement)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="injuries">Ongoing Injuries or Conditions</label>
+                    <textarea id="injuries" class="form-control" rows="2" placeholder="Describe any ongoing injuries or medical conditions"></textarea>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <label>Pain Area (Click on body part)</label>
+                        <div class="pain-map">
+                            <svg viewBox="0 0 200 400" width="200" height="400">
+                                <!-- Head -->
+                                <circle cx="100" cy="40" r="30" fill="#e5e7eb" class="pain-area" data-area="head"></circle>
+                                
+                                <!-- Neck -->
+                                <rect x="85" y="70" width="30" height="20" fill="#e5e7eb" class="pain-area" data-area="neck"></rect>
+                                
+                                <!-- Shoulders -->
+                                <rect x="55" y="90" width="30" height="20" fill="#e5e7eb" class="pain-area" data-area="leftShoulder"></rect>
+                                <rect x="115" y="90" width="30" height="20" fill="#e5e7eb" class="pain-area" data-area="rightShoulder"></rect>
+                                
+                                <!-- Arms -->
+                                <rect x="45" y="110" width="20" height="60" fill="#e5e7eb" class="pain-area" data-area="leftArm"></rect>
+                                <rect x="135" y="110" width="20" height="60" fill="#e5e7eb" class="pain-area" data-area="rightArm"></rect>
+                                
+                                <!-- Chest -->
+                                <rect x="75" y="90" width="50" height="40" fill="#e5e7eb" class="pain-area" data-area="chest"></rect>
+                                
+                                <!-- Back -->
+                                <rect x="75" y="130" width="50" height="40" fill="#e5e7eb" class="pain-area" data-area="back"></rect>
+                                
+                                <!-- Core/Abs -->
+                                <rect x="75" y="170" width="50" height="40" fill="#e5e7eb" class="pain-area" data-area="core"></rect>
+                                
+                                <!-- Hips -->
+                                <rect x="75" y="210" width="50" height="20" fill="#e5e7eb" class="pain-area" data-area="hips"></rect>
+                                
+                                <!-- Legs -->
+                                <rect x="65" y="230" width="30" height="100" fill="#e5e7eb" class="pain-area" data-area="leftLeg"></rect>
+                                <rect x="105" y="230" width="30" height="100" fill="#e5e7eb" class="pain-area" data-area="rightLeg"></rect>
+                                
+                                <!-- Feet -->
+                                <rect x="65" y="330" width="30" height="20" fill="#e5e7eb" class="pain-area" data-area="leftFoot"></rect>
+                                <rect x="105" y="330" width="30" height="20" fill="#e5e7eb" class="pain-area" data-area="rightFoot"></rect>
+                            </svg>
+                        </div>
+                        <input type="hidden" id="painArea" value="">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="severity">Pain Severity (if applicable)</label>
+                        <div class="slider-container">
+                            <input type="range" id="severity" min="0" max="10" value="0" class="form-control">
+                            <div class="slider-labels">
+                                <span>No Pain (0)</span>
+                                <span>Moderate (5)</span>
+                                <span>Severe (10)</span>
+                            </div>
+                            <div style="text-align: center; margin-top: 10px;">
+                                <span id="severityValue" style="font-weight: 500;">0</span>/10
+                            </div>
+                        </div>
+                        
+                        <button id="generate-btn" class="btn btn-block">Generate Training Plan</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="recommendations" class="hidden">
+                <h2 class="summary-title" style="font-size: 1.5rem; margin-bottom: 1rem;">Your Tailored Soccer Training Plan</h2>
+                
+                <div class="alert">
+                    <div class="alert-icon">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="alert-text">
+                        This training plan is personalized based on your inputs. Always consult with your coach or a sports medicine professional before starting any new training regimen, especially if you have existing injuries.
+                    </div>
+                </div>
+                
+                <div id="training-summary" class="summary">
+                    <!-- Summary will be inserted here -->
+                </div>
+                
+                <div class="grid grid-2">
+                    <div id="training-card" class="card">
+                        <!-- Training content will be inserted here -->
+                    </div>
+                    
+                    <div id="recovery-card" class="card">
+                        <!-- Recovery content will be inserted here -->
+                    </div>
+                </div>
+                
+                <div id="position-specific-card" class="card">
+                    <!-- Position-specific content will be inserted here -->
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-top: 1.5rem;">
+                    <button id="back-btn" class="btn btn-secondary">Back to Form</button>
+                    <button id="print-btn" class="btn">Print Training Plan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Pain area selection
+        const painAreas = document.querySelectorAll('.pain-area');
+        const painAreaInput = document.getElementById('painArea');
+        
+        painAreas.forEach(area => {
+            area.addEventListener('click', () => {
+                // Clear previous selections
+                painAreas.forEach(a => a.classList.remove('selected'));
+                
+                // Select this area
+                area.classList.add('selected');
+                painAreaInput.value = area.dataset.area;
+            });
+        });
+        
+        // Pain severity slider
+        const severitySlider = document.getElementById('severity');
+        const severityValue = document.getElementById('severityValue');
+        
+        severitySlider.addEventListener('input', () => {
+            severityValue.textContent = severitySlider.value;
+        });
+        
+        // Generate recommendations
+        const generateBtn = document.getElementById('generate-btn');
+        const inputForm = document.getElementById('input-form');
+        const recommendationsSection = document.getElementById('recommendations');
+        const backBtn = document.getElementById('back-btn');
+        const printBtn = document.getElementById('print-btn');
+        
+        generateBtn.addEventListener('click', () => {
+            const age = parseInt(document.getElementById('age').value) || 0;
+            const position = document.getElementById('position').value;
+            const intensity = document.getElementById('intensity').value;
+            const soreness = document.getElementById('soreness').value;
+            const injuries = document.getElementById('injuries').value;
+            const painArea = painAreaInput.value;
+            const severity = parseInt(severitySlider.value);
+            
+            // Validate inputs
+            if (!age || !position || !intensity || !soreness) {
+                alert('Please fill in all required fields (Age, Position, Fitness Level, and Soreness Level)');
+                return;
+            }
+            
+            // Generate training plan
+            const trainingPlan = generateTrainingPlan(age, position, intensity, soreness, injuries, painArea, severity);
+            
+            // Display training plan
+            displayTrainingPlan(trainingPlan);
+            
+            // Show recommendations section, hide form
+            inputForm.classList.add('hidden');
+            recommendationsSection.classList.remove('hidden');
+        });
+        
+        backBtn.addEventListener('click', () => {
+            // Show form, hide recommendations
+            inputForm.classList.remove('hidden');
+            recommendationsSection.classList.add('hidden');
+        });
+        
+        printBtn.addEventListener('click', () => {
+            window.print();
+        });
+        
+        function generateTrainingPlan(age, position, intensity, soreness, injuries, painArea, severity) {
+            // Determine training intensity based on soreness and pain
+            let trainingIntensity = "high";
+            if (soreness === "severe" || severity >= 7) {
+                trainingIntensity = "recovery";
+            } else if (soreness === "moderate" || (severity >= 4 && severity < 7)) {
+                trainingIntensity = "light";
+            } else if (soreness === "mild" || (severity > 0 && severity < 4)) {
+                trainingIntensity = "moderate";
+            }
+            
+            // Create base training plan
+            const trainingPlan = {
+                summary: {
+                    position: getPositionFullName(position),
+                    intensity: trainingIntensity,
+                    focus: getPositionFocus(position),
+                    painArea: painArea ? getPainAreaName(painArea) : "None",
+                    painSeverity: severity
+                },
+                training: getTrainingPlan(position, trainingIntensity, intensity, painArea, severity),
+                recovery: getRecoveryPlan(trainingIntensity, painArea, severity),
+                positionSpecific: getPositionSpecificDrills(position, trainingIntensity)
+            };
+            
+            return trainingPlan;
+        }
+        
+        function getPositionFullName(position) {
+            const positions = {
+                "goalkeeper": "Goalkeeper",
+                "centerback": "Center Back",
+                "outsideback": "Outside Back/Fullback",
+                "cdm": "Center Defensive Midfielder",
+                "cm": "Central Midfielder",
+                "cam": "Central Attacking Midfielder",
+                "outsideMid": "Outside Midfielder",
+                "wing": "Winger",
+                "striker": "Striker/Forward"
+            };
+            
+            return positions[position] || position;
+        }
+        
+        function getPositionFocus(position) {
+            const focuses = {
+                "goalkeeper": "Reflexes, Positioning, Distribution",
+                "centerback": "Strength, Aerial Ability, Tackling",
+                "outsideback": "Speed, Stamina, Crossing",
+                "cdm": "Tackling, Positioning, Short Passing",
+                "cm": "Endurance, Vision, Passing Range",
+                "cam": "Creativity, Technical Skills, Shooting",
+                "outsideMid": "Crossing, Stamina, Defensive Awareness",
+                "wing": "Speed, Dribbling, Crossing",
+                "striker": "Finishing, Movement, Strength"
+            };
+            
+            return focuses[position] || "All-around skills";
+        }
+        
+        function getPainAreaName(area) {
+            const areas = {
+                "head": "Head",
+                "neck": "Neck",
+                "leftShoulder": "Left Shoulder",
+                "rightShoulder": "Right Shoulder",
+                "leftArm": "Left Arm",
+                "rightArm": "Right Arm",
+                "chest": "Chest",
+                "back": "Back",
+                "core": "Core/Abdominals",
+                "hips": "Hips",
+                "leftLeg": "Left Leg",
+                "rightLeg": "Right Leg",
+                "leftFoot": "Left Foot",
+                "rightFoot": "Right Foot"
+            };
+            
+            return areas[area] || area;
+        }
+        
+        function getTrainingPlan(position, trainingIntensity, fitnessLevel, painArea, severity) {
+            // Base structure for training plan
+            const plan = {
+                title: "",
+                description: "",
+                warmup: [],
+                mainSession: [],
+                cooldown: [],
+                duration: "",
+                icon: "⚽"
+            };
+            
+            // Standard warm-up for all positions
+            const standardWarmup = [
+                "5 minutes light jogging/dynamic movement",
+                "Dynamic stretching sequence",
+                "Ball control warm-up exercises"
+            ];
+            
+            // Standard cooldown for all positions
+            const standardCooldown = [
+                "5 minutes light jogging/walking",
+                "Static stretching (hold each stretch 20-30 seconds)",
+                "Foam rolling for major muscle groups"
+            ];
+            
+            // Set training intensity details
+            switch(trainingIntensity) {
+                case "recovery":
+                    plan.title = "Recovery Session";
+                    plan.description = "Focus on active recovery and rehabilitation to promote healing and prevent further injury.";
+                    plan.warmup = ["5 minutes very light movement", "Gentle mobility exercises"];
+                    plan.mainSession = [
+                        "20 minutes of light technical work (no intensity)",
+                        "Non-impact cross-training (swimming or stationary bike)",
+                        "Technique work at walking pace"
+                    ];
+                    plan.cooldown = ["Extended stretching session", "Foam rolling"];
+                    plan.duration = "30-45 minutes (low intensity)";
+                    break;
+                    
+                case "light":
+                    plan.title = "Light Training Session";
+                    plan.description = "Maintain fitness while allowing your body to recover with reduced intensity training.";
+                    plan.warmup = standardWarmup;
+                    plan.mainSession = [
+                        "Technical drills at 50-60% intensity",
+                        "Positional work with limited movement",
+                        "Light ball work focusing on technique"
+                    ];
+                    plan.cooldown = standardCooldown;
+                    plan.duration = "45-60 minutes (moderate intensity)";
+                    break;
+                    
+                case "moderate":
+                    plan.title = "Moderate Training Session";
+                    plan.description = "Balanced session focusing on technical skills and moderate physical conditioning.";
+                    plan.warmup = standardWarmup;
+                    plan.mainSession = [
+                        "Technical drills at 70-80% intensity",
+                        "Small-sided games (4v4 or 5v5)",
+                        "Position-specific drills at moderate intensity",
+                        "Interval training (work:rest ratio 1:1)"
+                    ];
+                    plan.cooldown = standardCooldown;
+                    plan.duration = "60-75 minutes (moderate to high intensity)";
+                    break;
+                    
+                case "high":
+                    plan.title = "High Intensity Training Session";
+                    plan.description = "Full intensity session to develop match fitness and technical skills under pressure.";
+                    plan.warmup = standardWarmup;
+                    plan.mainSession = [
+                        "Technical drills at 90-100% intensity",
+                        "High-intensity small-sided games",
+                        "Position-specific drills at game speed",
+                        "Sprint and agility work",
+                        "Tactical scenarios at match pace"
+                    ];
+                    plan.cooldown = standardCooldown;
+                    plan.duration = "75-90 minutes (high intensity)";
+                    break;
+            }
+            
+            // Modify based on pain area if applicable
+            if (painArea && severity > 0) {
+                modifyTrainingForPain(plan, painArea, severity);
+            }
+            
+            return plan;
+        }
+        
+        function modifyTrainingForPain(plan, painArea, severity) {
+            // Add pain-specific modifications to the training plan
+            const modifications = [];
+            
+            switch(painArea) {
+                case "leftLeg":
+                case "rightLeg":
+                    modifications.push("Reduce running/sprinting volume by 50%");
+                    modifications.push("Avoid high-impact jumping exercises");
+                    if (severity > 5) {
+                        modifications.push("Consider non-weight bearing cardio alternatives (swimming, cycling)");
+                    }
+                    break;
+                    
+                case "leftFoot":
+                case "rightFoot":
+                    modifications.push("Ensure proper footwear with adequate support");
+                    modifications.push("Reduce cutting/pivoting movements");
+                    modifications.push("Consider taping or bracing for additional support");
+                    break;
+                    
+                case "back":
+                    modifications.push("Avoid heavy load-bearing exercises");
+                    modifications.push("Focus on core stability with proper form");
+                    modifications.push("Reduce rotation movements if painful");
+                    break;
+                    
+                case "core":
+                    modifications.push("Modify core exercises to pain-free variations");
+                    modifications.push("Focus on breathing techniques during core work");
+                    break;
+                    
+                case "leftShoulder":
+                case "rightShoulder":
+                    modifications.push("Limit throw-ins and goalkeeper-specific diving exercises");
+                    modifications.push("Modify push-up positions if needed");
+                    break;
+            }
+            
+            if (modifications.length > 0) {
+                plan.mainSession.push("--- Pain Management Modifications ---");
+                plan.mainSession = plan.mainSession.concat(modifications);
+            }
+        }
+        
+        function getRecoveryPlan(trainingIntensity, painArea, severity) {
+            // Base structure for recovery plan
+            const plan = {
+                title: "Recovery Protocol",
+                description: "Optimize recovery to prepare for your next training session or match.",
+                immediate: [],
+                sameDay: [],
+                nextDay: [],
+                nutrition: [],
+                icon: "🔄"
+            };
+            
+            // Standard recovery protocols
+            const standardImmediate = [
+                "10-15 minutes cool-down with light jogging/walking",
+                "Hydration (16-20 oz water or electrolyte drink)",
+                "Light stretching of major muscle groups"
+            ];
+            
+            const standardSameDay = [
+                "Proper meal within 60 minutes (4:1 carb to protein ratio)",
+                "Compression garments if available",
+                "20 minutes of foam rolling"
+            ];
+            
+            const standardNextDay = [
+                "10-15 minutes of mobility work",
+                "Light activation exercises",
+                "Self-assessment for soreness/pain"
+            ];
+            
+            const standardNutrition = [
+                "Hydrate (minimum 2-3 liters of water daily)",
+                "Protein intake (1.6-1.8g per kg of body weight)",
+                "Carbohydrates to replenish glycogen stores",
+                "Anti-inflammatory foods (berries, fatty fish, nuts)"
+            ];
+            
+            // Set recovery based on training intensity
+            switch(trainingIntensity) {
+                case "recovery":
+                    plan.immediate = standardImmediate;
+                    plan.sameDay = standardSameDay.concat([
+                        "Extended stretching session (30 minutes)",
+                        "Consider contrast therapy (hot/cold)"
+                    ]);
+                    plan.nextDay = standardNextDay.concat([
+                        "Continue with active recovery",
+                        "Consider massage or physiotherapy if available"
+                    ]);
+                    plan.nutrition = standardNutrition.concat([
+                        "Focus on anti-inflammatory diet"
+                    ]);
+                    break;
+                    
+                case "light":
+                    plan.immediate = standardImmediate;
+                    plan.sameDay = standardSameDay;
+                    plan.nextDay = standardNextDay;
+                    plan.nutrition = standardNutrition;
+                    break;
+                    
+                case "moderate":
+                    plan.immediate = standardImmediate;
+                    plan.sameDay = standardSameDay.concat([
+                        "Consider ice bath (10-15 minutes at 10-15°C)"
+                    ]);
+                    plan.nextDay = standardNextDay;
+                    plan.nutrition = standardNutrition;
+                    break;
+                    
+                case "high":
+                    plan.immediate = standardImmediate;
+                    plan.sameDay = standardSameDay.concat([
+                        "Ice bath (10-15 minutes at 10-15°C)",
+                        "Consider compression boots if available"
+                    ]);
+                    plan.nextDay = standardNextDay.concat([
+                        "Light recovery session (20-30 minutes)",
+                        "Consider massage or physiotherapy if available"
+                    ]);
+                    plan.nutrition = standardNutrition.concat([
+                        "Consider tart cherry juice for recovery",
+                        "Ensure adequate carbohydrate intake for glycogen replenishment"
+                    ]);
+                    break;
+            }
+            
+            // Add pain-specific recovery if applicable
+            if (painArea && severity > 0) {
+                addPainRecovery(plan, painArea, severity);
+            }
+            
+            return plan;
+        }
+        
+        function addPainRecovery(plan, painArea, severity) {
+            // Add pain-specific recovery protocols
+            const painRecovery = [];
+            
+            switch(painArea) {
+                case "leftLeg":
+                case "rightLeg":
+                    painRecovery.push("Elevate legs when resting");
+                    painRecovery.push("Ice affected area (15 minutes on, 45 minutes off)");
+                    if (severity > 5) {
+                        painRecovery.push("Consider compression sleeve for affected leg");
+                    }
+                    break;
+                    
+                case "leftFoot":
+                case "rightFoot":
+                    painRecovery.push("Ice foot bath (10-15 minutes)");
+                    painRecovery.push("Foot/arch stretches and exercises");
+                    painRecovery.push("Consider supportive insoles for daily wear");
+                    break;
+                    
+                case "back":
+                    painRecovery.push("Gentle back stretches (cat-cow, child's pose)");
+                    painRecovery.push("Heat therapy for muscle relaxation");
+                    painRecovery.push("Avoid prolonged sitting");
+                    break;
+                    
+                case "core":
+                    painRecovery.push("Gentle core activation exercises");
+                    painRecovery.push("Focus on proper breathing techniques");
+                    break;
+                    
+                case "leftShoulder":
+                case "rightShoulder":
+                    painRecovery.push("Ice affected shoulder (15 minutes on, 45 minutes off)");
+                    painRecovery.push("Gentle mobility exercises within pain-free range");
+                    painRecovery.push("Consider kinesiology taping if beneficial");
+                    break;
+            }
+            
+            if (painRecovery.length > 0) {
+                plan.sameDay.push("--- Pain-Specific Recovery ---");
+                plan.sameDay = plan.sameDay.concat(painRecovery);
+            }
+        }
+        
+        function getPositionSpecificDrills(position, trainingIntensity) {
+            // Base structure for position-specific drills
+            const drills = {
+                title: `${getPositionFullName(position)} Specific Training`,
+                description: "Focus on the key skills and attributes needed for your position.",
+                technicalDrills: [],
+                physicalFocus: [],
+                tacticalAwareness: [],
+                icon: "🎯"
+            };
+            
+            // Adjust drills based on position and training intensity
+            switch(position) {
+                case "goalkeeper":
+                    drills.technicalDrills = [
+                        "Handling drills (high/low catches)",
+                        "Diving technique (both sides)",
+                        "Distribution practice (throws, rolls, kicks)",
+                        "1v1 situations"
+                    ];
+                    drills.physicalFocus = [
+                        "Explosive power training",
+                        "Reaction time drills",
+                        "Core stability exercises",
+                        "Plyometric training"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Positioning for crosses",
+                        "Communication with defenders",
+                        "Starting position based on ball location",
+                        "Distribution decision making"
+                    ];
+                    break;
+                    
+                case "centerback":
+                    drills.technicalDrills = [
+                        "Heading drills (defensive and attacking)",
+                        "Tackling technique (standing and sliding)",
+                        "Long-range passing",
+                        "Clearance technique"
+                    ];
+                    drills.physicalFocus = [
+                        "Strength training (upper and lower body)",
+                        "Jumping and aerial duels",
+                        "Short burst speed",
+                        "Physical duels and shielding"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Defensive line positioning",
+                        "Reading the game and anticipation",
+                        "Covering and supporting teammates",
+                        "Building from the back"
+                    ];
+                    break;
+                    
+                case "outsideback":
+                    drills.technicalDrills = [
+                        "Crossing technique (various heights/speeds)",
+                        "1v1 defending",
+                        "Progressive passing drills",
+                        "Overlapping runs with ball control"
+                    ];
+                    drills.physicalFocus = [
+                        "Endurance training",
+                        "Repeated sprint ability",
+                        "Agility and change of direction",
+                        "Recovery runs"
+                    ];
+                    drills.tacticalAwareness = [
+                        "When to overlap/underlap",
+                        "Defensive positioning vs. attacking wingers",
+                        "Supporting the attack",
+                        "Recovery positioning"
+                    ];
+                    break;
+                    
+                case "cdm":
+                    drills.technicalDrills = [
+                        "Short passing accuracy",
+                        "Receiving under pressure",
+                        "Screening and interception drills",
+                        "Tackling technique"
+                    ];
+                    drills.physicalFocus = [
+                        "Endurance training",
+                        "Core stability",
+                        "Strength in duels",
+                        "Agility for quick transitions"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Positioning between lines",
+                        "Screening passing lanes",
+                        "Supporting center backs",
+                        "Transition from defense to attack"
+                    ];
+                    break;
+                    
+                case "cm":
+                    drills.technicalDrills = [
+                        "Passing range (short, medium, long)",
+                        "First touch under pressure",
+                        "Turning in tight spaces",
+                        "Shooting from distance"
+                    ];
+                    drills.physicalFocus = [
+                        "Box-to-box endurance",
+                        "Repeated sprint ability",
+                        "Balance and coordination",
+                        "Strength for midfield battles"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Finding space between lines",
+                        "Switching play",
+                        "Supporting both attack and defense",
+                        "Game tempo control"
+                    ];
+                    break;
+                    
+                case "cam":
+                    drills.technicalDrills = [
+                        "Creative passing and through balls",
+                        "Shooting from various angles",
+                        "Dribbling in tight spaces",
+                        "Set piece delivery"
+                    ];
+                    drills.physicalFocus = [
+                        "Agility and balance",
+                        "Quick acceleration",
+                        "Core strength",
+                        "Reaction speed"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Finding pockets of space",
+                        "Supporting the striker",
+                        "Transition moments",
+                        "Final third decision making"
+                    ];
+                    break;
+                    
+                case "outsideMid":
+                    drills.technicalDrills = [
+                        "Crossing technique",
+                        "Cutting inside with the ball",
+                        "Combination play with fullbacks",
+                        "Defensive tracking"
+                    ];
+                    drills.physicalFocus = [
+                        "Endurance for repeated runs",
+                        "Speed over medium distances",
+                        "Agility for quick turns",
+                        "Recovery capacity"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Width maintenance",
+                        "When to come inside",
+                        "Supporting fullbacks defensively",
+                        "Transition positioning"
+                    ];
+                    break;
+                    
+                case "wing":
+                    drills.technicalDrills = [
+                        "1v1 dribbling skills",
+                        "Crossing from various angles",
+                        "Cutting inside to shoot",
+                        "Quick combination play"
+                    ];
+                    drills.physicalFocus = [
+                        "Explosive speed",
+                        "Repeated sprint ability",
+                        "Agility and quick direction changes",
+                        "Balance under pressure"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Creating and exploiting space",
+                        "Timing of runs behind defense",
+                        "When to dribble vs. pass",
+                        "Defensive responsibilities"
+                    ];
+                    break;
+                    
+                case "striker":
+                    drills.technicalDrills = [
+                        "Finishing from various angles",
+                        "Heading technique",
+                        "Hold-up play and shielding",
+                        "One-touch finishing"
+                    ];
+                    drills.physicalFocus = [
+                        "Explosive power",
+                        "Strength for hold-up play",
+                        "Quick acceleration over short distances",
+                        "Jumping ability"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Movement to create space",
+                        "Timing runs behind defense",
+                        "Link-up play with midfielders",
+                        "Pressing from the front"
+                    ];
+                    break;
+            }
+            
+            // Modify drills based on training intensity
+            if (trainingIntensity === "recovery" || trainingIntensity === "light") {
+                drills.description += " Modified for recovery/light training.";
+                
+                // Reduce the number of drills and modify intensity
+                drills.technicalDrills = drills.technicalDrills.slice(0, 2).map(drill => drill + " (low intensity)");
+                drills.physicalFocus = drills.physicalFocus.slice(0, 2).map(focus => focus + " (reduced volume)");
+                drills.tacticalAwareness = drills.tacticalAwareness.slice(0, 2).map(awareness => awareness + " (walk-through/discussion)");
+            }
+            
+            return drills;
+        }
+        
+        function displayTrainingPlan(plan) {
+            // Display summary
+            const summaryElement = document.getElementById('training-summary');
+            let intensityClass = "";
+            let intensityText = "";
+            
+            switch(plan.summary.intensity) {
+                case "recovery":
+                    intensityClass = "badge-recovery";
+                    intensityText = "Recovery";
+                    break;
+                case "light":
+                    intensityClass = "badge-light";
+                    intensityText = "Light";
+                    break;
+                case "moderate":
+                    intensityClass = "badge-moderate";
+                    intensityText = "Moderate";
+                    break;
+                case "high":
+                    intensityClass = "badge-high";
+                    intensityText = "High";
+                    break;
+            }
+            
+            summaryElement.innerHTML = `
+                <div class="summary-flex">
+                    <div>
+                        <h3 class="summary-title">Training Summary</h3>
+                        <p class="summary-text">Position: <span>${plan.summary.position}</span></p>
+                        <p class="summary-text">Focus Areas: <span>${plan.summary.focus}</span></p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="intensity-badge ${intensityClass}">
+                            ${intensityText} Intensity
+                        </span>
+                        ${plan.summary.painArea !== "None" ? 
+                            `<p class="summary-text">Pain Area: <span>${plan.summary.painArea} (Level ${plan.summary.painSeverity})</span></p>` : 
+                            `<p class="summary-text">No pain reported</p>`
+                        }
+                    </div>
+                </div>
+            `;
+            
+            // Display training card
+            const trainingElement = document.getElementById('training-card');
+            
+            let trainingHTML = `
+                <div class="card-header">
+                    <div class="card-icon">${plan.training.icon}</div>
+                    <h3 class="card-title">${plan.training.title}</h3>
+                </div>
+                <p class="card-description">${plan.training.description}</p>
+                <p style="font-size: 0.875rem; color: #666; margin-bottom: 1rem;">Duration: ${plan.training.duration}</p>
+                
+                <h4 class="list-title">Warm-up:</h4>
+                <ul class="list">
+            `;
+            
+            plan.training.warmup.forEach(item => {
+                trainingHTML += `<li>${item}</li>`;
+            });
+            
+            trainingHTML += `
+                </ul>
+                
+                <h4 class="list-title">Main Session:</h4>
+                <ul class="list">
+            `;
+            
+            plan.training.mainSession.forEach(item => {
+                if (item.startsWith("---")) {
+                    trainingHTML += `<li class="special-item">${item.replace(/---/g, '')}</li>`;
+                } else {
+                    trainingHTML += `<li>${item}</li>`;
+                }
+            });
+            
+            trainingHTML += `
+                </ul>
+                
+                <h4 class="list-title">Cool-down:</h4>
+                <ul class="list">
+            `;
+            
+            plan.training.cooldown.forEach(item => {
+                trainingHTML += `<li>${item}</li>`;
+            });
+            
+            trainingHTML += `
+                </ul>
+            `;
+            
+            trainingElement.innerHTML = trainingHTML;
+            
+            // Display recovery card
+            const recoveryElement = document.getElementById('recovery-card');
+            
+            let recoveryHTML = `
+                <div class="card-header">
+                    <div class="card-icon">${plan.recovery.icon}</div>
+                    <h3 class="card-title">${plan.recovery.title}</h3>
+                </div>
+                <p class="card-description">${plan.recovery.description}</p>
+                
+                <h4 class="list-title">Immediate Post-Training:</h4>
+                <ul class="list">
+            `;
+            
+            plan.recovery.immediate.forEach(item => {
+                recoveryHTML += `<li>${item}</li>`;
+            });
+            
+            recoveryHTML += `
+                </ul>
+                
+                <h4 class="list-title">Same Day:</h4>
+                <ul class="list">
+            `;
+            
+            plan.recovery.sameDay.forEach(item => {
+                if (item.startsWith("---")) {
+                    recoveryHTML += `<li class="special-item">${item.replace(/---/g, '')}</li>`;
+                } else {
+                    recoveryHTML += `<li>${item}</li>`;
+                }
+            });
+            
+            recoveryHTML += `
+                </ul>
+                
+                <h4 class="list-title">Next Day:</h4>
+                <ul class="list">
+            `;
+            
+            plan.recovery.nextDay.forEach(item => {
+                recoveryHTML += `<li>${item}</li>`;
+            });
+            
+            recoveryHTML += `
+                </ul>
+                
+                <h4 class="list-title">Nutrition Focus:</h4>
+                <ul class="list">
+            `;
+            
+            plan.recovery.nutrition.forEach(item => {
+                recoveryHTML += `<li>${item}</li>`;
+            });
+            
+            recoveryHTML += `
+                </ul>
+            `;
+            
+            recoveryElement.innerHTML = recoveryHTML;
+            
+            // Display position-specific card
+            const positionElement = document.getElementById('position-specific-card');
+            
+            let positionHTML = `
+                <div class="card-header">
+                    <div class="card-icon">${plan.positionSpecific.icon}</div>
+                    <h3 class="card-title">${plan.positionSpecific.title}</h3>
+                </div>
+                <p class="card-description">${plan.positionSpecific.description}</p>
+                
+                <div class="grid grid-3">
+                    <div>
+                        <h4 class="list-title">Technical Drills:</h4>
+                        <ul class="list">
+            `;
+            
+            plan.positionSpecific.technicalDrills.forEach(item => {
+                positionHTML += `<li>${item}</li>`;
+            });
+            
+            positionHTML += `
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="list-title">Physical Focus:</h4>
+                        <ul class="list">
+            `;
+            
+            plan.positionSpecific.physicalFocus.forEach(item => {
+                positionHTML += `<li>${item}</li>`;
+            });
+            
+            positionHTML += `
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="list-title">Tactical Awareness:</h4>
+                        <ul class="list">
+            `;
+            
+            plan.positionSpecific.tacticalAwareness.forEach(item => {
+                positionHTML += `<li>${item}</li>`;
+            });
+            
+            positionHTML += `
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            positionElement.innerHTML = positionHTML;
+        }
+    </script>
+</body>
+</html>
