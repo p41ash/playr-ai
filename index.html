@@ -1,595 +1,1241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Playr.AI — Elite Soccer Training</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --obsidian:#07070f;--obsidian2:#0e0e1a;--obsidian3:#161624;--obsidian4:#1e1e2e;
-  --gold:#c9a55a;--gold2:#e8c97a;--gold-dim:rgba(201,165,90,0.12);--gold-glow:rgba(201,165,90,0.25);
-  --ivory:#f5f0e8;--ivory2:#d8d0c0;--muted:#6e6e8a;--muted2:#9898b8;
-  --border:rgba(201,165,90,0.12);--border2:rgba(255,255,255,0.06);
-  --sidebar-w:300px;--r:16px;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playr.ai</Playr></title>
+ <style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-html{scroll-behavior:smooth}
-body{font-family:'Crimson Pro',serif;background:var(--obsidian);color:var(--ivory);min-height:100vh;font-size:18px;line-height:1.8;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.6}
 
-/* LAYOUT */
-.app{display:flex;min-height:100vh;position:relative;z-index:1}
+/* BODY */
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background: linear-gradient(135deg, #0f0f18 0%, #1a0033 50%, #2d0066 100%);
+  min-height: 100vh;
+  padding: 1.5rem;
+  color: #f5f5f5;
+  line-height: 1.8;
+  font-size: 1.125rem; /* larger body font */
+  letter-spacing: 0.5px;
+}
 
-/* SIDEBAR */
-.sidebar{width:var(--sidebar-w);min-width:var(--sidebar-w);background:var(--obsidian2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;z-index:10}
-.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-.s-logo{padding:2rem 1.75rem 1.5rem;border-bottom:1px solid var(--border);position:relative}
-.s-logo::after{content:'';position:absolute;bottom:0;left:1.75rem;right:1.75rem;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
-.s-wordmark{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;letter-spacing:4px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold2) 60%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.s-sub{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:3px}
-.s-auth{padding:1.5rem 1.75rem;border-bottom:1px solid var(--border2)}
-.s-greeting{font-size:.78rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:.3rem}
-.s-name{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold2);margin-bottom:1rem}
-.sb{display:block;width:100%;padding:.7rem 1rem;border-radius:10px;border:none;font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-bottom:.5rem;text-align:center}
-.sb-primary{background:linear-gradient(135deg,#8b6914,var(--gold));color:var(--obsidian)}
-.sb-primary:hover{transform:translateY(-1px);box-shadow:0 8px 24px var(--gold-glow)}
-.sb-outline{background:transparent;border:1px solid var(--border);color:var(--muted2)}
-.sb-outline:hover{border-color:var(--gold);color:var(--gold)}
-.sb-ghost{background:transparent;border:none;color:var(--muted);font-size:.68rem;letter-spacing:1.5px}
-.sb-ghost:hover{color:#ff8080}
-.s-plans{padding:1.5rem 1.75rem;flex:1}
-.s-ph{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem}
-.s-ph::after{content:'';flex:1;height:1px;background:var(--border)}
-.pc{padding:.9rem 1rem;border-radius:12px;border:1px solid var(--border2);background:var(--obsidian3);cursor:pointer;margin-bottom:.6rem;transition:all .2s;position:relative}
-.pc:hover{border-color:var(--border);background:var(--obsidian4);transform:translateX(4px)}
-.pc-title{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--ivory);margin-bottom:.2rem}
-.pc-meta{font-size:.78rem;color:var(--muted);font-family:'DM Mono',monospace}
-.pb{display:inline-block;padding:2px 9px;border-radius:20px;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:1px;text-transform:uppercase;margin-top:.4rem}
-.pb-recovery{background:rgba(99,179,237,.15);color:#63b3ed}.pb-light{background:rgba(110,231,183,.15);color:#6ee7b7}
-.pb-moderate{background:rgba(251,191,36,.15);color:#fbbf24}.pb-high{background:rgba(252,129,129,.15);color:#fc8181}
-.pc-del{position:absolute;top:.75rem;right:.75rem;background:none;border:none;color:var(--muted);cursor:pointer;font-size:.9rem;opacity:0;transition:opacity .2s}
-.pc:hover .pc-del{opacity:1}.pc-del:hover{color:#ff6b6b}
-.no-plans{font-size:.88rem;color:var(--muted);font-style:italic;text-align:center;padding:1.5rem 0;line-height:1.6}
-
-/* MAIN */
-.main{flex:1;padding:2rem;min-width:0}
-.panel{max-width:960px;margin:0 auto;background:var(--obsidian2);border:1px solid var(--border);border-radius:24px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(201,165,90,.05)}
+/* CONTAINER */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #111118;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+}
 
 /* HEADER */
-.ph{padding:3rem 3.5rem;position:relative;overflow:hidden;background:linear-gradient(160deg,#12100a 0%,#1a1505 40%,#0a0a16 100%);border-bottom:1px solid var(--border)}
-.ph::before{content:'';position:absolute;top:-60px;right:-80px;width:350px;height:350px;background:radial-gradient(circle,rgba(201,165,90,.08) 0%,transparent 70%);pointer-events:none}
-.ph::after{content:'';position:absolute;bottom:0;left:3.5rem;right:3.5rem;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.ph-eye{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem}
-.ph-eye::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
-.ph-title{font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:900;letter-spacing:2px;line-height:1.1;background:linear-gradient(135deg,var(--gold2) 0%,var(--gold) 50%,#f0dca0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.75rem}
-.ph-sub{color:var(--muted2);font-size:1.15rem;font-weight:300;letter-spacing:.5px}
+.header {
+  background: linear-gradient(to right, #3b0066, #6a00cc);
+  color: white;
+  padding: 2rem;
+}
+
+.header h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 2.5rem; /* bigger heading */
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+/* CONTENT */
+.content {
+  padding: 2.5rem;
+}
 
 /* FORM */
-.pb-body{padding:3rem 3.5rem}
-.fs{margin-bottom:2.5rem}
-.fs-label{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem}
-.fs-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
-.grid{display:grid;gap:1.25rem}.grid-2{grid-template-columns:1fr 1fr}.grid-3{grid-template-columns:1fr 1fr 1fr}
-.field{display:flex;flex-direction:column;gap:.55rem}
-.flabel{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted2)}
-.finput{width:100%;padding:1rem 1.1rem;background:var(--obsidian3);border:1px solid var(--border2);border-radius:12px;color:var(--ivory);font-family:'Crimson Pro',serif;font-size:1.15rem;transition:border-color .2s,box-shadow .2s;appearance:none;-webkit-appearance:none}
-.finput:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-dim)}
-.finput::placeholder{color:var(--muted)}
-select.finput{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236e6e8a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;cursor:pointer}
-select.finput option{background:var(--obsidian3)}
-textarea.finput{resize:vertical;min-height:80px;line-height:1.65}
-
-/* PAIN MAP */
-.pain-row{display:grid;grid-template-columns:200px 1fr;gap:2rem;align-items:start}
-.pmw{background:var(--obsidian3);border:1px solid var(--border2);border-radius:16px;padding:1.25rem;display:flex;justify-content:center}
-.pmw svg{max-width:160px;width:100%}
-.pain-area{cursor:pointer;fill:#1e1e30;stroke:rgba(255,255,255,.06);stroke-width:.8;transition:fill .25s ease,filter .25s ease}
-.pain-area:hover{fill:#2e2e48;filter:brightness(1.3)}
-.pain-area.selected{stroke:rgba(255,255,255,.4);stroke-width:1.5;filter:drop-shadow(0 0 5px rgba(255,255,255,.3))}
-.pain-area.has-pain{filter:drop-shadow(0 0 6px rgba(239,68,68,.5))}
-.pain-area.selected.has-pain{filter:brightness(1.15) drop-shadow(0 0 9px rgba(239,68,68,.7))}
-.pain-controls{display:flex;flex-direction:column;gap:1.5rem;padding-top:.25rem}
-.pal{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--gold2);font-style:italic;min-height:1.4em}
-.ptags{display:flex;flex-wrap:wrap;gap:.5rem;min-height:32px}
-.ptag{display:flex;align-items:center;gap:.4rem;padding:3px 10px 3px 12px;border-radius:30px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.08);color:#fca5a5;font-size:.85rem}
-.ptag-x{background:none;border:none;color:#fca5a5;cursor:pointer;font-size:.9rem;opacity:.6;transition:opacity .15s;padding:0}
-.ptag-x:hover{opacity:1}
-.no-areas{font-size:.9rem;color:var(--muted);font-style:italic}
-.sf{display:flex;flex-direction:column;gap:.6rem}
-input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:5px;border-radius:3px;outline:none;cursor:pointer;border:none;background:linear-gradient(to right,var(--gold) var(--pct,0%),var(--obsidian4) var(--pct,0%))}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--gold2);border:3px solid var(--obsidian2);box-shadow:0 0 0 2px var(--gold);cursor:pointer}
-input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--gold2);border:3px solid var(--obsidian2);box-shadow:0 0 0 2px var(--gold);cursor:pointer}
-.slabels{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);margin-top:.3rem}
-.sevn{font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;text-align:center;line-height:1;transition:color .3s;color:var(--muted)}
-.sevl{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:2px;text-align:center;color:var(--muted);margin-top:2px}
-
-/* GENERATE */
-.genwrap{padding:0 3.5rem 3rem;border-top:1px solid var(--border2)}
-.genbtn{width:100%;padding:1.3rem 2rem;background:linear-gradient(135deg,#6b4c0a,var(--gold),#b8930e,var(--gold2));background-size:300% 300%;animation:gshift 4s ease infinite;border:none;border-radius:14px;font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;letter-spacing:2px;color:var(--obsidian);cursor:pointer;transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
-.genbtn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.15) 50%,transparent 60%);transform:translateX(-100%);transition:transform .4s ease}
-.genbtn:hover::after{transform:translateX(100%)}
-.genbtn:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(201,165,90,.35)}
-.genbtn:disabled{opacity:.5;cursor:not-allowed;animation:none;transform:none}
-@keyframes gshift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-
-/* LOADING */
-.loading{padding:4rem 3.5rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2rem}
-.lring{width:72px;height:72px;border-radius:50%;border:2px solid var(--border);border-top:2px solid var(--gold);animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.ltitle{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--gold2);font-style:italic}
-.lsteps{display:flex;flex-direction:column;gap:.6rem;width:100%;max-width:380px}
-.lstep{display:flex;align-items:center;gap:.75rem;font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;transition:color .3s,transform .3s}
-.lstep.active{color:var(--gold2);transform:translateX(8px)}
-.lstep.done{color:var(--muted2)}
-.ldot{width:6px;height:6px;border-radius:50%;background:var(--muted);flex-shrink:0;transition:background .3s}
-.lstep.active .ldot{background:var(--gold);box-shadow:0 0 8px var(--gold-glow)}
-.lstep.done .ldot{background:var(--muted2)}
-
-/* RESULTS */
-.results{padding:3rem 3.5rem}
-.rh{margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
-.reye{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem}
-.reye::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
-.rtitle{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;color:var(--ivory);line-height:1.2;margin-bottom:.5rem}
-.rmeta{font-size:1rem;color:var(--muted2)}
-.disc{background:var(--obsidian3);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:1.1rem 1.5rem;margin-bottom:2.5rem;display:flex;gap:.9rem;align-items:flex-start}
-.disc-icon{color:var(--gold);font-size:1.1rem;flex-shrink:0;margin-top:1px}
-.disc-text{font-size:.98rem;color:var(--muted2);line-height:1.7}
-
-/* AI SECTIONS */
-.ais{margin-bottom:2.5rem;animation:fadeUp .4s ease both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.ais-head{display:flex;align-items:center;gap:1rem;padding-bottom:1rem;margin-bottom:1.5rem;border-bottom:1px solid var(--border);position:relative}
-.ais-head::after{content:'';position:absolute;bottom:-1px;left:0;width:60px;height:1px;background:var(--gold)}
-.ais-icon{width:44px;height:44px;border-radius:12px;background:var(--gold-dim);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
-.ais-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700}
-.ais-body{font-size:1.1rem;color:var(--ivory2);line-height:1.95;white-space:pre-wrap;word-wrap:break-word}
-.ais-body strong{color:var(--gold2);font-weight:600}
-.ais-body em{color:var(--ivory);font-style:italic}
-
-/* ACTIONS */
-.ract{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding-top:2rem;border-top:1px solid var(--border);margin-top:2.5rem}
-.ag{display:flex;gap:.85rem;flex-wrap:wrap}
-.bact{padding:.8rem 1.6rem;border-radius:11px;border:none;font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s}
-.b-back{background:var(--obsidian3);border:1px solid var(--border2);color:var(--muted2)}.b-back:hover{border-color:var(--border);color:var(--ivory)}
-.b-save{background:linear-gradient(135deg,#064e3b,#059669);color:#fff}.b-save:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(5,150,105,.3)}
-.b-print{background:var(--gold-dim);border:1px solid var(--border);color:var(--gold2)}.b-print:hover{background:rgba(201,165,90,.18);transform:translateY(-2px)}
-
-/* MODAL */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem}
-.modal{background:var(--obsidian2);border:1px solid var(--border);border-radius:20px;padding:2.75rem;width:100%;max-width:430px;box-shadow:0 40px 100px rgba(0,0,0,.8);position:relative;animation:mIn .35s cubic-bezier(.34,1.56,.64,1)}
-@keyframes mIn{from{opacity:0;transform:scale(.88) translateY(24px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.mx{position:absolute;top:1.25rem;right:1.25rem;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;transition:color .2s;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center}
-.mx:hover{color:var(--ivory);background:var(--obsidian3)}
-.mlogo{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;letter-spacing:3px;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem}
-.msub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
-.tabs{display:flex;background:var(--obsidian3);border-radius:11px;padding:3px;margin-bottom:2rem;gap:3px}
-.tab{flex:1;padding:.6rem;border:none;border-radius:9px;font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;background:transparent;color:var(--muted)}
-.tab.on{background:linear-gradient(135deg,#8b6914,var(--gold));color:var(--obsidian)}
-.mf{margin-bottom:1.35rem}
-.mf label{display:block;font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:.5rem}
-.mi{width:100%;padding:.85rem 1rem;background:var(--obsidian3);border:1px solid var(--border2);border-radius:10px;color:var(--ivory);font-family:'Crimson Pro',serif;font-size:1.1rem;transition:border-color .2s,box-shadow .2s}
-.mi:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-dim)}
-.merr{color:#fc8181;font-size:.85rem;margin-top:-.7rem;margin-bottom:.85rem;display:none}
-.merr.show{display:block}
-.msub-btn{width:100%;padding:1rem;border:none;border-radius:12px;background:linear-gradient(135deg,#8b6914,var(--gold),var(--gold2));color:var(--obsidian);font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-top:.5rem}
-.msub-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px var(--gold-glow)}
-
-/* TOAST */
-.toast{position:fixed;bottom:2rem;right:2rem;padding:.85rem 1.75rem;border-radius:12px;font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;box-shadow:0 12px 35px rgba(0,0,0,.5);z-index:200;animation:tIn .3s ease,tOut .3s ease 2.4s forwards;pointer-events:none}
-.t-ok{background:linear-gradient(135deg,#065f46,#059669);color:#fff}
-.t-warn{background:linear-gradient(135deg,#78350f,var(--gold));color:var(--obsidian)}
-@keyframes tIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@keyframes tOut{to{opacity:0;transform:translateY(10px)}}
-
-.hidden{display:none!important}
-
-/* MOBILE */
-.mob-tog{display:none;position:fixed;top:1rem;left:1rem;z-index:20;background:var(--obsidian2);border:1px solid var(--border);border-radius:10px;color:var(--gold);width:42px;height:42px;cursor:pointer;font-size:1.1rem;align-items:center;justify-content:center}
-@media(max-width:720px){
-  .mob-tog{display:flex}
-  .sidebar{position:fixed;left:-100%;transition:left .3s}
-  .sidebar.open{left:0}
-  .main{padding:1rem;padding-top:4rem}
-  .ph{padding:2rem 1.5rem}.pb-body,.results{padding:1.75rem 1.5rem}.genwrap{padding:0 1.5rem 2rem}
-  .grid-2,.grid-3{grid-template-columns:1fr}
-  .pain-row{grid-template-columns:1fr}
-  .ph-title{font-size:2.2rem}
+.form-group {
+  margin-bottom: 2rem;
 }
-@media print{.sidebar,.mob-tog,.ract,.disc{display:none!important}body{background:#fff;color:#000}.panel{box-shadow:none;border:none}.ais-body{color:#222}}
+
+.form-group label {
+  display: block;
+  font-size: 1.125rem; /* larger labels */
+  font-weight: 600;
+  color: #d8d8ff;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 1rem; /* bigger input height */
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.125rem; /* bigger text inside input */
+  background: #1a1a26;
+  color: #ffffff;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #9d4edd;
+  box-shadow: 0 0 0 3px rgba(157, 78, 221, 0.3);
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-block;
+  background: linear-gradient(to right, #6a00cc, #9d4edd);
+  color: white;
+  border: none;
+  padding: 1rem 2rem; /* bigger button */
+  font-size: 1.125rem; /* larger font */
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(157, 78, 221, 0.4);
+}
+
+.btn-secondary {
+  background: #2a2a38;
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background: #3a3a55;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+/* CARDS */
+.card {
+  background-color: #1a1a26;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(157, 78, 221, 0.25);
+}
+
+.card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem; /* bigger card titles */
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.card-description,
+.summary-text,
+.list li {
+  color: #d0d0ff;
+  font-size: 1.125rem; /* larger text */
+}
+
+/* LIST */
+.list li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #9d4edd;
+  font-size: 1.25rem;
+}
+
+/* ALERT */
+.alert {
+  background-color: rgba(157, 78, 221, 0.1);
+  border-left: 4px solid #9d4edd;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.alert-text {
+  color: #e0d4ff;
+  font-size: 1.125rem;
+}
+
+/* SUMMARY */
+.summary {
+  background-color: #151521;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.summary-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+/* PAIN MAP INTERACTIVITY */
+.pain-map {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.pain-area {
+  cursor: pointer;
+  transition: fill 0.3s ease, filter 0.3s ease, transform 0.2s ease;
+  transform-origin: center;
+}
+
+.pain-area:hover {
+  fill: #b388ff;
+}
+
+.pain-area.selected {
+  fill: #9d4edd;
+  filter: drop-shadow(0px 0px 8px rgba(157, 78, 221, 0.8));
+}
+/* PRINT */
+@media print {
+  body { background: white; color: black; }
+  .container { box-shadow: none; }
+  .btn-print, .btn-back { display: none; }
+}
 </style>
 </head>
 <body>
-
-<button class="mob-tog hidden" id="mob-tog">☰</button>
-
-<!-- MODAL -->
-<div class="modal-bg hidden" id="auth-modal">
-  <div class="modal">
-    <button class="mx" id="modal-x">✕</button>
-    <div class="mlogo">PLAYR.AI</div>
-    <div class="msub">Your elite training companion</div>
-    <div class="tabs">
-      <button class="tab on" id="tab-in" onclick="switchTab('in')">Sign In</button>
-      <button class="tab" id="tab-up" onclick="switchTab('up')">Register</button>
-    </div>
-    <div id="form-in">
-      <div class="mf"><label>Username</label><input class="mi" id="li-u" type="text" placeholder="Enter username"/></div>
-      <div class="mf"><label>Password</label><input class="mi" id="li-p" type="password" placeholder="••••••••"/></div>
-      <div class="merr" id="li-e"></div>
-      <button class="msub-btn" onclick="doLogin()">Sign In</button>
-    </div>
-    <div id="form-up" class="hidden">
-      <div class="mf"><label>Display Name</label><input class="mi" id="ru-n" type="text" placeholder="Your name"/></div>
-      <div class="mf"><label>Username</label><input class="mi" id="ru-u" type="text" placeholder="Choose a username"/></div>
-      <div class="mf"><label>Password</label><input class="mi" id="ru-p" type="password" placeholder="Min 4 characters"/></div>
-      <div class="merr" id="ru-e"></div>
-      <button class="msub-btn" onclick="doRegister()">Create Account</button>
-    </div>
-  </div>
-</div>
-
-<div class="app">
-<!-- SIDEBAR -->
-<aside class="sidebar" id="sidebar">
-  <div class="s-logo">
-    <div class="s-wordmark">PLAYR.AI</div>
-    <div class="s-sub">Elite Training Platform</div>
-  </div>
-  <div class="s-auth" id="s-auth"></div>
-  <div class="s-plans">
-    <div class="s-ph">Saved Plans</div>
-    <div id="plans-list"><p class="no-plans">Sign in to save &amp; access your training history</p></div>
-  </div>
-</aside>
-
-<!-- MAIN -->
-<div class="main">
-<div class="panel">
-
-  <!-- HEADER -->
-  <div class="ph">
-    <div class="ph-eye">AI-Powered Soccer Training</div>
-    <div class="ph-title">Playr.AI</div>
-    <div class="ph-sub">Enter your profile and let our AI design your personalized elite training plan</div>
-  </div>
-
-  <!-- FORM VIEW -->
-  <div id="view-form">
-    <div class="pb-body">
-
-      <div class="fs">
-        <div class="fs-label">Player Profile</div>
-        <div class="grid grid-2">
-          <div class="field">
-            <span class="flabel">Age</span>
-            <input class="finput" type="number" id="f-age" min="5" max="80" placeholder="e.g. 22"/>
-          </div>
-          <div class="field">
-            <span class="flabel">Position</span>
-            <select class="finput" id="f-pos">
-              <option value="">Select your position</option>
-              <option>Goalkeeper</option>
-              <option>Center Back</option>
-              <option>Outside Back / Fullback</option>
-              <option>Center Defensive Midfielder</option>
-              <option>Central Midfielder</option>
-              <option>Central Attacking Midfielder</option>
-              <option>Outside Midfielder</option>
-              <option>Winger</option>
-              <option>Striker / Forward</option>
-            </select>
-          </div>
+    <div class="container">
+        <div class="header">
+            <h1>Playr.AI</h1>
+            <p>Get personalized training and recovery plans based on your position and physical condition</p>
         </div>
-      </div>
 
-      <div class="fs">
-        <div class="fs-label">Physical Condition</div>
-        <div class="grid grid-2">
-          <div class="field">
-            <span class="flabel">Fitness Level</span>
-            <select class="finput" id="f-fit">
-              <option value="">Select fitness level</option>
-              <option value="Beginner — new to soccer training">Beginner</option>
-              <option value="Recreational — trains occasionally">Recreational</option>
-              <option value="Active — regular team player">Active</option>
-              <option value="Elite — competitive / professional">Elite</option>
-            </select>
-          </div>
-          <div class="field">
-            <span class="flabel">Overall Soreness</span>
-            <select class="finput" id="f-sor">
-              <option value="">Select soreness level</option>
-              <option value="None — feel completely fresh">None — feel fresh</option>
-              <option value="Mild — slightly sore but manageable">Mild</option>
-              <option value="Moderate — noticeable soreness">Moderate</option>
-              <option value="Severe — affecting movement">Severe</option>
-            </select>
-          </div>
-        </div>
-        <div class="field" style="margin-top:1.25rem">
-          <span class="flabel">Ongoing Injuries or Conditions</span>
-          <textarea class="finput" id="f-inj" rows="2" placeholder="Describe any injuries, recent conditions, or medical history..."></textarea>
-        </div>
-      </div>
+        <div class="content">
+            <div id="input-form">
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" class="form-control" min="1" max="120" placeholder="Enter your age">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="position">Soccer Position</label>
+                        <select id="position" class="form-control">
+                            <option value="">Select your position</option>
+                            <option value="goalkeeper">Goalkeeper</option>
+                            <option value="centerback">Center Back</option>
+                            <option value="outsideback">Outside Back/Fullback</option>
+                            <option value="cdm">Center Defensive Midfielder</option>
+                            <option value="cm">Central Midfielder</option>
+                            <option value="cam">Central Attacking Midfielder</option>
+                            <option value="outsideMid">Outside Midfielder</option>
+                            <option value="wing">Winger</option>
+                            <option value="striker">Striker/Forward</option>
+                        </select>
+                    </div>
+                </div>
 
-      <div class="fs">
-        <div class="fs-label">Pain &amp; Stress Mapping</div>
-        <div class="pain-row">
-          <div>
-            <div class="flabel" style="margin-bottom:.75rem">Click areas to select</div>
-            <div class="pmw">
-              <svg viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
-                <path class="pain-area" data-area="head"          data-label="Head"            d="M100,12 C82,12 68,26 68,44 C68,60 78,73 92,78 L92,92 L108,92 L108,78 C122,73 132,60 132,44 C132,26 118,12 100,12 Z"/>
-                <rect class="pain-area" data-area="neck"          data-label="Neck"            x="90" y="92" width="20" height="12" rx="3"/>
-                <path class="pain-area" data-area="leftShoulder"  data-label="Left Shoulder"  d="M68,103 C52,103 40,114 36,128 L58,133 L68,113 Z"/>
-                <path class="pain-area" data-area="rightShoulder" data-label="Right Shoulder" d="M132,103 C148,103 160,114 164,128 L142,133 L132,113 Z"/>
-                <path class="pain-area" data-area="chest"         data-label="Chest"           d="M70,103 L130,103 L126,142 L74,142 Z"/>
-                <path class="pain-area" data-area="core"          data-label="Core / Abs"      d="M74,143 L126,143 L122,185 L78,185 Z"/>
-                <path class="pain-area" data-area="hips"          data-label="Hips"            d="M78,186 L122,186 L128,216 L100,230 L72,216 Z"/>
-                <path class="pain-area" data-area="leftArm"       data-label="Left Arm"        d="M35,130 L56,135 L48,200 L28,194 Z"/>
-                <path class="pain-area" data-area="rightArm"      data-label="Right Arm"       d="M165,130 L144,135 L152,200 L172,194 Z"/>
-                <path class="pain-area" data-area="leftThigh"     data-label="Left Thigh"      d="M72,220 L98,230 L94,278 L68,278 Z"/>
-                <path class="pain-area" data-area="rightThigh"    data-label="Right Thigh"     d="M128,220 L102,230 L106,278 L132,278 Z"/>
-                <ellipse class="pain-area" data-area="leftKnee"   data-label="Left Knee"       cx="81" cy="286" rx="13" ry="9"/>
-                <ellipse class="pain-area" data-area="rightKnee"  data-label="Right Knee"      cx="119" cy="286" rx="13" ry="9"/>
-                <path class="pain-area" data-area="leftShin"      data-label="Left Shin/Calf"  d="M68,297 L94,297 L91,335 L65,335 Z"/>
-                <path class="pain-area" data-area="rightShin"     data-label="Right Shin/Calf" d="M106,297 L132,297 L135,335 L109,335 Z"/>
-                <path class="pain-area" data-area="leftFoot"      data-label="Left Ankle/Foot" d="M64,338 L90,338 L93,368 L58,368 Z"/>
-                <path class="pain-area" data-area="rightFoot"     data-label="Right Ankle/Foot" d="M110,338 L136,338 L142,368 L107,368 Z"/>
-              </svg>
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <label for="intensity">Current Fitness Level</label>
+                        <select id="intensity" class="form-control">
+                            <option value="">Select your fitness level</option>
+                            <option value="beginner">Beginner (New to soccer training)</option>
+                            <option value="moderate">Moderate (Recreational player)</option>
+                            <option value="active">Active (Regular team player)</option>
+                            <option value="elite">Elite (Competitive/Professional)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="soreness">Current Soreness Level</label>
+                        <select id="soreness" class="form-control">
+                            <option value="">Select soreness level</option>
+                            <option value="none">None (Feel fresh)</option>
+                            <option value="mild">Mild (Slightly sore but manageable)</option>
+                            <option value="moderate">Moderate (Noticeable soreness)</option>
+                            <option value="severe">Severe (Very sore, affecting movement)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="injuries">Ongoing Injuries or Conditions</label>
+                    <textarea id="injuries" class="form-control" rows="2" placeholder="Describe any ongoing injuries or medical conditions"></textarea>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <label>Pain Area (Click on body part)</label>
+                       <div class="pain-map">
+                            <svg viewBox="0 0 200 400" width="100%" height="400" xmlns="http://www.w3.org/2000/svg">
+                                <path class="pain-area" data-area="head" fill="#e5e7eb" d="M100,15 C83,15 70,28 70,45 C70,60 80,72 92,78 L92,90 L108,90 L108,78 C120,72 130,60 130,45 C130,28 117,15 100,15 Z"/>
+                                
+                                <path class="pain-area" data-area="leftShoulder" fill="#e5e7eb" d="M68,90 C50,90 40,105 35,120 L55,125 L68,105 Z"/>
+                                <path class="pain-area" data-area="rightShoulder" fill="#e5e7eb" d="M132,90 C150,90 160,105 165,120 L145,125 L132,105 Z"/>
+                                
+                                <path class="pain-area" data-area="chest" fill="#e5e7eb" d="M70,95 L130,95 L125,135 L75,135 Z"/>
+                                
+                                <path class="pain-area" data-area="core" fill="#e5e7eb" d="M76,140 L124,140 L120,185 L80,185 Z"/>
+                                
+                                <path class="pain-area" data-area="hips" fill="#e5e7eb" d="M78,190 L122,190 L128,220 L100,235 L72,220 Z"/>
+                                
+                                <path class="pain-area" data-area="leftArm" fill="#e5e7eb" d="M33,125 L53,130 L45,195 L25,190 Z"/>
+                                <path class="pain-area" data-area="rightArm" fill="#e5e7eb" d="M167,125 L147,130 L155,195 L175,190 Z"/>
+                                
+                                <path class="pain-area" data-area="leftLeg" fill="#e5e7eb" d="M72,225 L98,235 L90,320 L65,320 Z"/>
+                                <path class="pain-area" data-area="rightLeg" fill="#e5e7eb" d="M128,225 L102,235 L110,320 L135,320 Z"/>
+                                
+                                <path class="pain-area" data-area="leftFoot" fill="#e5e7eb" d="M64,325 L89,325 L92,355 L58,355 Z"/>
+                                <path class="pain-area" data-area="rightFoot" fill="#e5e7eb" d="M111,325 L136,325 L142,355 L108,355 Z"/>
+                            </svg>
+                        </div>
+                        <input type="hidden" id="painArea" value="">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="severity">Pain Severity (if applicable)</label>
+                        <div class="slider-container">
+                            <input type="range" id="severity" min="0" max="10" value="0" class="form-control">
+                            <div class="slider-labels">
+                                <span>No Pain (0)</span>
+                                <span>Moderate (5)</span>
+                                <span>Severe (10)</span>
+                            </div>
+                            <div style="text-align: center; margin-top: 10px;">
+                                <span id="severityValue" style="font-weight: 500;">0</span>/10
+                            </div>
+                        </div>
+                        
+                        <button id="generate-btn" class="btn btn-block">Generate Training Plan</button>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="pain-controls">
-            <div>
-              <div class="flabel" style="margin-bottom:.6rem">Selected Areas</div>
-              <div class="ptags" id="pain-tags"><span class="no-areas">No areas selected yet</span></div>
+
+            <div id="recommendations" class="hidden">
+                <h2 class="summary-title" style="font-size: 1.5rem; margin-bottom: 1rem;">Your Tailored Soccer Training Plan</h2>
+                
+                <div class="alert">
+                    <div class="alert-icon">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="alert-text">
+                        This training plan is personalized based on your inputs. Always consult with your coach or a sports medicine professional before starting any new training regimen, especially if you have existing injuries.
+                    </div>
+                </div>
+                
+                <div id="training-summary" class="summary">
+                    <!-- Summary will be inserted here -->
+                </div>
+                
+                <div class="grid grid-2">
+                    <div id="training-card" class="card">
+                        <!-- Training content will be inserted here -->
+                    </div>
+                    
+                    <div id="recovery-card" class="card">
+                        <!-- Recovery content will be inserted here -->
+                    </div>
+                </div>
+                
+                <div id="position-specific-card" class="card">
+                    <!-- Position-specific content will be inserted here -->
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-top: 1.5rem;">
+                    <button id="back-btn" class="btn btn-secondary">Back to Form</button>
+                    <button id="print-btn" class="btn">Print Training Plan</button>
+                </div>
             </div>
-            <div class="sf">
-              <div class="pal" id="active-lbl">Select a body part to rate severity</div>
-              <input type="range" id="sev-sl" min="0" max="10" value="0" style="--pct:0%"/>
-              <div class="slabels"><span>No Pain</span><span>Moderate</span><span>Severe</span></div>
-              <div class="sevn" id="sev-num">0</div>
-              <div class="sevl">Pain Severity / 10</div>
-            </div>
-          </div>
         </div>
-      </div>
-
-    </div><!-- /pb-body -->
-    <div class="genwrap" style="padding-top:2rem">
-      <button class="genbtn" id="gen-btn">✦ Generate My Elite Training Plan</button>
     </div>
-  </div><!-- /view-form -->
 
-  <!-- LOADING VIEW -->
-  <div id="view-loading" class="loading hidden">
-    <div class="lring"></div>
-    <div class="ltitle">Crafting your plan…</div>
-    <div class="lsteps">
-      <div class="lstep" id="ls0"><span class="ldot"></span>Analyzing your player profile</div>
-      <div class="lstep" id="ls1"><span class="ldot"></span>Evaluating pain &amp; soreness data</div>
-      <div class="lstep" id="ls2"><span class="ldot"></span>Building position-specific drills</div>
-      <div class="lstep" id="ls3"><span class="ldot"></span>Designing recovery protocol</div>
-      <div class="lstep" id="ls4"><span class="ldot"></span>Finalizing your elite plan</div>
-    </div>
-  </div>
-
-  <!-- RESULTS VIEW -->
-  <div id="view-results" class="results hidden">
-    <div class="rh">
-      <div class="reye">Your AI Training Plan</div>
-      <div class="rtitle" id="res-title">Elite Training Plan</div>
-      <div class="rmeta" id="res-meta"></div>
-    </div>
-    <div class="disc">
-      <div class="disc-icon">⚠</div>
-      <div class="disc-text">This AI-generated plan is personalized to your inputs. Always consult a qualified coach or sports medicine professional before beginning any new training program — especially if you have existing injuries.</div>
-    </div>
-    <div id="ai-secs"></div>
-    <div class="ract">
-      <button class="bact b-back" id="back-btn">← Adjust Inputs</button>
-      <div class="ag">
-        <button class="bact b-save" id="save-btn">💾 Save Plan</button>
-        <button class="bact b-print" id="print-btn">🖨 Print</button>
-      </div>
-    </div>
-  </div>
-
-</div><!-- /panel -->
-</div><!-- /main -->
-</div><!-- /app -->
-
-<script>
-/* ── PAIN MAP ── */
-const painData={};let activeArea=null;
-const slider=document.getElementById('sev-sl');
-const sevEl=document.getElementById('sev-num');
-function sevColor(s){if(!s)return'#1e1e30';const t=s/10,h=Math.round(50-t*50),sa=Math.round(85+t*12),l=Math.round(60-t*20);return`hsl(${h},${sa}%,${l}%)`}
-function sevText(s){if(!s)return'var(--muted)';const t=s/10,h=Math.round(50-t*50),sa=Math.round(85+t*12),l=Math.round(60-t*20);return`hsl(${h},${sa}%,${l}%)`}
-function fillArea(id){const el=document.querySelector(`[data-area="${id}"]`);if(!el)return;const s=painData[id]||0;el.style.fill=sevColor(s);el.classList.toggle('has-pain',s>0)}
-function setActive(id){
-  document.querySelectorAll('.pain-area.selected').forEach(e=>e.classList.remove('selected'));
-  if(activeArea===id){activeArea=null;resetSl();return;}
-  activeArea=id;const el=document.querySelector(`[data-area="${id}"]`);el?.classList.add('selected');
-  document.getElementById('active-lbl').textContent=`Adjusting: ${el?.dataset.label||id}`;
-  const s=painData[id]||0;slider.value=s;updateSl(s);
-}
-function resetSl(){activeArea=null;slider.value=0;updateSl(0);document.getElementById('active-lbl').textContent='Select a body part to rate severity'}
-function updateSl(v){const p=v*10;slider.style.setProperty('--pct',p+'%');slider.style.background=`linear-gradient(to right,var(--gold) ${p}%,var(--obsidian4) ${p}%)`;sevEl.textContent=v;sevEl.style.color=sevText(v)}
-function renderTags(){
-  const box=document.getElementById('pain-tags');
-  const entries=Object.entries(painData).filter(([,v])=>v>0);
-  if(!entries.length){box.innerHTML='<span class="no-areas">No areas selected yet</span>';return;}
-  box.innerHTML=entries.map(([a,v])=>{const el=document.querySelector(`[data-area="${a}"]`);return`<span class="ptag">${el?.dataset.label||a} <strong>${v}/10</strong><button class="ptag-x" onclick="removeArea('${a}')">✕</button></span>`}).join('')
-}
-function removeArea(id){delete painData[id];fillArea(id);renderTags();if(activeArea===id)resetSl()}
-document.querySelectorAll('.pain-area').forEach(el=>el.addEventListener('click',()=>setActive(el.dataset.area)));
-slider.addEventListener('input',()=>{
-  const v=+slider.value;updateSl(v);if(!activeArea)return;
-  if(!v)delete painData[activeArea];else painData[activeArea]=v;
-  fillArea(activeArea);renderTags();
-});
-updateSl(0);
-
-/* ── AUTH ── */
-function getU(){try{return JSON.parse(localStorage.getItem('playr_u')||'{}')}catch{return{}}}
-function setU(u){localStorage.setItem('playr_u',JSON.stringify(u))}
-function getMe(){return localStorage.getItem('playr_me')||null}
-function setMe(u){u?localStorage.setItem('playr_me',u):localStorage.removeItem('playr_me')}
-function doLogin(){
-  const u=document.getElementById('li-u').value.trim().toLowerCase(),p=document.getElementById('li-p').value,e=document.getElementById('li-e');
-  e.classList.remove('show');if(!u||!p){e.textContent='Please fill all fields.';e.classList.add('show');return}
-  const us=getU();if(!us[u]||us[u].pw!==p){e.textContent='Invalid username or password.';e.classList.add('show');return}
-  setMe(u);closeModal();renderAuth();renderPlans();toast(`Welcome back, ${us[u].name}!`);
-}
-function doRegister(){
-  const n=document.getElementById('ru-n').value.trim(),u=document.getElementById('ru-u').value.trim().toLowerCase(),p=document.getElementById('ru-p').value,e=document.getElementById('ru-e');
-  e.classList.remove('show');if(!n||!u||!p){e.textContent='Please fill all fields.';e.classList.add('show');return}
-  if(u.length<3){e.textContent='Username: min 3 chars.';e.classList.add('show');return}
-  if(p.length<4){e.textContent='Password: min 4 chars.';e.classList.add('show');return}
-  const us=getU();if(us[u]){e.textContent='Username taken.';e.classList.add('show');return}
-  us[u]={pw:p,name:n,plans:[]};setU(us);setMe(u);closeModal();renderAuth();renderPlans();toast(`Welcome, ${n}! Account created.`);
-}
-function doLogout(){setMe(null);renderAuth();renderPlans();toast('Signed out.')}
-function renderAuth(){
-  const me=getMe(),box=document.getElementById('s-auth');
-  if(me){const u=getU()[me];box.innerHTML=`<div class="s-greeting">Signed in as</div><div class="s-name">${u?.name||me}</div><button class="sb sb-ghost" onclick="doLogout()">Sign Out</button>`}
-  else box.innerHTML=`<button class="sb sb-primary" onclick="openModal()">Sign In</button><button class="sb sb-outline" onclick="openModal('up')">Create Account</button>`
-}
-function savePlan(){
-  const me=getMe();if(!me){openModal();toast('Sign in to save your plan','warn');return}
-  if(!lastPlan)return;
-  const us=getU();
-  us[me].plans=[{id:Date.now().toString(),date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),label:`${lastPlan.pos}`,pos:lastPlan.pos,intensity:lastPlan.intensity,aiText:lastPlan.aiText,painAreas:{...lastPlan.painAreas}},...(us[me].plans||[])].slice(0,20);
-  setU(us);renderPlans();toast('Plan saved!');
-}
-function delPlan(id,e){e.stopPropagation();const me=getMe();if(!me)return;const us=getU();us[me].plans=(us[me].plans||[]).filter(p=>p.id!==id);setU(us);renderPlans()}
-function loadPlan(p){lastPlan=p;showResults(p.pos,p.intensity,p.painAreas,p.aiText)}
-function renderPlans(){
-  const me=getMe(),box=document.getElementById('plans-list');
-  if(!me){box.innerHTML='<p class="no-plans">Sign in to save &amp; access your training history</p>';return}
-  const plans=getU()[me]?.plans||[];
-  if(!plans.length){box.innerHTML='<p class="no-plans">No saved plans yet</p>';return}
-  box.innerHTML=plans.map(p=>`<div class="pc" onclick="loadPlan(${JSON.stringify(p).replace(/"/g,'&quot;')})"><button class="pc-del" onclick="delPlan('${p.id}',event)">✕</button><div class="pc-title">${p.pos}</div><div class="pc-meta">${p.date}</div><span class="pb pb-${p.intensity}">${p.intensity}</span></div>`).join('')
-}
-
-/* ── MODAL ── */
-function openModal(t){document.getElementById('auth-modal').classList.remove('hidden');switchTab(t||'in')}
-function closeModal(){document.getElementById('auth-modal').classList.add('hidden')}
-function switchTab(t){['in','up'].forEach(x=>{document.getElementById('tab-'+x).classList.toggle('on',x===t);document.getElementById('form-'+x).classList.toggle('hidden',x!==t)})}
-document.getElementById('modal-x').addEventListener('click',closeModal);
-document.getElementById('auth-modal').addEventListener('click',e=>{if(e.target===document.getElementById('auth-modal'))closeModal()});
-['li-u','li-p'].forEach(id=>document.getElementById(id)?.addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()}));
-['ru-n','ru-u','ru-p'].forEach(id=>document.getElementById(id)?.addEventListener('keydown',e=>{if(e.key==='Enter')doRegister()}));
-
-/* ── TOAST ── */
-function toast(msg,type='ok'){document.querySelector('.toast')?.remove();const t=document.createElement('div');t.className=`toast t-${type}`;t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2800)}
-
-/* ── MOBILE ── */
-document.getElementById('mob-tog')?.addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
-if(window.innerWidth<=720)document.getElementById('mob-tog').classList.remove('hidden');
-
-/* ── VIEW ── */
-function showView(id){['view-form','view-loading','view-results'].forEach(v=>document.getElementById(v).classList.add('hidden'));document.getElementById(id).classList.remove('hidden')}
-
-/* ── AI GENERATE ── */
-let lastPlan=null;
-const SMETA={'TRAINING SESSION':{icon:'⚽',col:'#c9a55a'},'RECOVERY PROTOCOL':{icon:'🔄',col:'#6ee7b7'},'POSITION-SPECIFIC DRILLS':{icon:'🎯',col:'#93c5fd'},'PERFORMANCE NOTES':{icon:'📊',col:'#d8b4fe'}};
-
-document.getElementById('gen-btn').addEventListener('click',async()=>{
-  const age=document.getElementById('f-age').value.trim();
-  const pos=document.getElementById('f-pos').value;
-  const fit=document.getElementById('f-fit').value;
-  const sor=document.getElementById('f-sor').value;
-  const inj=document.getElementById('f-inj').value.trim();
-  if(!age||!pos||!fit||!sor){toast('Please fill in all required fields','warn');return}
-
-  const entries=Object.entries(painData).filter(([,v])=>v>0);
-  const maxSev=entries.length?Math.max(...entries.map(([,v])=>v)):0;
-  const intensity=maxSev>=7||sor.startsWith('Severe')?'recovery':maxSev>=4||sor.startsWith('Moderate')?'light':maxSev>=1||sor.startsWith('Mild')?'moderate':'high';
-  const painDesc=entries.length?entries.map(([a,v])=>{const el=document.querySelector(`[data-area="${a}"]`);return`${el?.dataset.label||a} (severity ${v}/10)`}).join(', '):'None reported';
-
-  showView('view-loading');
-  // Animate steps
-  [0,800,1600,2400,3200].forEach((d,i)=>setTimeout(()=>{document.querySelectorAll('.lstep').forEach((el,j)=>{el.classList.remove('active','done');if(j<i)el.classList.add('done');if(j===i)el.classList.add('active')})},d));
-
-  const prompt=`You are an elite soccer coach and sports scientist. Create a comprehensive, highly personalized training plan.
-
-PLAYER PROFILE:
-- Age: ${age}
-- Position: ${pos}
-- Fitness Level: ${fit}
-- Overall Soreness: ${sor}
-- Injuries / Conditions: ${inj||'None'}
-- Pain Areas: ${painDesc}
-- Recommended Intensity: ${intensity}
-
-Write EXACTLY these 4 sections with the heading on its own line:
-
-## TRAINING SESSION
-A detailed today's training session for a ${pos}. Include specific warm-up exercises with durations, main session drills with sets/reps/duration (position-specific, at ${intensity} intensity), and cool-down. If pain areas exist, explicitly modify exercises to protect them. Be precise with times and numbers.
-
-## RECOVERY PROTOCOL
-Complete recovery plan: immediate post-training actions (first 30 min), same-day recovery (nutrition with specific macros, hydration targets, ice/heat protocols for any pain areas, sleep), and next-day guidance. Give specific steps for each reported pain area.
-
-## POSITION-SPECIFIC DRILLS
-6 to 8 drills designed specifically for a ${pos} at ${fit} fitness. For each: name, step-by-step instructions, sets/reps/duration, and the tactical benefit. Scale complexity to ${intensity} intensity.
-
-## PERFORMANCE NOTES
-4 to 5 direct, specific coaching insights for this player: age-relevant advice, position-specific development areas, how current soreness should shape this week's load, nutrition periodization, and one long-term goal to focus on.
-
-Use a direct expert coaching voice. Be specific with all numbers. Use line breaks for readability.`;
-
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1800,messages:[{role:'user',content:prompt}]})});
-    if(!res.ok)throw new Error(res.status);
-    const data=await res.json();
-    const text=data.content?.map(b=>b.text||'').join('')||'No response.';
-    lastPlan={pos,intensity,painAreas:{...painData},aiText:text};
-    showResults(pos,intensity,painData,text);
-  }catch(err){
-    showView('view-form');
-    toast('Could not generate — check connection and retry.','warn');
-    console.error(err);
-  }
-});
-
-function showResults(pos,intensity,painAreas,text){
-  document.getElementById('res-title').textContent=`${pos} Training Plan`;
-  const ps=Object.entries(painAreas).filter(([,v])=>v>0).map(([a,v])=>{const el=document.querySelector(`[data-area="${a}"]`);return`${el?.dataset.label||a} ${v}/10`}).join(' · ');
-  document.getElementById('res-meta').textContent=`${intensity.charAt(0).toUpperCase()+intensity.slice(1)} Intensity${ps?' · Pain: '+ps:''}`;
-
-  const box=document.getElementById('ai-secs');box.innerHTML='';
-  const raw=text;
-  const re=/##\s+([A-Z][A-Z\-\/ ]+)\n([\s\S]*?)(?=\n##\s+[A-Z]|$)/g;
-  let m,found=false,delay=0;
-  while((m=re.exec(raw))!==null){
-    const title=m[1].trim();
-    const body=m[2].trim().replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/\n/g,'<br/>');
-    const meta=SMETA[title]||{icon:'✦',col:'var(--gold)'};
-    const div=document.createElement('div');
-    div.className='ais';div.style.animationDelay=delay+'s';delay+=0.1;
-    div.innerHTML=`<div class="ais-head"><div class="ais-icon" style="border-color:${meta.col}33;color:${meta.col}">${meta.icon}</div><div class="ais-title" style="color:${meta.col}">${title.charAt(0)+title.slice(1).toLowerCase()}</div></div><div class="ais-body">${body}</div>`;
-    box.appendChild(div);found=true;
-  }
-  if(!found){
-    const div=document.createElement('div');div.className='ais';
-    div.innerHTML=`<div class="ais-head"><div class="ais-icon">✦</div><div class="ais-title" style="color:var(--gold)">Training Plan</div></div><div class="ais-body">${text.replace(/\n/g,'<br/>')}</div>`;
-    box.appendChild(div);
-  }
-  showView('view-results');
-}
-
-document.getElementById('back-btn').addEventListener('click',()=>showView('view-form'));
-document.getElementById('save-btn').addEventListener('click',savePlan);
-document.getElementById('print-btn').addEventListener('click',()=>window.print());
-
-/* INIT */
-renderAuth();renderPlans();
-</script>
+    <script>
+        // Pain area selection
+        const painAreas = document.querySelectorAll('.pain-area');
+        const painAreaInput = document.getElementById('painArea');
+        
+        painAreas.forEach(area => {
+            area.addEventListener('click', () => {
+                // Clear previous selections
+                painAreas.forEach(a => a.classList.remove('selected'));
+                
+                // Select this area
+                area.classList.add('selected');
+                painAreaInput.value = area.dataset.area;
+            });
+        });
+        
+        // Pain severity slider
+        const severitySlider = document.getElementById('severity');
+        const severityValue = document.getElementById('severityValue');
+        
+        severitySlider.addEventListener('input', () => {
+            severityValue.textContent = severitySlider.value;
+        });
+        
+        // Generate recommendations
+        const generateBtn = document.getElementById('generate-btn');
+        const inputForm = document.getElementById('input-form');
+        const recommendationsSection = document.getElementById('recommendations');
+        const backBtn = document.getElementById('back-btn');
+        const printBtn = document.getElementById('print-btn');
+        
+        generateBtn.addEventListener('click', () => {
+            const age = parseInt(document.getElementById('age').value) || 0;
+            const position = document.getElementById('position').value;
+            const intensity = document.getElementById('intensity').value;
+            const soreness = document.getElementById('soreness').value;
+            const injuries = document.getElementById('injuries').value;
+            const painArea = painAreaInput.value;
+            const severity = parseInt(severitySlider.value);
+            
+            // Validate inputs
+            if (!age || !position || !intensity || !soreness) {
+                alert('Please fill in all required fields (Age, Position, Fitness Level, and Soreness Level)');
+                return;
+            }
+            
+            // Generate training plan
+            const trainingPlan = generateTrainingPlan(age, position, intensity, soreness, injuries, painArea, severity);
+            
+            // Display training plan
+            displayTrainingPlan(trainingPlan);
+            
+            // Show recommendations section, hide form
+            inputForm.classList.add('hidden');
+            recommendationsSection.classList.remove('hidden');
+        });
+        
+        backBtn.addEventListener('click', () => {
+            // Show form, hide recommendations
+            inputForm.classList.remove('hidden');
+            recommendationsSection.classList.add('hidden');
+        });
+        
+        printBtn.addEventListener('click', () => {
+            window.print();
+        });
+        
+        function generateTrainingPlan(age, position, intensity, soreness, injuries, painArea, severity) {
+            // Determine training intensity based on soreness and pain
+            let trainingIntensity = "high";
+            if (soreness === "severe" || severity >= 7) {
+                trainingIntensity = "recovery";
+            } else if (soreness === "moderate" || (severity >= 4 && severity < 7)) {
+                trainingIntensity = "light";
+            } else if (soreness === "mild" || (severity > 0 && severity < 4)) {
+                trainingIntensity = "moderate";
+            }
+            
+            // Create base training plan
+            const trainingPlan = {
+                summary: {
+                    position: getPositionFullName(position),
+                    intensity: trainingIntensity,
+                    focus: getPositionFocus(position),
+                    painArea: painArea ? getPainAreaName(painArea) : "None",
+                    painSeverity: severity
+                },
+                training: getTrainingPlan(position, trainingIntensity, intensity, painArea, severity),
+                recovery: getRecoveryPlan(trainingIntensity, painArea, severity),
+                positionSpecific: getPositionSpecificDrills(position, trainingIntensity)
+            };
+            
+            return trainingPlan;
+        }
+        
+        function getPositionFullName(position) {
+            const positions = {
+                "goalkeeper": "Goalkeeper",
+                "centerback": "Center Back",
+                "outsideback": "Outside Back/Fullback",
+                "cdm": "Center Defensive Midfielder",
+                "cm": "Central Midfielder",
+                "cam": "Central Attacking Midfielder",
+                "outsideMid": "Outside Midfielder",
+                "wing": "Winger",
+                "striker": "Striker/Forward"
+            };
+            
+            return positions[position] || position;
+        }
+        
+        function getPositionFocus(position) {
+            const focuses = {
+                "goalkeeper": "Reflexes, Positioning, Distribution",
+                "centerback": "Strength, Aerial Ability, Tackling",
+                "outsideback": "Speed, Stamina, Crossing",
+                "cdm": "Tackling, Positioning, Short Passing",
+                "cm": "Endurance, Vision, Passing Range",
+                "cam": "Creativity, Technical Skills, Shooting",
+                "outsideMid": "Crossing, Stamina, Defensive Awareness",
+                "wing": "Speed, Dribbling, Crossing",
+                "striker": "Finishing, Movement, Strength"
+            };
+            
+            return focuses[position] || "All-around skills";
+        }
+        
+        function getPainAreaName(area) {
+            const areas = {
+                "head": "Head",
+                "neck": "Neck",
+                "leftShoulder": "Left Shoulder",
+                "rightShoulder": "Right Shoulder",
+                "leftArm": "Left Arm",
+                "rightArm": "Right Arm",
+                "chest": "Chest",
+                "back": "Back",
+                "core": "Core/Abdominals",
+                "hips": "Hips",
+                "leftLeg": "Left Leg",
+                "rightLeg": "Right Leg",
+                "leftFoot": "Left Foot",
+                "rightFoot": "Right Foot"
+            };
+            
+            return areas[area] || area;
+        }
+        
+        function getTrainingPlan(position, trainingIntensity, fitnessLevel, painArea, severity) {
+            // Base structure for training plan
+            const plan = {
+                title: "",
+                description: "",
+                warmup: [],
+                mainSession: [],
+                cooldown: [],
+                duration: "",
+                icon: "⚽"
+            };
+            
+            // Standard warm-up for all positions
+            const standardWarmup = [
+                "5 minutes light jogging/dynamic movement",
+                "Dynamic stretching sequence",
+                "Ball control warm-up exercises"
+            ];
+            
+            // Standard cooldown for all positions
+            const standardCooldown = [
+                "5 minutes light jogging/walking",
+                "Static stretching (hold each stretch 20-30 seconds)",
+                "Foam rolling for major muscle groups"
+            ];
+            
+            // Set training intensity details
+            switch(trainingIntensity) {
+                case "recovery":
+                    plan.title = "Recovery Session";
+                    plan.description = "Focus on active recovery and rehabilitation to promote healing and prevent further injury.";
+                    plan.warmup = ["5 minutes very light movement", "Gentle mobility exercises"];
+                    plan.mainSession = [
+                        "20 minutes of light technical work (no intensity)",
+                        "Non-impact cross-training (swimming or stationary bike)",
+                        "Technique work at walking pace"
+                    ];
+                    plan.cooldown = ["Extended stretching session", "Foam rolling"];
+                    plan.duration = "30-45 minutes (low intensity)";
+                    break;
+                    
+                case "light":
+                    plan.title = "Light Training Session";
+                    plan.description = "Maintain fitness while allowing your body to recover with reduced intensity training.";
+                    plan.warmup = standardWarmup;
+                    plan.mainSession = [
+                        "Technical drills at 50-60% intensity",
+                        "Positional work with limited movement",
+                        "Light ball work focusing on technique"
+                    ];
+                    plan.cooldown = standardCooldown;
+                    plan.duration = "45-60 minutes (moderate intensity)";
+                    break;
+                    
+                case "moderate":
+                    plan.title = "Moderate Training Session";
+                    plan.description = "Balanced session focusing on technical skills and moderate physical conditioning.";
+                    plan.warmup = standardWarmup;
+                    plan.mainSession = [
+                        "Technical drills at 70-80% intensity",
+                        "Small-sided games (4v4 or 5v5)",
+                        "Position-specific drills at moderate intensity",
+                        "Interval training (work:rest ratio 1:1)"
+                    ];
+                    plan.cooldown = standardCooldown;
+                    plan.duration = "60-75 minutes (moderate to high intensity)";
+                    break;
+                    
+                case "high":
+                    plan.title = "High Intensity Training Session";
+                    plan.description = "Full intensity session to develop match fitness and technical skills under pressure.";
+                    plan.warmup = standardWarmup;
+                    plan.mainSession = [
+                        "Technical drills at 90-100% intensity",
+                        "High-intensity small-sided games",
+                        "Position-specific drills at game speed",
+                        "Sprint and agility work",
+                        "Tactical scenarios at match pace"
+                    ];
+                    plan.cooldown = standardCooldown;
+                    plan.duration = "75-90 minutes (high intensity)";
+                    break;
+            }
+            
+            // Modify based on pain area if applicable
+            if (painArea && severity > 0) {
+                modifyTrainingForPain(plan, painArea, severity);
+            }
+            
+            return plan;
+        }
+        
+        function modifyTrainingForPain(plan, painArea, severity) {
+            // Add pain-specific modifications to the training plan
+            const modifications = [];
+            
+            switch(painArea) {
+                case "leftLeg":
+                case "rightLeg":
+                    modifications.push("Reduce running/sprinting volume by 50%");
+                    modifications.push("Avoid high-impact jumping exercises");
+                    if (severity > 5) {
+                        modifications.push("Consider non-weight bearing cardio alternatives (swimming, cycling)");
+                    }
+                    break;
+                    
+                case "leftFoot":
+                case "rightFoot":
+                    modifications.push("Ensure proper footwear with adequate support");
+                    modifications.push("Reduce cutting/pivoting movements");
+                    modifications.push("Consider taping or bracing for additional support");
+                    break;
+                    
+                case "back":
+                    modifications.push("Avoid heavy load-bearing exercises");
+                    modifications.push("Focus on core stability with proper form");
+                    modifications.push("Reduce rotation movements if painful");
+                    break;
+                    
+                case "core":
+                    modifications.push("Modify core exercises to pain-free variations");
+                    modifications.push("Focus on breathing techniques during core work");
+                    break;
+                    
+                case "leftShoulder":
+                case "rightShoulder":
+                    modifications.push("Limit throw-ins and goalkeeper-specific diving exercises");
+                    modifications.push("Modify push-up positions if needed");
+                    break;
+            }
+            
+            if (modifications.length > 0) {
+                plan.mainSession.push("--- Pain Management Modifications ---");
+                plan.mainSession = plan.mainSession.concat(modifications);
+            }
+        }
+        
+        function getRecoveryPlan(trainingIntensity, painArea, severity) {
+            // Base structure for recovery plan
+            const plan = {
+                title: "Recovery Protocol",
+                description: "Optimize recovery to prepare for your next training session or match.",
+                immediate: [],
+                sameDay: [],
+                nextDay: [],
+                nutrition: [],
+                icon: "🔄"
+            };
+            
+            // Standard recovery protocols
+            const standardImmediate = [
+                "10-15 minutes cool-down with light jogging/walking",
+                "Hydration (16-20 oz water or electrolyte drink)",
+                "Light stretching of major muscle groups"
+            ];
+            
+            const standardSameDay = [
+                "Proper meal within 60 minutes (4:1 carb to protein ratio)",
+                "Compression garments if available",
+                "20 minutes of foam rolling"
+            ];
+            
+            const standardNextDay = [
+                "10-15 minutes of mobility work",
+                "Light activation exercises",
+                "Self-assessment for soreness/pain"
+            ];
+            
+            const standardNutrition = [
+                "Hydrate (minimum 2-3 liters of water daily)",
+                "Protein intake (1.6-1.8g per kg of body weight)",
+                "Carbohydrates to replenish glycogen stores",
+                "Anti-inflammatory foods (berries, fatty fish, nuts)"
+            ];
+            
+            // Set recovery based on training intensity
+            switch(trainingIntensity) {
+                case "recovery":
+                    plan.immediate = standardImmediate;
+                    plan.sameDay = standardSameDay.concat([
+                        "Extended stretching session (30 minutes)",
+                        "Consider contrast therapy (hot/cold)"
+                    ]);
+                    plan.nextDay = standardNextDay.concat([
+                        "Continue with active recovery",
+                        "Consider massage or physiotherapy if available"
+                    ]);
+                    plan.nutrition = standardNutrition.concat([
+                        "Focus on anti-inflammatory diet"
+                    ]);
+                    break;
+                    
+                case "light":
+                    plan.immediate = standardImmediate;
+                    plan.sameDay = standardSameDay;
+                    plan.nextDay = standardNextDay;
+                    plan.nutrition = standardNutrition;
+                    break;
+                    
+                case "moderate":
+                    plan.immediate = standardImmediate;
+                    plan.sameDay = standardSameDay.concat([
+                        "Consider ice bath (10-15 minutes at 10-15°C)"
+                    ]);
+                    plan.nextDay = standardNextDay;
+                    plan.nutrition = standardNutrition;
+                    break;
+                    
+                case "high":
+                    plan.immediate = standardImmediate;
+                    plan.sameDay = standardSameDay.concat([
+                        "Ice bath (10-15 minutes at 10-15°C)",
+                        "Consider compression boots if available"
+                    ]);
+                    plan.nextDay = standardNextDay.concat([
+                        "Light recovery session (20-30 minutes)",
+                        "Consider massage or physiotherapy if available"
+                    ]);
+                    plan.nutrition = standardNutrition.concat([
+                        "Consider tart cherry juice for recovery",
+                        "Ensure adequate carbohydrate intake for glycogen replenishment"
+                    ]);
+                    break;
+            }
+            
+            // Add pain-specific recovery if applicable
+            if (painArea && severity > 0) {
+                addPainRecovery(plan, painArea, severity);
+            }
+            
+            return plan;
+        }
+        
+        function addPainRecovery(plan, painArea, severity) {
+            // Add pain-specific recovery protocols
+            const painRecovery = [];
+            
+            switch(painArea) {
+                case "leftLeg":
+                case "rightLeg":
+                    painRecovery.push("Elevate legs when resting");
+                    painRecovery.push("Ice affected area (15 minutes on, 45 minutes off)");
+                    if (severity > 5) {
+                        painRecovery.push("Consider compression sleeve for affected leg");
+                    }
+                    break;
+                    
+                case "leftFoot":
+                case "rightFoot":
+                    painRecovery.push("Ice foot bath (10-15 minutes)");
+                    painRecovery.push("Foot/arch stretches and exercises");
+                    painRecovery.push("Consider supportive insoles for daily wear");
+                    break;
+                    
+                case "back":
+                    painRecovery.push("Gentle back stretches (cat-cow, child's pose)");
+                    painRecovery.push("Heat therapy for muscle relaxation");
+                    painRecovery.push("Avoid prolonged sitting");
+                    break;
+                    
+                case "core":
+                    painRecovery.push("Gentle core activation exercises");
+                    painRecovery.push("Focus on proper breathing techniques");
+                    break;
+                    
+                case "leftShoulder":
+                case "rightShoulder":
+                    painRecovery.push("Ice affected shoulder (15 minutes on, 45 minutes off)");
+                    painRecovery.push("Gentle mobility exercises within pain-free range");
+                    painRecovery.push("Consider kinesiology taping if beneficial");
+                    break;
+            }
+            
+            if (painRecovery.length > 0) {
+                plan.sameDay.push("--- Pain-Specific Recovery ---");
+                plan.sameDay = plan.sameDay.concat(painRecovery);
+            }
+        }
+        
+        function getPositionSpecificDrills(position, trainingIntensity) {
+            // Base structure for position-specific drills
+            const drills = {
+                title: `${getPositionFullName(position)} Specific Training`,
+                description: "Focus on the key skills and attributes needed for your position.",
+                technicalDrills: [],
+                physicalFocus: [],
+                tacticalAwareness: [],
+                icon: "🎯"
+            };
+            
+            // Adjust drills based on position and training intensity
+            switch(position) {
+                case "goalkeeper":
+                    drills.technicalDrills = [
+                        "Handling drills (high/low catches)",
+                        "Diving technique (both sides)",
+                        "Distribution practice (throws, rolls, kicks)",
+                        "1v1 situations"
+                    ];
+                    drills.physicalFocus = [
+                        "Explosive power training",
+                        "Reaction time drills",
+                        "Core stability exercises",
+                        "Plyometric training"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Positioning for crosses",
+                        "Communication with defenders",
+                        "Starting position based on ball location",
+                        "Distribution decision making"
+                    ];
+                    break;
+                    
+                case "centerback":
+                    drills.technicalDrills = [
+                        "Heading drills (defensive and attacking)",
+                        "Tackling technique (standing and sliding)",
+                        "Long-range passing",
+                        "Clearance technique"
+                    ];
+                    drills.physicalFocus = [
+                        "Strength training (upper and lower body)",
+                        "Jumping and aerial duels",
+                        "Short burst speed",
+                        "Physical duels and shielding"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Defensive line positioning",
+                        "Reading the game and anticipation",
+                        "Covering and supporting teammates",
+                        "Building from the back"
+                    ];
+                    break;
+                    
+                case "outsideback":
+                    drills.technicalDrills = [
+                        "Crossing technique (various heights/speeds)",
+                        "1v1 defending",
+                        "Progressive passing drills",
+                        "Overlapping runs with ball control"
+                    ];
+                    drills.physicalFocus = [
+                        "Endurance training",
+                        "Repeated sprint ability",
+                        "Agility and change of direction",
+                        "Recovery runs"
+                    ];
+                    drills.tacticalAwareness = [
+                        "When to overlap/underlap",
+                        "Defensive positioning vs. attacking wingers",
+                        "Supporting the attack",
+                        "Recovery positioning"
+                    ];
+                    break;
+                    
+                case "cdm":
+                    drills.technicalDrills = [
+                        "Short passing accuracy",
+                        "Receiving under pressure",
+                        "Screening and interception drills",
+                        "Tackling technique"
+                    ];
+                    drills.physicalFocus = [
+                        "Endurance training",
+                        "Core stability",
+                        "Strength in duels",
+                        "Agility for quick transitions"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Positioning between lines",
+                        "Screening passing lanes",
+                        "Supporting center backs",
+                        "Transition from defense to attack"
+                    ];
+                    break;
+                    
+                case "cm":
+                    drills.technicalDrills = [
+                        "Passing range (short, medium, long)",
+                        "First touch under pressure",
+                        "Turning in tight spaces",
+                        "Shooting from distance"
+                    ];
+                    drills.physicalFocus = [
+                        "Box-to-box endurance",
+                        "Repeated sprint ability",
+                        "Balance and coordination",
+                        "Strength for midfield battles"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Finding space between lines",
+                        "Switching play",
+                        "Supporting both attack and defense",
+                        "Game tempo control"
+                    ];
+                    break;
+                    
+                case "cam":
+                    drills.technicalDrills = [
+                        "Creative passing and through balls",
+                        "Shooting from various angles",
+                        "Dribbling in tight spaces",
+                        "Set piece delivery"
+                    ];
+                    drills.physicalFocus = [
+                        "Agility and balance",
+                        "Quick acceleration",
+                        "Core strength",
+                        "Reaction speed"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Finding pockets of space",
+                        "Supporting the striker",
+                        "Transition moments",
+                        "Final third decision making"
+                    ];
+                    break;
+                    
+                case "outsideMid":
+                    drills.technicalDrills = [
+                        "Crossing technique",
+                        "Cutting inside with the ball",
+                        "Combination play with fullbacks",
+                        "Defensive tracking"
+                    ];
+                    drills.physicalFocus = [
+                        "Endurance for repeated runs",
+                        "Speed over medium distances",
+                        "Agility for quick turns",
+                        "Recovery capacity"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Width maintenance",
+                        "When to come inside",
+                        "Supporting fullbacks defensively",
+                        "Transition positioning"
+                    ];
+                    break;
+                    
+                case "wing":
+                    drills.technicalDrills = [
+                        "1v1 dribbling skills",
+                        "Crossing from various angles",
+                        "Cutting inside to shoot",
+                        "Quick combination play"
+                    ];
+                    drills.physicalFocus = [
+                        "Explosive speed",
+                        "Repeated sprint ability",
+                        "Agility and quick direction changes",
+                        "Balance under pressure"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Creating and exploiting space",
+                        "Timing of runs behind defense",
+                        "When to dribble vs. pass",
+                        "Defensive responsibilities"
+                    ];
+                    break;
+                    
+                case "striker":
+                    drills.technicalDrills = [
+                        "Finishing from various angles",
+                        "Heading technique",
+                        "Hold-up play and shielding",
+                        "One-touch finishing"
+                    ];
+                    drills.physicalFocus = [
+                        "Explosive power",
+                        "Strength for hold-up play",
+                        "Quick acceleration over short distances",
+                        "Jumping ability"
+                    ];
+                    drills.tacticalAwareness = [
+                        "Movement to create space",
+                        "Timing runs behind defense",
+                        "Link-up play with midfielders",
+                        "Pressing from the front"
+                    ];
+                    break;
+            }
+            
+            // Modify drills based on training intensity
+            if (trainingIntensity === "recovery" || trainingIntensity === "light") {
+                drills.description += " Modified for recovery/light training.";
+                
+                // Reduce the number of drills and modify intensity
+                drills.technicalDrills = drills.technicalDrills.slice(0, 2).map(drill => drill + " (low intensity)");
+                drills.physicalFocus = drills.physicalFocus.slice(0, 2).map(focus => focus + " (reduced volume)");
+                drills.tacticalAwareness = drills.tacticalAwareness.slice(0, 2).map(awareness => awareness + " (walk-through/discussion)");
+            }
+            
+            return drills;
+        }
+        
+        function displayTrainingPlan(plan) {
+            // Display summary
+            const summaryElement = document.getElementById('training-summary');
+            let intensityClass = "";
+            let intensityText = "";
+            
+            switch(plan.summary.intensity) {
+                case "recovery":
+                    intensityClass = "badge-recovery";
+                    intensityText = "Recovery";
+                    break;
+                case "light":
+                    intensityClass = "badge-light";
+                    intensityText = "Light";
+                    break;
+                case "moderate":
+                    intensityClass = "badge-moderate";
+                    intensityText = "Moderate";
+                    break;
+                case "high":
+                    intensityClass = "badge-high";
+                    intensityText = "High";
+                    break;
+            }
+            
+            summaryElement.innerHTML = `
+                <div class="summary-flex">
+                    <div>
+                        <h3 class="summary-title">Training Summary</h3>
+                        <p class="summary-text">Position: <span>${plan.summary.position}</span></p>
+                        <p class="summary-text">Focus Areas: <span>${plan.summary.focus}</span></p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="intensity-badge ${intensityClass}">
+                            ${intensityText} Intensity
+                        </span>
+                        ${plan.summary.painArea !== "None" ? 
+                            `<p class="summary-text">Pain Area: <span>${plan.summary.painArea} (Level ${plan.summary.painSeverity})</span></p>` : 
+                            `<p class="summary-text">No pain reported</p>`
+                        }
+                    </div>
+                </div>
+            `;
+            
+            // Display training card
+            const trainingElement = document.getElementById('training-card');
+            
+            let trainingHTML = `
+                <div class="card-header">
+                    <div class="card-icon">${plan.training.icon}</div>
+                    <h3 class="card-title">${plan.training.title}</h3>
+                </div>
+                <p class="card-description">${plan.training.description}</p>
+                <p style="font-size: 0.875rem; color: #666; margin-bottom: 1rem;">Duration: ${plan.training.duration}</p>
+                
+                <h4 class="list-title">Warm-up:</h4>
+                <ul class="list">
+            `;
+            
+            plan.training.warmup.forEach(item => {
+                trainingHTML += `<li>${item}</li>`;
+            });
+            
+            trainingHTML += `
+                </ul>
+                
+                <h4 class="list-title">Main Session:</h4>
+                <ul class="list">
+            `;
+            
+            plan.training.mainSession.forEach(item => {
+                if (item.startsWith("---")) {
+                    trainingHTML += `<li class="special-item">${item.replace(/---/g, '')}</li>`;
+                } else {
+                    trainingHTML += `<li>${item}</li>`;
+                }
+            });
+            
+            trainingHTML += `
+                </ul>
+                
+                <h4 class="list-title">Cool-down:</h4>
+                <ul class="list">
+            `;
+            
+            plan.training.cooldown.forEach(item => {
+                trainingHTML += `<li>${item}</li>`;
+            });
+            
+            trainingHTML += `
+                </ul>
+            `;
+            
+            trainingElement.innerHTML = trainingHTML;
+            
+            // Display recovery card
+            const recoveryElement = document.getElementById('recovery-card');
+            
+            let recoveryHTML = `
+                <div class="card-header">
+                    <div class="card-icon">${plan.recovery.icon}</div>
+                    <h3 class="card-title">${plan.recovery.title}</h3>
+                </div>
+                <p class="card-description">${plan.recovery.description}</p>
+                
+                <h4 class="list-title">Immediate Post-Training:</h4>
+                <ul class="list">
+            `;
+            
+            plan.recovery.immediate.forEach(item => {
+                recoveryHTML += `<li>${item}</li>`;
+            });
+            
+            recoveryHTML += `
+                </ul>
+                
+                <h4 class="list-title">Same Day:</h4>
+                <ul class="list">
+            `;
+            
+            plan.recovery.sameDay.forEach(item => {
+                if (item.startsWith("---")) {
+                    recoveryHTML += `<li class="special-item">${item.replace(/---/g, '')}</li>`;
+                } else {
+                    recoveryHTML += `<li>${item}</li>`;
+                }
+            });
+            
+            recoveryHTML += `
+                </ul>
+                
+                <h4 class="list-title">Next Day:</h4>
+                <ul class="list">
+            `;
+            
+            plan.recovery.nextDay.forEach(item => {
+                recoveryHTML += `<li>${item}</li>`;
+            });
+            
+            recoveryHTML += `
+                </ul>
+                
+                <h4 class="list-title">Nutrition Focus:</h4>
+                <ul class="list">
+            `;
+            
+            plan.recovery.nutrition.forEach(item => {
+                recoveryHTML += `<li>${item}</li>`;
+            });
+            
+            recoveryHTML += `
+                </ul>
+            `;
+            
+            recoveryElement.innerHTML = recoveryHTML;
+            
+            // Display position-specific card
+            const positionElement = document.getElementById('position-specific-card');
+            
+            let positionHTML = `
+                <div class="card-header">
+                    <div class="card-icon">${plan.positionSpecific.icon}</div>
+                    <h3 class="card-title">${plan.positionSpecific.title}</h3>
+                </div>
+                <p class="card-description">${plan.positionSpecific.description}</p>
+                
+                <div class="grid grid-3">
+                    <div>
+                        <h4 class="list-title">Technical Drills:</h4>
+                        <ul class="list">
+            `;
+            
+            plan.positionSpecific.technicalDrills.forEach(item => {
+                positionHTML += `<li>${item}</li>`;
+            });
+            
+            positionHTML += `
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="list-title">Physical Focus:</h4>
+                        <ul class="list">
+            `;
+            
+            plan.positionSpecific.physicalFocus.forEach(item => {
+                positionHTML += `<li>${item}</li>`;
+            });
+            
+            positionHTML += `
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="list-title">Tactical Awareness:</h4>
+                        <ul class="list">
+            `;
+            
+            plan.positionSpecific.tacticalAwareness.forEach(item => {
+                positionHTML += `<li>${item}</li>`;
+            });
+            
+            positionHTML += `
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            positionElement.innerHTML = positionHTML;
+        }
+    </script>
 </body>
 </html>
+
