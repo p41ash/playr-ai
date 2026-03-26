@@ -1,337 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Playr.AI — Elevate Your Game</title>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Playr.AI — Elite Soccer Training</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
 <style>
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   RESET & ROOT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --obs:   #07070f;
-  --obs2:  #0e0e1a;
-  --obs3:  #161624;
-  --obs4:  #1e1e2e;
-  --gold:  #c9a55a;
-  --gold2: #e8c97a;
-  --gdim:  rgba(201,165,90,.12);
-  --glow:  rgba(201,165,90,.25);
-  --ivory: #f5f0e8;
-  --iv2:   #d8d0c0;
-  --muted: #6e6e8a;
-  --mut2:  #9898b8;
-  --bdr:   rgba(201,165,90,.12);
-  --bdr2:  rgba(255,255,255,.06);
-  --sw:    300px;
+  --obs:#07070f;--obs2:#0e0e1a;--obs3:#161624;--obs4:#1e1e2e;--obs5:#252538;
+  --gold:#c9a55a;--gold2:#e8c97a;--gdim:rgba(201,165,90,.12);--glow:rgba(201,165,90,.25);
+  --ivory:#f5f0e8;--iv2:#d8d0c0;--muted:#6e6e8a;--mut2:#9898b8;
+  --bdr:rgba(201,165,90,.12);--bdr2:rgba(255,255,255,.06);
+  --green:#10b981;--red:#ef4444;--blue:#60a5fa;--orange:#f97316;
+  --sw:290px;
 }
 html{scroll-behavior:smooth}
-body{
-  font-family:'Crimson Pro',serif;
-  background:var(--obs);color:var(--ivory);
-  min-height:100vh;font-size:19px;line-height:1.85;
-  overflow-x:hidden;
-}
-body::before{
-  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity:.55;
-}
+body{font-family:'Crimson Pro',serif;background:var(--obs);color:var(--ivory);min-height:100vh;font-size:18px;line-height:1.8;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   LAYOUT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ── LAYOUT ── */
 .app{display:flex;min-height:100vh;position:relative;z-index:1}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   SIDEBAR
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.sidebar{
-  width:var(--sw);min-width:var(--sw);
-  background:var(--obs2);border-right:1px solid var(--bdr);
-  display:flex;flex-direction:column;
-  position:sticky;top:0;height:100vh;overflow-y:auto;z-index:10;
-}
-.sidebar::-webkit-scrollbar{width:3px}
-.sidebar::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:2px}
+/* ── SIDEBAR ── */
+.sidebar{width:var(--sw);min-width:var(--sw);background:var(--obs2);border-right:1px solid var(--bdr);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;z-index:10}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:2px}
+.s-logo{padding:1.6rem 1.6rem 1.2rem;border-bottom:1px solid var(--bdr)}
+.s-wordmark{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;letter-spacing:4px;background:linear-gradient(135deg,var(--gold),var(--gold2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.s-sub{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:3px}
 
-/* Logo */
-.s-logo{padding:2rem 1.75rem 1.5rem;border-bottom:1px solid var(--bdr);position:relative}
-.s-logo::after{content:'';position:absolute;bottom:0;left:1.75rem;right:1.75rem;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
-.s-wordmark{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:900;letter-spacing:4px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold2) 60%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.s-sub{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:4px}
+/* NAV */
+.s-nav{padding:1rem 1rem;border-bottom:1px solid var(--bdr2)}
+.s-nav-btn{display:flex;align-items:center;gap:.65rem;width:100%;padding:.65rem .9rem;border:none;border-radius:10px;background:transparent;color:var(--mut2);font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-bottom:.3rem;text-align:left}
+.s-nav-btn:hover{background:var(--obs3);color:var(--ivory)}
+.s-nav-btn.active{background:var(--gdim);color:var(--gold);border:1px solid var(--bdr)}
+.s-nav-icon{font-size:1rem;width:20px;text-align:center;flex-shrink:0}
 
-/* Auth */
-.s-auth{padding:1.5rem 1.75rem;border-bottom:1px solid var(--bdr2)}
-.s-greeting{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.3rem}
-.s-name{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold2);margin-bottom:1rem;font-style:italic}
-.sbn{display:block;width:100%;padding:.72rem 1rem;border-radius:10px;border:none;font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s ease;margin-bottom:.5rem;text-align:center}
+/* STREAK */
+.s-streak{padding:1rem 1.4rem;border-bottom:1px solid var(--bdr2)}
+.streak-card{background:var(--gdim);border:1px solid var(--bdr);border-radius:12px;padding:.9rem 1rem}
+.streak-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem}
+.streak-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--gold2);line-height:1}
+.streak-fire{font-size:1.5rem;line-height:1}
+.streak-label{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:.55rem}
+.streak-dots{display:flex;gap:4px}
+.sdot{width:22px;height:6px;border-radius:3px;background:var(--obs4);transition:background .3s}
+.sdot.on{background:var(--gold)}
+.sdot.today{background:var(--gold2);box-shadow:0 0 6px var(--glow)}
+.streak-sign{font-size:.82rem;color:var(--muted);font-style:italic;text-align:center;padding:.6rem 0}
+
+/* AUTH */
+.s-auth{padding:1rem 1.4rem;border-bottom:1px solid var(--bdr2)}
+.s-greeting{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.25rem}
+.s-name{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--gold2);font-style:italic;margin-bottom:.75rem}
+.sbn{display:block;width:100%;padding:.65rem .9rem;border-radius:9px;border:none;font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-bottom:.4rem;text-align:center}
 .sbn-p{background:linear-gradient(135deg,#8b6914,var(--gold));color:var(--obs)}
-.sbn-p:hover{transform:translateY(-1px);box-shadow:0 8px 22px var(--glow)}
-.sbn-o{background:transparent;border:1px solid var(--bdr);color:var(--mut2)}
-.sbn-o:hover{border-color:var(--gold);color:var(--gold)}
-.sbn-g{background:transparent;border:none;color:var(--muted);font-size:.68rem;letter-spacing:1.5px}
-.sbn-g:hover{color:#ff8080}
+.sbn-p:hover{transform:translateY(-1px);box-shadow:0 6px 18px var(--glow)}
+.sbn-o{background:transparent;border:1px solid var(--bdr);color:var(--mut2)}.sbn-o:hover{border-color:var(--gold);color:var(--gold)}
+.sbn-g{background:transparent;border:none;color:var(--muted);font-size:.65rem;letter-spacing:1.5px}.sbn-g:hover{color:#ff8080}
 
-/* Plans list */
-.s-plans{padding:1.5rem 1.75rem;flex:1}
-.s-ph{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem}
+/* SAVED PLANS */
+.s-plans{padding:1rem 1.4rem;flex:1}
+.s-ph{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
 .s-ph::after{content:'';flex:1;height:1px;background:var(--bdr)}
-.pc{padding:.95rem 1rem;border-radius:12px;border:1px solid var(--bdr2);background:var(--obs3);cursor:pointer;margin-bottom:.6rem;transition:all .2s;position:relative}
-.pc:hover{border-color:var(--bdr);background:var(--obs4);transform:translateX(4px)}
-.pc-title{font-family:'Playfair Display',serif;font-size:.98rem;color:var(--ivory);margin-bottom:.2rem}
-.pc-meta{font-size:.78rem;color:var(--muted);font-family:'DM Mono',monospace}
-.pb{display:inline-block;padding:2px 9px;border-radius:20px;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:1px;text-transform:uppercase;margin-top:.4rem}
-.pb-recovery{background:rgba(99,179,237,.15);color:#63b3ed}
-.pb-light{background:rgba(110,231,183,.15);color:#6ee7b7}
-.pb-moderate{background:rgba(251,191,36,.15);color:#fbbf24}
-.pb-high{background:rgba(252,129,129,.15);color:#fc8181}
-.pc-del{position:absolute;top:.8rem;right:.8rem;background:none;border:none;color:var(--muted);cursor:pointer;font-size:.9rem;opacity:0;transition:opacity .2s}
-.pc:hover .pc-del{opacity:1}
-.pc-del:hover{color:#ff6b6b}
-.no-plans{font-size:.92rem;color:var(--muted);font-style:italic;text-align:center;padding:1.5rem 0;line-height:1.7}
+.pc{padding:.8rem .9rem;border-radius:10px;border:1px solid var(--bdr2);background:var(--obs3);cursor:pointer;margin-bottom:.5rem;transition:all .2s;position:relative}
+.pc:hover{border-color:var(--bdr);background:var(--obs4);transform:translateX(3px)}
+.pc-title{font-family:'Playfair Display',serif;font-size:.9rem;color:var(--ivory);margin-bottom:.15rem}
+.pc-meta{font-size:.72rem;color:var(--muted);font-family:'DM Mono',monospace}
+.pb{display:inline-block;padding:1px 7px;border-radius:20px;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:1px;text-transform:uppercase;margin-top:.3rem}
+.pb-recovery{background:rgba(99,179,237,.15);color:#63b3ed}.pb-light{background:rgba(110,231,183,.15);color:#6ee7b7}
+.pb-moderate{background:rgba(251,191,36,.15);color:#fbbf24}.pb-high{background:rgba(252,129,129,.15);color:#fc8181}
+.pc-del{position:absolute;top:.7rem;right:.7rem;background:none;border:none;color:var(--muted);cursor:pointer;font-size:.85rem;opacity:0;transition:opacity .2s}
+.pc:hover .pc-del{opacity:1}.pc-del:hover{color:#ff6b6b}
+.no-plans{font-size:.85rem;color:var(--muted);font-style:italic;text-align:center;padding:1rem 0;line-height:1.65}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   MAIN
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.main{flex:1;padding:2rem;min-width:0}
-.panel{max-width:960px;margin:0 auto;background:var(--obs2);border:1px solid var(--bdr);border-radius:24px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(201,165,90,.05)}
+/* ── MAIN ── */
+.main{flex:1;padding:1.75rem;min-width:0;overflow-y:auto}
+.page{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-/* Panel Header */
-.ph{padding:3rem 3.5rem;position:relative;overflow:hidden;background:linear-gradient(160deg,#12100a 0%,#1c1608 40%,#0a0a16 100%);border-bottom:1px solid var(--bdr)}
-.ph::before{content:'';position:absolute;top:-60px;right:-80px;width:360px;height:360px;background:radial-gradient(circle,rgba(201,165,90,.08) 0%,transparent 70%);pointer-events:none}
-.ph::after{content:'';position:absolute;bottom:0;left:3.5rem;right:3.5rem;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.ph-eye{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem}
-.ph-eye::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
-.ph-title{font-family:'Playfair Display',serif;font-size:3.4rem;font-weight:900;letter-spacing:2px;line-height:1.1;background:linear-gradient(135deg,var(--gold2) 0%,var(--gold) 50%,#f0dca0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.75rem}
-.ph-sub{color:var(--mut2);font-size:1.2rem;font-weight:300;letter-spacing:.5px}
+/* ── PANEL ── */
+.panel{max-width:960px;margin:0 auto;background:var(--obs2);border:1px solid var(--bdr);border-radius:22px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.65)}
 
-/* Panel body */
-.pb-body{padding:3rem 3.5rem}
+/* PANEL HEADER */
+.ph{padding:2.5rem 3rem;position:relative;overflow:hidden;background:linear-gradient(160deg,#12100a 0%,#1c1608 40%,#0a0a16 100%);border-bottom:1px solid var(--bdr)}
+.ph::before{content:'';position:absolute;top:-60px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(201,165,90,.09) 0%,transparent 70%);pointer-events:none}
+.ph::after{content:'';position:absolute;bottom:0;left:3rem;right:3rem;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.ph-eye{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:.65rem;display:flex;align-items:center;gap:.65rem}
+.ph-eye::before{content:'';display:block;width:20px;height:1px;background:var(--gold)}
+.ph-title{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;letter-spacing:2px;line-height:1.1;background:linear-gradient(135deg,var(--gold2),var(--gold),#f0dca0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.6rem}
+.ph-sub{color:var(--mut2);font-size:1.1rem;font-weight:300}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   FORM
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.fsec{margin-bottom:2.5rem}
-.fsec-label{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:1.3rem;display:flex;align-items:center;gap:.75rem}
+/* PAGE BODY */
+.pb-body{padding:2.5rem 3rem}
+
+/* ── FORM ELEMENTS ── */
+.fsec{margin-bottom:2.25rem}
+.fsec-label{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:1.15rem;display:flex;align-items:center;gap:.7rem}
 .fsec-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--bdr),transparent)}
-
-.grid{display:grid;gap:1.35rem}
-.g2{grid-template-columns:1fr 1fr}
-.g3{grid-template-columns:1fr 1fr 1fr}
-
-.field{display:flex;flex-direction:column;gap:.55rem}
-.flbl{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--mut2)}
-.finput{
-  width:100%;padding:1rem 1.1rem;
-  background:var(--obs3);border:1px solid var(--bdr2);border-radius:12px;
-  color:var(--ivory);font-family:'Crimson Pro',serif;font-size:1.18rem;
-  transition:border-color .2s,box-shadow .2s;
-  appearance:none;-webkit-appearance:none;
-}
+.grid{display:grid;gap:1.25rem}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr 1fr}
+.field{display:flex;flex-direction:column;gap:.5rem}
+.flbl{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--mut2)}
+.finput{width:100%;padding:.95rem 1.05rem;background:var(--obs3);border:1px solid var(--bdr2);border-radius:11px;color:var(--ivory);font-family:'Crimson Pro',serif;font-size:1.12rem;transition:border-color .2s,box-shadow .2s;appearance:none;-webkit-appearance:none}
 .finput:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gdim)}
 .finput::placeholder{color:var(--muted)}
-select.finput{
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236e6e8a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 1rem center;
-  padding-right:2.5rem;cursor:pointer;
-}
+select.finput{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236e6e8a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;cursor:pointer}
 select.finput option{background:var(--obs3)}
-textarea.finput{resize:vertical;min-height:90px;line-height:1.7}
+textarea.finput{resize:vertical;min-height:80px;line-height:1.7}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   PAIN MAP
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.pain-row{display:grid;grid-template-columns:210px 1fr;gap:2.25rem;align-items:start}
-.pmw{background:var(--obs3);border:1px solid var(--bdr2);border-radius:16px;padding:1.35rem;display:flex;justify-content:center}
-.pmw svg{max-width:160px;width:100%}
-
-.pain-area{cursor:pointer;fill:#1e1e30;stroke:rgba(255,255,255,.06);stroke-width:.8;transition:fill .22s ease,filter .22s ease}
+/* ── PAIN MAP ── */
+.pain-row{display:grid;grid-template-columns:200px 1fr;gap:2rem;align-items:start}
+.pmw{background:var(--obs3);border:1px solid var(--bdr2);border-radius:14px;padding:1.2rem;display:flex;justify-content:center}
+.pmw svg{max-width:155px;width:100%}
+.pain-area{cursor:pointer;fill:#1e1e30;stroke:rgba(255,255,255,.06);stroke-width:.8;transition:fill .22s,filter .22s}
 .pain-area:hover{fill:#2e2e48;filter:brightness(1.3)}
-.pain-area.selected{stroke:rgba(255,255,255,.45);stroke-width:1.5;filter:drop-shadow(0 0 6px rgba(255,255,255,.3))}
+.pain-area.selected{stroke:rgba(255,255,255,.45);stroke-width:1.5;filter:drop-shadow(0 0 5px rgba(255,255,255,.3))}
 .pain-area.has-pain{filter:drop-shadow(0 0 6px rgba(239,68,68,.55))}
-.pain-area.selected.has-pain{filter:brightness(1.15) drop-shadow(0 0 10px rgba(239,68,68,.7))}
+.pain-area.selected.has-pain{filter:brightness(1.15) drop-shadow(0 0 9px rgba(239,68,68,.7))}
+.pain-ctrl{display:flex;flex-direction:column;gap:1.4rem;padding-top:.2rem}
+.pal{font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold2);font-style:italic;min-height:1.4em}
+.ptags{display:flex;flex-wrap:wrap;gap:.45rem;min-height:28px}
+.ptag{display:flex;align-items:center;gap:.35rem;padding:3px 10px 3px 11px;border-radius:30px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.08);color:#fca5a5;font-size:.85rem}
+.ptag-x{background:none;border:none;color:#fca5a5;cursor:pointer;font-size:.85rem;opacity:.65;padding:0}.ptag-x:hover{opacity:1}
+.no-areas{font-size:.88rem;color:var(--muted);font-style:italic}
+.sfield{display:flex;flex-direction:column;gap:.55rem}
+input[type=range]{width:100%;-webkit-appearance:none;height:5px;border-radius:3px;outline:none;cursor:pointer;border:none;background:linear-gradient(to right,var(--gold) var(--pct,0%),var(--obs4) var(--pct,0%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--gold2);border:3px solid var(--obs2);box-shadow:0 0 0 2px var(--gold);cursor:pointer}
+.slbls{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);margin-top:.25rem}
+.sevn{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;text-align:center;line-height:1;transition:color .3s;color:var(--muted)}
+.sevlbl{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:2px;text-align:center;color:var(--muted);margin-top:2px}
 
-.pain-ctrl{display:flex;flex-direction:column;gap:1.6rem;padding-top:.25rem}
-.pal{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold2);font-style:italic;min-height:1.5em}
-.ptags{display:flex;flex-wrap:wrap;gap:.5rem;min-height:32px}
-.ptag{display:flex;align-items:center;gap:.4rem;padding:4px 11px 4px 13px;border-radius:30px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.08);color:#fca5a5;font-size:.88rem}
-.ptag-x{background:none;border:none;color:#fca5a5;cursor:pointer;font-size:.9rem;opacity:.65;transition:opacity .15s;padding:0}
-.ptag-x:hover{opacity:1}
-.no-areas{font-size:.92rem;color:var(--muted);font-style:italic}
+/* ── WEAKNESS + FITNESS ── */
+.skill-grid{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.25rem}
+.skill-btn{padding:.45rem .9rem;border-radius:20px;border:1px solid var(--bdr2);background:var(--obs3);color:var(--mut2);font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:1px;cursor:pointer;transition:all .2s}
+.skill-btn:hover{border-color:var(--bdr);color:var(--ivory)}
+.skill-btn.on{background:var(--gdim);border-color:var(--gold);color:var(--gold2)}
+.fitness-row{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;margin-top:.5rem}
+.toggle-wrap{display:flex;align-items:center;gap:.65rem}
+.toggle{position:relative;width:44px;height:24px;background:var(--obs4);border-radius:12px;cursor:pointer;transition:background .25s;flex-shrink:0;border:none}
+.toggle.on{background:var(--gold)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .25s}
+.toggle.on::after{transform:translateX(20px)}
+.toggle-label{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut2)}
+.fitness-opts{display:flex;gap:.5rem;flex-wrap:wrap}
+.fit-opt{padding:.4rem .85rem;border-radius:20px;border:1px solid var(--bdr2);background:var(--obs3);color:var(--mut2);font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:1px;cursor:pointer;transition:all .2s}
+.fit-opt.on{background:rgba(96,165,250,.15);border-color:rgba(96,165,250,.4);color:var(--blue)}
 
-/* Severity slider */
-.sfield{display:flex;flex-direction:column;gap:.6rem}
-input[type=range]{
-  width:100%;-webkit-appearance:none;appearance:none;
-  height:5px;border-radius:3px;outline:none;cursor:pointer;border:none;
-  background:linear-gradient(to right,var(--gold) var(--pct,0%),var(--obs4) var(--pct,0%));
-}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--gold2);border:3px solid var(--obs2);box-shadow:0 0 0 2px var(--gold);cursor:pointer}
-input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--gold2);border:3px solid var(--obs2);box-shadow:0 0 0 2px var(--gold);cursor:pointer}
-.slbls{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);margin-top:.3rem}
-.sevn{font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;text-align:center;line-height:1;transition:color .3s;color:var(--muted)}
-.sevlbl{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:2px;text-align:center;color:var(--muted);margin-top:2px}
+/* STREAK BANNER on home page */
+.streak-banner{background:linear-gradient(135deg,rgba(201,165,90,.08),rgba(201,165,90,.04));border:1px solid var(--bdr);border-radius:16px;padding:1.4rem 2rem;margin-bottom:2rem;display:flex;align-items:center;gap:1.5rem}
+.sb-fire{font-size:2.8rem;line-height:1;animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.sb-count{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:var(--gold2);line-height:1}
+.sb-info{flex:1}
+.sb-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--ivory);margin-bottom:.2rem}
+.sb-sub{font-size:.9rem;color:var(--muted)}
+.sb-dots{display:flex;gap:5px;margin-top:.6rem}
+.sbdot{width:28px;height:7px;border-radius:4px;background:var(--obs4)}
+.sbdot.on{background:var(--gold)}
+.sbdot.today{background:var(--gold2);box-shadow:0 0 8px var(--glow)}
+.no-streak{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:1.5px}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   GENERATE BUTTON
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.gen-wrap{padding:0 3.5rem 3rem;border-top:1px solid var(--bdr2);padding-top:2rem}
-.gen-btn{
-  width:100%;padding:1.35rem 2rem;
-  background:linear-gradient(135deg,#6b4c0a,var(--gold),#b8930e,var(--gold2));
-  background-size:300% 300%;animation:gshift 4s ease infinite;
-  border:none;border-radius:14px;
-  font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;letter-spacing:2px;
-  color:var(--obs);cursor:pointer;
-  transition:transform .2s,box-shadow .2s;
-  position:relative;overflow:hidden;
-}
-.gen-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.15) 50%,transparent 60%);transform:translateX(-100%);transition:transform .45s ease}
+/* ── GENERATE BUTTON ── */
+.gen-wrap{padding:0 3rem 2.5rem;border-top:1px solid var(--bdr2);padding-top:1.75rem}
+.gen-btn{width:100%;padding:1.25rem 2rem;background:linear-gradient(135deg,#6b4c0a,var(--gold),#b8930e,var(--gold2));background-size:300% 300%;animation:gshift 4s ease infinite;border:none;border-radius:13px;font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;letter-spacing:2px;color:var(--obs);cursor:pointer;transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+.gen-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.15) 50%,transparent 60%);transform:translateX(-100%);transition:transform .45s}
 .gen-btn:hover::after{transform:translateX(100%)}
-.gen-btn:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(201,165,90,.38)}
+.gen-btn:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(201,165,90,.35)}
 @keyframes gshift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   RESULTS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.results{padding:3rem 3.5rem}
-.rh{margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--bdr)}
-.reye{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem}
-.reye::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
-.rtitle{font-family:'Playfair Display',serif;font-size:2.3rem;font-weight:700;color:var(--ivory);line-height:1.2;margin-bottom:.5rem}
-.rmeta{font-size:1rem;color:var(--mut2);font-family:'DM Mono',monospace;letter-spacing:.5px}
-
-/* Disclaimer */
-.disc{background:var(--obs3);border:1px solid var(--bdr);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:1.2rem 1.5rem;margin-bottom:2.5rem;display:flex;gap:.9rem;align-items:flex-start}
-.disc-icon{color:var(--gold);font-size:1.15rem;flex-shrink:0;margin-top:2px}
-.disc-text{font-size:1rem;color:var(--mut2);line-height:1.75}
-
-/* Summary strip */
-.sumstrip{background:var(--gdim);border:1px solid rgba(201,165,90,.2);border-radius:14px;padding:1.5rem 2rem;margin-bottom:2.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1.25rem;align-items:center}
-.sum-group{display:flex;flex-direction:column;gap:.3rem}
-.sum-label{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold)}
-.sum-value{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--ivory)}
-.sum-value.italic{font-style:italic;color:var(--gold2)}
-.ibadge{display:inline-block;padding:4px 14px;border-radius:20px;font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:1px;text-transform:uppercase}
-
-/* Cards grid */
-.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
-.card{background:var(--obs3);border:1px solid var(--bdr2);border-radius:16px;padding:2rem;transition:transform .25s,box-shadow .25s}
-.card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(201,165,90,.15)}
+/* ── RESULTS ── */
+.results{padding:2.5rem 3rem}
+.rh{margin-bottom:2rem;padding-bottom:1.75rem;border-bottom:1px solid var(--bdr)}
+.reye{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.65rem;margin-bottom:.5rem}
+.reye::before{content:'';display:block;width:20px;height:1px;background:var(--gold)}
+.rtitle{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--ivory);line-height:1.2;margin-bottom:.4rem}
+.rmeta{font-size:.95rem;color:var(--mut2);font-family:'DM Mono',monospace;letter-spacing:.5px}
+.disc{background:var(--obs3);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:1rem 1.4rem;margin-bottom:2rem;display:flex;gap:.8rem;align-items:flex-start}
+.disc-icon{color:var(--gold);flex-shrink:0;margin-top:2px}
+.disc-text{font-size:.95rem;color:var(--mut2);line-height:1.7}
+.sumstrip{background:var(--gdim);border:1px solid rgba(201,165,90,.2);border-radius:13px;padding:1.35rem 1.75rem;margin-bottom:2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;align-items:center}
+.sum-group{display:flex;flex-direction:column;gap:.25rem}
+.sum-label{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.sum-value{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--ivory)}
+.ibadge{display:inline-block;padding:3px 12px;border-radius:20px;font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:1px;text-transform:uppercase}
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.35rem;margin-bottom:1.35rem}
+.card{background:var(--obs3);border:1px solid var(--bdr2);border-radius:15px;padding:1.75rem;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(201,165,90,.13)}
 .card-full{grid-column:1/-1}
-.card-head{display:flex;align-items:center;gap:.85rem;margin-bottom:.75rem}
-.card-icon{font-size:1.5rem}
-.card-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--ivory)}
-.card-desc{color:var(--mut2);font-size:1rem;margin-bottom:1.25rem;line-height:1.75}
-.card-duration{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:1.5px;color:var(--muted);margin-bottom:1.25rem;text-transform:uppercase}
-
-.list-head{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin:1.1rem 0 .6rem;display:flex;align-items:center;gap:.6rem}
-.list-head::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--bdr),transparent)}
+.card-head{display:flex;align-items:center;gap:.8rem;margin-bottom:.65rem}
+.card-icon{font-size:1.4rem}
+.card-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ivory)}
+.card-desc{color:var(--mut2);font-size:.95rem;margin-bottom:1.1rem;line-height:1.7}
+.lhead{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin:1rem 0 .5rem;display:flex;align-items:center;gap:.55rem}
+.lhead::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--bdr),transparent)}
+.lhead.feedback-head{color:var(--blue)}
+.lhead.feedback-head::after{background:linear-gradient(90deg,rgba(96,165,250,.3),transparent)}
 ul.clist{list-style:none}
-ul.clist li{position:relative;padding-left:1.3rem;color:var(--iv2);font-size:1.02rem;margin-bottom:.4rem;line-height:1.7}
-ul.clist li::before{content:'›';position:absolute;left:0;color:var(--gold);font-size:1.1rem;line-height:1.5}
-ul.clist li.special{color:var(--gold2);font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;padding-left:0;margin-top:.75rem}
+ul.clist li{position:relative;padding-left:1.2rem;color:var(--iv2);font-size:.98rem;margin-bottom:.35rem;line-height:1.7}
+ul.clist li::before{content:'›';position:absolute;left:0;color:var(--gold);font-size:1rem;line-height:1.6}
+ul.clist li.special{color:var(--gold2);font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;padding-left:0;margin-top:.7rem}
 ul.clist li.special::before{display:none}
-
-/* Position drills inner grid */
-.drills-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-top:.5rem}
-.drills-col-title{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
-.drills-col-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--bdr),transparent)}
-
-/* Results actions */
-.ract{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding-top:2rem;border-top:1px solid var(--bdr);margin-top:.5rem}
-.ract-r{display:flex;gap:.85rem;flex-wrap:wrap}
-.rbtn{padding:.82rem 1.65rem;border-radius:11px;border:none;font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s}
+ul.clist li.feedback-item::before{color:var(--blue)}
+.drills-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.35rem;margin-top:.5rem}
+.dcol-title{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:.65rem;display:flex;align-items:center;gap:.5rem}
+.dcol-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--bdr),transparent)}
+.ract{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.85rem;padding-top:1.75rem;border-top:1px solid var(--bdr);margin-top:.5rem}
+.ract-r{display:flex;gap:.75rem;flex-wrap:wrap}
+.rbtn{padding:.75rem 1.5rem;border-radius:10px;border:none;font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s}
 .rb-back{background:var(--obs3);border:1px solid var(--bdr2);color:var(--mut2)}.rb-back:hover{border-color:var(--bdr);color:var(--ivory)}
-.rb-save{background:linear-gradient(135deg,#064e3b,#059669);color:#fff}.rb-save:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(5,150,105,.3)}
+.rb-save{background:linear-gradient(135deg,#064e3b,#059669);color:#fff}.rb-save:hover{transform:translateY(-2px);box-shadow:0 7px 20px rgba(5,150,105,.3)}
 .rb-print{background:var(--gdim);border:1px solid var(--bdr);color:var(--gold2)}.rb-print:hover{background:rgba(201,165,90,.18);transform:translateY(-2px)}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   AUTH MODAL
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem}
-.modal{background:var(--obs2);border:1px solid var(--bdr);border-radius:20px;padding:2.75rem;width:100%;max-width:430px;box-shadow:0 40px 100px rgba(0,0,0,.8);position:relative;animation:mIn .35s cubic-bezier(.34,1.56,.64,1)}
-@keyframes mIn{from{opacity:0;transform:scale(.88) translateY(24px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.modal-x{position:absolute;top:1.25rem;right:1.25rem;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;transition:color .2s;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center}
-.modal-x:hover{color:var(--ivory);background:var(--obs3)}
-.m-logo{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;letter-spacing:3px;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem}
-.m-sub{color:var(--muted);font-size:1rem;margin-bottom:2rem}
-.tabs{display:flex;background:var(--obs3);border-radius:11px;padding:3px;margin-bottom:2rem;gap:3px}
-.tab{flex:1;padding:.65rem;border:none;border-radius:9px;font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;background:transparent;color:var(--muted)}
-.tab.on{background:linear-gradient(135deg,#8b6914,var(--gold));color:var(--obs)}
-.mf{margin-bottom:1.35rem}
-.mf label{display:block;font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--mut2);margin-bottom:.5rem}
-.mi{width:100%;padding:.88rem 1rem;background:var(--obs3);border:1px solid var(--bdr2);border-radius:10px;color:var(--ivory);font-family:'Crimson Pro',serif;font-size:1.12rem;transition:border-color .2s,box-shadow .2s}
-.mi:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gdim)}
-.merr{color:#fc8181;font-size:.88rem;margin-top:-.7rem;margin-bottom:.85rem;display:none}
-.merr.show{display:block}
-.m-btn{width:100%;padding:1rem;border:none;border-radius:12px;background:linear-gradient(135deg,#8b6914,var(--gold),var(--gold2));color:var(--obs);font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-top:.5rem}
-.m-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px var(--glow)}
+/* ── SCHEDULE PAGE ── */
+.sched-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.75rem;flex-wrap:wrap;gap:1rem}
+.sched-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--ivory)}
+.sched-nav{display:flex;align-items:center;gap:.75rem}
+.sched-week{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:1.5px;color:var(--mut2)}
+.wk-btn{background:var(--obs3);border:1px solid var(--bdr2);color:var(--mut2);padding:.5rem .9rem;border-radius:8px;cursor:pointer;font-family:'DM Mono',monospace;font-size:.8rem;transition:all .2s}.wk-btn:hover{border-color:var(--bdr);color:var(--ivory)}
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.6rem}
+.day-col{background:var(--obs3);border:1px solid var(--bdr2);border-radius:12px;padding:.85rem .7rem;min-height:200px;display:flex;flex-direction:column;gap:.5rem}
+.day-col.today-col{border-color:rgba(201,165,90,.3);background:rgba(201,165,90,.04)}
+.day-head{text-align:center;margin-bottom:.5rem}
+.day-name{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.day-num{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ivory);line-height:1.2}
+.day-num.today-num{color:var(--gold2)}
+.ev-card{border-radius:8px;padding:.55rem .65rem;cursor:pointer;transition:all .2s;position:relative;border:1px solid transparent}
+.ev-card:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.ev-card.match{background:rgba(249,115,22,.15);border-color:rgba(249,115,22,.3);color:#fed7aa}
+.ev-card.team{background:rgba(201,165,90,.12);border-color:rgba(201,165,90,.25);color:var(--gold2)}
+.ev-card.individual{background:rgba(96,165,250,.1);border-color:rgba(96,165,250,.25);color:#bfdbfe}
+.ev-card.recovery{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.25);color:#a7f3d0}
+.ev-card.prescribed{border-style:dashed;opacity:.8}
+.ev-card.logged::after{content:'✓';position:absolute;top:.3rem;right:.4rem;font-size:.65rem;opacity:.7}
+.ev-title{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:1px;text-transform:uppercase;font-weight:400;margin-bottom:.15rem}
+.ev-sub{font-size:.78rem;opacity:.8}
+.ev-badge{font-size:.6rem;font-family:'DM Mono',monospace;opacity:.7;margin-top:.15rem}
+.add-ev-btn{margin-top:auto;padding:.4rem;border:1px dashed var(--bdr2);border-radius:7px;background:transparent;color:var(--muted);font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:1px;cursor:pointer;text-align:center;transition:all .2s;width:100%}
+.add-ev-btn:hover{border-color:var(--bdr);color:var(--mut2)}
+.sched-legend{display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bdr2)}
+.leg-item{display:flex;align-items:center;gap:.45rem;font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:1px;color:var(--muted)}
+.leg-dot{width:10px;height:10px;border-radius:3px}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   TOAST
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.toast{position:fixed;bottom:2rem;right:2rem;padding:.88rem 1.8rem;border-radius:12px;font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;box-shadow:0 12px 35px rgba(0,0,0,.5);z-index:200;animation:tIn .3s ease,tOut .3s ease 2.5s forwards;pointer-events:none}
+/* ── MATCH DAY PAGE ── */
+.matchday-time{margin-bottom:2rem}
+.md-time-head{display:flex;align-items:center;gap:.85rem;margin-bottom:1rem}
+.md-time-badge{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;padding:.35rem .85rem;border-radius:20px;background:var(--gdim);border:1px solid var(--bdr);color:var(--gold)}
+.md-time-line{flex:1;height:1px;background:linear-gradient(90deg,var(--bdr),transparent)}
+.md-items{display:flex;flex-direction:column;gap:.5rem;padding-left:.5rem}
+.md-item{display:flex;align-items:flex-start;gap:.85rem;padding:.75rem 1rem;border-radius:10px;background:var(--obs3);border:1px solid transparent;cursor:pointer;transition:all .2s}
+.md-item:hover{border-color:var(--bdr2)}
+.md-item.checked{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.2)}
+.md-cb{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--bdr);background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px}
+.md-item.checked .md-cb{background:var(--green);border-color:var(--green)}
+.md-cb-check{color:#fff;font-size:.75rem;display:none}
+.md-item.checked .md-cb-check{display:block}
+.md-text{font-size:1rem;color:var(--iv2);line-height:1.6}
+.md-item.checked .md-text{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(110,231,183,.3)}
+.md-progress{background:var(--obs3);border:1px solid var(--bdr);border-radius:14px;padding:1.25rem 1.75rem;display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem}
+.md-prog-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:var(--gold2);line-height:1}
+.md-prog-label{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:.15rem}
+.md-prog-bar-wrap{flex:1;height:8px;background:var(--obs4);border-radius:4px;overflow:hidden}
+.md-prog-bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:4px;transition:width .4s ease}
+.md-reset-btn{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;padding:.55rem 1rem;border-radius:8px;border:1px solid var(--bdr2);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}.md-reset-btn:hover{border-color:var(--bdr);color:var(--ivory)}
+
+/* ── HISTORY PAGE ── */
+.history-empty{text-align:center;padding:3rem;color:var(--muted);font-style:italic;font-size:1.05rem}
+.hist-month{margin-bottom:2rem}
+.hist-month-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.65rem}
+.hist-month-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--bdr),transparent)}
+.hist-item{display:flex;align-items:stretch;gap:1rem;margin-bottom:.85rem;cursor:pointer}
+.hist-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.hist-dot{width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--obs2);flex-shrink:0;margin-top:.85rem}
+.hist-vline{width:2px;background:linear-gradient(180deg,var(--bdr),transparent);flex:1;margin-top:2px}
+.hist-card{flex:1;background:var(--obs3);border:1px solid var(--bdr2);border-radius:12px;padding:1.25rem 1.5rem;transition:all .2s}
+.hist-card:hover{border-color:var(--bdr);transform:translateX(4px)}
+.hist-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem}
+.hist-pos{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--ivory)}
+.hist-date{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:1px}
+.hist-focus{font-size:.9rem;color:var(--mut2);margin-bottom:.5rem}
+.hist-bottom{display:flex;align-items:center;gap:.65rem;flex-wrap:wrap}
+.hist-pain{font-size:.8rem;color:var(--muted)}
+.hist-detail{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--bdr2)}
+.hist-detail.open{display:block}
+
+/* ── MODALS ── */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;overflow-y:auto}
+.modal{background:var(--obs2);border:1px solid var(--bdr);border-radius:20px;padding:2.5rem;width:100%;max-width:520px;box-shadow:0 40px 100px rgba(0,0,0,.8);position:relative;animation:mIn .3s cubic-bezier(.34,1.56,.64,1);max-height:90vh;overflow-y:auto;margin:auto}
+@keyframes mIn{from{opacity:0;transform:scale(.88) translateY(24px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-lg{max-width:700px}
+.mx{position:absolute;top:1.1rem;right:1.1rem;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;transition:color .2s;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.mx:hover{color:var(--ivory);background:var(--obs3)}
+.m-logo{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;letter-spacing:3px;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.25rem}
+.m-sub{color:var(--muted);font-size:.95rem;margin-bottom:1.75rem}
+.m-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--ivory);margin-bottom:.35rem}
+.m-date-badge{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:2px;color:var(--gold);margin-bottom:1.5rem;text-transform:uppercase}
+.tabs{display:flex;background:var(--obs3);border-radius:10px;padding:3px;margin-bottom:1.75rem;gap:3px}
+.tab{flex:1;padding:.58rem;border:none;border-radius:8px;font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;background:transparent;color:var(--muted)}
+.tab.on{background:linear-gradient(135deg,#8b6914,var(--gold));color:var(--obs)}
+.mf{margin-bottom:1.2rem}
+.mf label{display:block;font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:2px;text-transform:uppercase;color:var(--mut2);margin-bottom:.45rem}
+.mi{width:100%;padding:.8rem .95rem;background:var(--obs3);border:1px solid var(--bdr2);border-radius:9px;color:var(--ivory);font-family:'Crimson Pro',serif;font-size:1.05rem;transition:border-color .2s,box-shadow .2s}
+.mi:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gdim)}
+select.mi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236e6e8a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;cursor:pointer}
+select.mi option{background:var(--obs3)}
+textarea.mi{resize:vertical;min-height:70px;line-height:1.65}
+.merr{color:#fc8181;font-size:.85rem;margin-top:-.65rem;margin-bottom:.85rem;display:none}.merr.show{display:block}
+.m-btn{width:100%;padding:.9rem;border:none;border-radius:11px;background:linear-gradient(135deg,#8b6914,var(--gold),var(--gold2));color:var(--obs);font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-top:.5rem}
+.m-btn:hover{transform:translateY(-2px);box-shadow:0 9px 25px var(--glow)}
+.m-btn-sec{background:var(--obs3);border:1px solid var(--bdr);color:var(--mut2)}.m-btn-sec:hover{transform:none;box-shadow:none;border-color:var(--bdr)}
+.stars{display:flex;gap:.4rem;margin-top:.35rem}
+.star{font-size:1.6rem;cursor:pointer;transition:transform .15s;opacity:.35;line-height:1}
+.star.on{opacity:1}.star:hover{transform:scale(1.2)}
+.event-type-btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.35rem}
+.ev-type-btn{padding:.5rem 1rem;border-radius:20px;border:1px solid var(--bdr2);background:var(--obs3);color:var(--mut2);font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:1px;cursor:pointer;transition:all .2s}
+.ev-type-btn.on.match{background:rgba(249,115,22,.15);border-color:rgba(249,115,22,.4);color:#fed7aa}
+.ev-type-btn.on.team{background:rgba(201,165,90,.12);border-color:rgba(201,165,90,.3);color:var(--gold2)}
+.prescribed-section{margin-top:1.25rem}
+.prescribed-note{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;border-radius:9px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:#93c5fd;font-size:.88rem;margin-bottom:1rem}
+.feedback-note{background:rgba(201,165,90,.08);border-color:rgba(201,165,90,.2);color:var(--gold2)}
+.m-section-title{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin:1rem 0 .6rem;display:flex;align-items:center;gap:.5rem}
+.m-section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--bdr),transparent)}
+.log-detail-row{display:flex;align-items:center;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid var(--bdr2);font-size:.95rem}
+.log-detail-label{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.log-detail-val{color:var(--iv2)}
+.m-tag-grid{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.35rem}
+.m-tag{padding:.38rem .8rem;border-radius:20px;border:1px solid var(--bdr2);background:var(--obs3);color:var(--mut2);font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:1px;cursor:pointer;transition:all .2s}
+.m-tag.on{background:rgba(96,165,250,.12);border-color:rgba(96,165,250,.35);color:#93c5fd}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:2rem;right:2rem;padding:.8rem 1.6rem;border-radius:11px;font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;box-shadow:0 10px 30px rgba(0,0,0,.5);z-index:200;animation:tIn .3s ease,tOut .3s ease 2.5s forwards;pointer-events:none}
 .t-ok{background:linear-gradient(135deg,#065f46,#059669);color:#fff}
 .t-warn{background:linear-gradient(135deg,#78350f,var(--gold));color:var(--obs)}
-@keyframes tIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@keyframes tOut{to{opacity:0;transform:translateY(10px)}}
+@keyframes tIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes tOut{to{opacity:0;transform:translateY(8px)}}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   UTILS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .hidden{display:none!important}
 
-/* Mobile sidebar toggle */
-.mob-tog{display:none;position:fixed;top:1rem;left:1rem;z-index:20;background:var(--obs2);border:1px solid var(--bdr);border-radius:10px;color:var(--gold);width:42px;height:42px;cursor:pointer;font-size:1.15rem;align-items:center;justify-content:center}
-@media(max-width:760px){
+/* MOBILE */
+.mob-tog{display:none;position:fixed;top:1rem;left:1rem;z-index:20;background:var(--obs2);border:1px solid var(--bdr);border-radius:9px;color:var(--gold);width:40px;height:40px;cursor:pointer;font-size:1.1rem;align-items:center;justify-content:center}
+@media(max-width:860px){
   .mob-tog{display:flex}
-  .sidebar{position:fixed;left:-100%;transition:left .3s ease}
-  .sidebar.open{left:0}
-  .main{padding:1rem;padding-top:4rem}
-  .ph,.pb-body,.results{padding:1.75rem 1.5rem}
+  .sidebar{position:fixed;left:-100%;transition:left .3s}.sidebar.open{left:0}
+  .main{padding:1rem;padding-top:3.5rem}
+  .ph,.pb-body,.results{padding:1.5rem}
   .gen-wrap{padding:0 1.5rem 2rem;padding-top:1.5rem}
-  .g2,.g3{grid-template-columns:1fr}
+  .g2,.g3,.card-grid,.drills-grid,.week-grid{grid-template-columns:1fr}
   .pain-row{grid-template-columns:1fr}
-  .card-grid{grid-template-columns:1fr}
-  .drills-grid{grid-template-columns:1fr}
-  .ph-title{font-size:2.4rem}
+  .ph-title{font-size:2.2rem}
+  .week-grid{grid-template-columns:repeat(4,1fr)}
 }
-@media print{
-  .sidebar,.mob-tog,.ract,.disc{display:none!important}
-  body{background:#fff;color:#000}
-  .panel{box-shadow:none;border:none}
-  ul.clist li{color:#333}
-}
+@media print{.sidebar,.mob-tog,.ract,.disc{display:none!important}body{background:#fff;color:#000}.panel{box-shadow:none;border:none}ul.clist li{color:#333}}
 </style>
 </head>
 <body>
 
 <button class="mob-tog hidden" id="mob-tog">☰</button>
 
-<!-- AUTH MODAL -->
-<div class="modal-bg hidden" id="auth-modal">
+<!-- ═══ AUTH MODAL ═══ -->
+<div class="modal-bg hidden" id="modal-auth">
   <div class="modal">
-    <button class="modal-x" id="modal-x">✕</button>
+    <button class="mx" onclick="closeModal('modal-auth')">✕</button>
     <div class="m-logo">PLAYR.AI</div>
     <div class="m-sub">Your elite training companion</div>
     <div class="tabs">
       <button class="tab on" id="tab-in" onclick="switchTab('in')">Sign In</button>
-      <button class="tab"    id="tab-up" onclick="switchTab('up')">Register</button>
+      <button class="tab" id="tab-up" onclick="switchTab('up')">Register</button>
     </div>
-    <!-- Login -->
     <div id="form-in">
       <div class="mf"><label>Username</label><input class="mi" id="li-u" type="text" placeholder="Your username"/></div>
       <div class="mf"><label>Password</label><input class="mi" id="li-p" type="password" placeholder="••••••••"/></div>
       <div class="merr" id="li-e"></div>
       <button class="m-btn" onclick="doLogin()">Sign In</button>
     </div>
-    <!-- Register -->
     <div id="form-up" class="hidden">
       <div class="mf"><label>Display Name</label><input class="mi" id="ru-n" type="text" placeholder="Your name"/></div>
       <div class="mf"><label>Username</label><input class="mi" id="ru-u" type="text" placeholder="Choose a username"/></div>
@@ -342,7 +383,41 @@ ul.clist li.special::before{display:none}
   </div>
 </div>
 
-<!-- APP -->
+<!-- ═══ ADD EVENT MODAL ═══ -->
+<div class="modal-bg hidden" id="modal-add-event">
+  <div class="modal">
+    <button class="mx" onclick="closeModal('modal-add-event')">✕</button>
+    <div class="m-title">Add Event</div>
+    <div class="m-date-badge" id="ae-date-display"></div>
+    <div class="mf">
+      <label>Event Type</label>
+      <div class="event-type-btns">
+        <button class="ev-type-btn match" onclick="selectEvType('match',this)">🏟 Match</button>
+        <button class="ev-type-btn team" onclick="selectEvType('team',this)">👥 Team Training</button>
+      </div>
+    </div>
+    <div class="mf"><label>Title / Opponent</label><input class="mi" id="ae-title" placeholder="e.g. vs Arsenal, Morning Training"/></div>
+    <div class="mf">
+      <label>Intensity</label>
+      <select class="mi" id="ae-intensity">
+        <option value="light">Light</option>
+        <option value="moderate" selected>Moderate</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+    <div class="mf hidden" id="ae-mins-wrap"><label>Minutes Played (optional, fill after match)</label><input class="mi" id="ae-mins" type="number" min="0" max="120" placeholder="e.g. 90"/></div>
+    <button class="m-btn" onclick="saveEvent()">Add to Schedule</button>
+  </div>
+</div>
+
+<!-- ═══ EVENT DETAIL MODAL ═══ -->
+<div class="modal-bg hidden" id="modal-event-detail">
+  <div class="modal modal-lg" id="med-content">
+    <!-- JS renders -->
+  </div>
+</div>
+
+<!-- ═══ APP ═══ -->
 <div class="app">
 
 <!-- SIDEBAR -->
@@ -351,39 +426,49 @@ ul.clist li.special::before{display:none}
     <div class="s-wordmark">PLAYR.AI</div>
     <div class="s-sub">Elite Training Platform</div>
   </div>
-  <div class="s-auth" id="s-auth"><!-- JS renders --></div>
-  <div class="s-plans">
+
+  <nav class="s-nav">
+    <button class="s-nav-btn active" onclick="goTo('home')" data-page="home"><span class="s-nav-icon">⚽</span>Training</button>
+    <button class="s-nav-btn" onclick="goTo('schedule')" data-page="schedule"><span class="s-nav-icon">📅</span>Schedule</button>
+    <button class="s-nav-btn" onclick="goTo('matchday')" data-page="matchday"><span class="s-nav-icon">🏟</span>Match Day</button>
+    <button class="s-nav-btn" onclick="goTo('history')" data-page="history"><span class="s-nav-icon">📊</span>History</button>
+  </nav>
+
+  <div class="s-streak" id="s-streak"></div>
+  <div class="s-auth" id="s-auth"></div>
+  <div class="s-plans" id="s-plans">
     <div class="s-ph">Saved Plans</div>
-    <div id="plans-list"><p class="no-plans">Sign in to save &amp; access your training history</p></div>
+    <div id="plans-list"><p class="no-plans">Sign in to save plans</p></div>
   </div>
 </aside>
 
 <!-- MAIN -->
 <div class="main">
-<div class="panel">
 
-  <!-- HEADER -->
+<!-- ╔═══════════════════════════════════════
+     HOME PAGE
+═══════════════════════════════════════╗ -->
+<div id="page-home" class="page">
+<div class="panel">
   <div class="ph">
     <div class="ph-eye">Position-Specific Soccer Training</div>
     <div class="ph-title">Playr.AI</div>
-    <div class="ph-sub">Get a personalized training &amp; recovery plan tailored to your position and physical condition</div>
+    <div class="ph-sub">Personalized training, recovery &amp; skill development for every player</div>
   </div>
 
-  <!-- FORM VIEW -->
   <div id="view-form">
     <div class="pb-body">
+
+      <!-- STREAK BANNER -->
+      <div id="home-streak-banner"></div>
 
       <div class="fsec">
         <div class="fsec-label">Player Profile</div>
         <div class="grid g2">
-          <div class="field">
-            <span class="flbl">Age</span>
-            <input class="finput" type="number" id="f-age" min="5" max="80" placeholder="e.g. 22"/>
-          </div>
-          <div class="field">
-            <span class="flbl">Soccer Position</span>
+          <div class="field"><span class="flbl">Age</span><input class="finput" type="number" id="f-age" min="5" max="80" placeholder="e.g. 22"/></div>
+          <div class="field"><span class="flbl">Position</span>
             <select class="finput" id="f-pos">
-              <option value="">Select your position</option>
+              <option value="">Select position</option>
               <option value="goalkeeper">Goalkeeper</option>
               <option value="centerback">Center Back</option>
               <option value="outsideback">Outside Back / Fullback</option>
@@ -401,66 +486,60 @@ ul.clist li.special::before{display:none}
       <div class="fsec">
         <div class="fsec-label">Physical Condition</div>
         <div class="grid g2">
-          <div class="field">
-            <span class="flbl">Current Fitness Level</span>
+          <div class="field"><span class="flbl">Fitness Level</span>
             <select class="finput" id="f-fit">
-              <option value="">Select fitness level</option>
-              <option value="beginner">Beginner (New to soccer training)</option>
-              <option value="moderate">Recreational (Trains occasionally)</option>
-              <option value="active">Active (Regular team player)</option>
-              <option value="elite">Elite (Competitive / Professional)</option>
+              <option value="">Select level</option>
+              <option value="beginner">Beginner</option>
+              <option value="moderate">Recreational</option>
+              <option value="active">Active</option>
+              <option value="elite">Elite</option>
             </select>
           </div>
-          <div class="field">
-            <span class="flbl">Current Overall Soreness</span>
+          <div class="field"><span class="flbl">Overall Soreness</span>
             <select class="finput" id="f-sor">
-              <option value="">Select soreness level</option>
-              <option value="none">None — feel completely fresh</option>
-              <option value="mild">Mild — slightly sore but manageable</option>
-              <option value="moderate">Moderate — noticeable soreness</option>
-              <option value="severe">Severe — affecting movement</option>
+              <option value="">Select soreness</option>
+              <option value="none">None — feel fresh</option>
+              <option value="mild">Mild</option>
+              <option value="moderate">Moderate</option>
+              <option value="severe">Severe</option>
             </select>
           </div>
         </div>
-        <div class="field" style="margin-top:1.35rem">
-          <span class="flbl">Ongoing Injuries or Conditions</span>
-          <textarea class="finput" id="f-inj" rows="2" placeholder="Describe any injuries, conditions, or medical history…"></textarea>
+        <div class="field" style="margin-top:1.25rem"><span class="flbl">Ongoing Injuries or Conditions</span>
+          <textarea class="finput" id="f-inj" rows="2" placeholder="Describe any injuries or conditions…"></textarea>
         </div>
       </div>
 
       <div class="fsec">
         <div class="fsec-label">Pain &amp; Stress Mapping</div>
         <div class="pain-row">
-          <!-- BODY MAP -->
           <div>
-            <div class="flbl" style="margin-bottom:.8rem">Click areas to select (multi-select)</div>
+            <div class="flbl" style="margin-bottom:.7rem">Click areas to select (multi-select)</div>
             <div class="pmw">
               <svg viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
-                <path class="pain-area" data-area="head"          data-label="Head"            d="M100,12 C82,12 68,26 68,44 C68,60 78,73 92,78 L92,92 L108,92 L108,78 C122,73 132,60 132,44 C132,26 118,12 100,12 Z"/>
-                <rect class="pain-area" data-area="neck"          data-label="Neck"            x="90" y="92" width="20" height="12" rx="3"/>
-                <path class="pain-area" data-area="leftShoulder"  data-label="Left Shoulder"  d="M68,103 C52,103 40,114 36,128 L58,133 L68,113 Z"/>
+                <path class="pain-area" data-area="head" data-label="Head" d="M100,12 C82,12 68,26 68,44 C68,60 78,73 92,78 L92,92 L108,92 L108,78 C122,73 132,60 132,44 C132,26 118,12 100,12 Z"/>
+                <rect class="pain-area" data-area="neck" data-label="Neck" x="90" y="92" width="20" height="12" rx="3"/>
+                <path class="pain-area" data-area="leftShoulder" data-label="Left Shoulder" d="M68,103 C52,103 40,114 36,128 L58,133 L68,113 Z"/>
                 <path class="pain-area" data-area="rightShoulder" data-label="Right Shoulder" d="M132,103 C148,103 160,114 164,128 L142,133 L132,113 Z"/>
-                <path class="pain-area" data-area="chest"         data-label="Chest"           d="M70,103 L130,103 L126,142 L74,142 Z"/>
-                <path class="pain-area" data-area="core"          data-label="Core / Abs"      d="M74,143 L126,143 L122,185 L78,185 Z"/>
-                <path class="pain-area" data-area="hips"          data-label="Hips"            d="M78,186 L122,186 L128,216 L100,230 L72,216 Z"/>
-                <path class="pain-area" data-area="leftArm"       data-label="Left Arm"        d="M35,130 L56,135 L48,200 L28,194 Z"/>
-                <path class="pain-area" data-area="rightArm"      data-label="Right Arm"       d="M165,130 L144,135 L152,200 L172,194 Z"/>
-                <path class="pain-area" data-area="leftThigh"     data-label="Left Thigh"      d="M72,220 L98,230 L94,278 L68,278 Z"/>
-                <path class="pain-area" data-area="rightThigh"    data-label="Right Thigh"     d="M128,220 L102,230 L106,278 L132,278 Z"/>
-                <ellipse class="pain-area" data-area="leftKnee"   data-label="Left Knee"       cx="81" cy="286" rx="13" ry="9"/>
-                <ellipse class="pain-area" data-area="rightKnee"  data-label="Right Knee"      cx="119" cy="286" rx="13" ry="9"/>
-                <path class="pain-area" data-area="leftShin"      data-label="Left Shin/Calf"  d="M68,297 L94,297 L91,335 L65,335 Z"/>
-                <path class="pain-area" data-area="rightShin"     data-label="Right Shin/Calf" d="M106,297 L132,297 L135,335 L109,335 Z"/>
-                <path class="pain-area" data-area="leftFoot"      data-label="Left Ankle/Foot" d="M64,338 L90,338 L93,368 L58,368 Z"/>
-                <path class="pain-area" data-area="rightFoot"     data-label="Right Ankle/Foot" d="M110,338 L136,338 L142,368 L107,368 Z"/>
+                <path class="pain-area" data-area="chest" data-label="Chest" d="M70,103 L130,103 L126,142 L74,142 Z"/>
+                <path class="pain-area" data-area="core" data-label="Core / Abs" d="M74,143 L126,143 L122,185 L78,185 Z"/>
+                <path class="pain-area" data-area="hips" data-label="Hips" d="M78,186 L122,186 L128,216 L100,230 L72,216 Z"/>
+                <path class="pain-area" data-area="leftArm" data-label="Left Arm" d="M35,130 L56,135 L48,200 L28,194 Z"/>
+                <path class="pain-area" data-area="rightArm" data-label="Right Arm" d="M165,130 L144,135 L152,200 L172,194 Z"/>
+                <path class="pain-area" data-area="leftThigh" data-label="Left Thigh" d="M72,220 L98,230 L94,278 L68,278 Z"/>
+                <path class="pain-area" data-area="rightThigh" data-label="Right Thigh" d="M128,220 L102,230 L106,278 L132,278 Z"/>
+                <ellipse class="pain-area" data-area="leftKnee" data-label="Left Knee" cx="81" cy="286" rx="13" ry="9"/>
+                <ellipse class="pain-area" data-area="rightKnee" data-label="Right Knee" cx="119" cy="286" rx="13" ry="9"/>
+                <path class="pain-area" data-area="leftShin" data-label="Left Shin/Calf" d="M68,297 L94,297 L91,335 L65,335 Z"/>
+                <path class="pain-area" data-area="rightShin" data-label="Right Shin/Calf" d="M106,297 L132,297 L135,335 L109,335 Z"/>
+                <path class="pain-area" data-area="leftFoot" data-label="Left Ankle/Foot" d="M64,338 L90,338 L93,368 L58,368 Z"/>
+                <path class="pain-area" data-area="rightFoot" data-label="Right Ankle/Foot" d="M110,338 L136,338 L142,368 L107,368 Z"/>
               </svg>
             </div>
           </div>
-          <!-- PAIN CONTROLS -->
           <div class="pain-ctrl">
-            <div>
-              <div class="flbl" style="margin-bottom:.7rem">Selected Areas</div>
-              <div class="ptags" id="pain-tags"><span class="no-areas">No areas selected yet</span></div>
+            <div><div class="flbl" style="margin-bottom:.6rem">Selected Areas</div>
+              <div class="ptags" id="pain-tags"><span class="no-areas">No areas selected</span></div>
             </div>
             <div class="sfield">
               <div class="pal" id="active-lbl">Select a body part to rate severity</div>
@@ -473,7 +552,40 @@ ul.clist li.special::before{display:none}
         </div>
       </div>
 
-    </div><!-- /pb-body -->
+      <!-- WEAKNESS SECTION -->
+      <div class="fsec">
+        <div class="fsec-label">Areas to Work On</div>
+        <p style="font-size:.95rem;color:var(--mut2);margin-bottom:.85rem">Select skill areas you want to target — targeted drills will be included in your plan.</p>
+        <div class="skill-grid" id="skill-grid"></div>
+      </div>
+
+      <!-- FITNESS SECTION -->
+      <div class="fsec">
+        <div class="fsec-label">Fitness Development</div>
+        <div class="fitness-row">
+          <div class="toggle-wrap">
+            <button class="toggle" id="fitness-toggle" onclick="toggleFitness()"></button>
+            <span class="toggle-label">Include fitness conditioning block</span>
+          </div>
+        </div>
+        <div id="fitness-opts-wrap" class="hidden" style="margin-top:1.1rem">
+          <div class="flbl" style="margin-bottom:.6rem">Focus Area</div>
+          <div class="fitness-opts" id="fitness-type-btns">
+            <button class="fit-opt" onclick="selectFitType('endurance',this)">🏃 Endurance</button>
+            <button class="fit-opt" onclick="selectFitType('speed',this)">⚡ Speed</button>
+            <button class="fit-opt" onclick="selectFitType('strength',this)">💪 Strength</button>
+            <button class="fit-opt" onclick="selectFitType('agility',this)">🔄 Agility</button>
+          </div>
+          <div class="flbl" style="margin:.9rem 0 .5rem">Conditioning Intensity</div>
+          <div class="fitness-opts" id="fitness-int-btns">
+            <button class="fit-opt" onclick="selectFitInt('light',this)">Light</button>
+            <button class="fit-opt on" onclick="selectFitInt('moderate',this)">Moderate</button>
+            <button class="fit-opt" onclick="selectFitInt('intense',this)">Intense</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
     <div class="gen-wrap">
       <button class="gen-btn" id="gen-btn">✦ Generate My Training Plan</button>
     </div>
@@ -486,20 +598,15 @@ ul.clist li.special::before{display:none}
       <div class="rtitle" id="res-title">Training Plan</div>
       <div class="rmeta" id="res-meta"></div>
     </div>
-
-    <div class="disc">
-      <div class="disc-icon">⚠</div>
-      <div class="disc-text">This training plan is personalized based on your inputs. Always consult with your coach or a sports medicine professional before starting any new training regimen, especially if you have existing injuries.</div>
-    </div>
-
-    <div class="sumstrip" id="res-sumstrip"><!-- JS renders --></div>
-
+    <div class="disc"><div class="disc-icon">⚠</div><div class="disc-text">This training plan is personalized to your inputs. Always consult a coach or sports medicine professional before starting any new regimen, especially with existing injuries.</div></div>
+    <div class="sumstrip" id="res-sumstrip"></div>
     <div class="card-grid">
-      <div class="card" id="card-training"><!-- JS --></div>
-      <div class="card" id="card-recovery"><!-- JS --></div>
-      <div class="card card-full" id="card-position"><!-- JS --></div>
+      <div class="card" id="card-training"></div>
+      <div class="card" id="card-recovery"></div>
+      <div class="card card-full" id="card-position"></div>
     </div>
-
+    <div id="card-weakness-wrap"></div>
+    <div id="card-fitness-wrap"></div>
     <div class="ract">
       <button class="rbtn rb-back" id="back-btn">← Back to Form</button>
       <div class="ract-r">
@@ -507,615 +614,730 @@ ul.clist li.special::before{display:none}
         <button class="rbtn rb-print" id="print-btn">🖨 Print Plan</button>
       </div>
     </div>
-  </div><!-- /view-results -->
+  </div>
 
 </div><!-- /panel -->
+</div><!-- /page-home -->
+
+<!-- ╔═══════════════════════════════════════
+     SCHEDULE PAGE
+═══════════════════════════════════════╗ -->
+<div id="page-schedule" class="page hidden">
+<div class="panel">
+  <div class="ph">
+    <div class="ph-eye">Weekly Training Calendar</div>
+    <div class="ph-title">Schedule</div>
+    <div class="ph-sub">Add your team sessions &amp; matches — we'll prescribe recovery and solo training around them</div>
+  </div>
+  <div class="pb-body">
+    <div class="sched-header">
+      <div class="sched-title" id="sched-week-title"></div>
+      <div class="sched-nav">
+        <button class="wk-btn" onclick="changeWeek(-1)">← Prev</button>
+        <span class="sched-week" id="sched-week-range"></span>
+        <button class="wk-btn" onclick="changeWeek(1)">Next →</button>
+      </div>
+    </div>
+    <div class="week-grid" id="week-grid"></div>
+    <div class="sched-legend">
+      <div class="leg-item"><div class="leg-dot" style="background:rgba(249,115,22,.6)"></div>Match</div>
+      <div class="leg-item"><div class="leg-dot" style="background:rgba(201,165,90,.5)"></div>Team Training</div>
+      <div class="leg-item"><div class="leg-dot" style="background:rgba(96,165,250,.5)"></div>Individual Training</div>
+      <div class="leg-item"><div class="leg-dot" style="background:rgba(16,185,129,.5)"></div>Recovery</div>
+      <div class="leg-item" style="opacity:.6"><span style="font-family:'DM Mono',monospace;font-size:.65rem;border:1px dashed var(--muted);padding:1px 5px;border-radius:3px">- -</span> Prescribed</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ╔═══════════════════════════════════════
+     MATCH DAY PAGE
+═══════════════════════════════════════╗ -->
+<div id="page-matchday" class="page hidden">
+<div class="panel">
+  <div class="ph">
+    <div class="ph-eye">Game Day Preparation</div>
+    <div class="ph-title">Match Day</div>
+    <div class="ph-sub">Your complete pre-match, halftime &amp; post-match preparation checklist</div>
+  </div>
+  <div class="pb-body">
+    <div class="md-progress">
+      <div>
+        <div class="md-prog-num" id="md-prog-num">0</div>
+        <div class="md-prog-label">of <span id="md-prog-total">0</span> complete</div>
+      </div>
+      <div class="md-prog-bar-wrap"><div class="md-prog-bar" id="md-prog-bar" style="width:0%"></div></div>
+      <button class="md-reset-btn" onclick="resetChecklist()">Reset All</button>
+    </div>
+    <div id="md-sections"></div>
+  </div>
+</div>
+</div>
+
+<!-- ╔═══════════════════════════════════════
+     HISTORY PAGE
+═══════════════════════════════════════╗ -->
+<div id="page-history" class="page hidden">
+<div class="panel">
+  <div class="ph">
+    <div class="ph-eye">Training Log</div>
+    <div class="ph-title">Plan History</div>
+    <div class="ph-sub">All your generated and saved training plans — click any to expand</div>
+  </div>
+  <div class="pb-body" id="history-body"></div>
+</div>
+</div>
+
 </div><!-- /main -->
 </div><!-- /app -->
 
 <script>
-/* ══════════════════════════════════════════
-   PAIN MAP — multi-select + severity colors
-══════════════════════════════════════════ */
-const painData = {};
-let activeArea = null;
-const slider  = document.getElementById('sev-sl');
-const sevEl   = document.getElementById('sev-num');
+/* ═══════════════════════════════════════════════════════════
+   CONSTANTS
+═══════════════════════════════════════════════════════════ */
+const SKILL_AREAS=[
+  {id:'shooting',label:'Shooting',icon:'🎯'},{id:'passing',label:'Passing',icon:'⚽'},
+  {id:'firstTouch',label:'First Touch',icon:'🦶'},{id:'dribbling',label:'Dribbling',icon:'💫'},
+  {id:'defending',label:'Defending',icon:'🛡'},{id:'heading',label:'Heading',icon:'🏹'},
+  {id:'pace',label:'Pace & Speed',icon:'⚡'},{id:'positioning',label:'Positioning',icon:'📍'},
+  {id:'stamina',label:'Stamina',icon:'🏃'},{id:'strength',label:'Strength',icon:'💪'},
+  {id:'aerialDuels',label:'Aerial Duels',icon:'🦅'},{id:'setPieces',label:'Set Pieces',icon:'🎪'}
+];
+const WEAKNESS_DRILLS={
+  shooting:['Driven shots — 3×10 each foot from edge of box','First-time finishing from cut-backs — 3×8','Shooting under pressure after receiving and turning — 10 reps','1v1 finishing vs goalkeeper from various angles — 15 attempts','Volleys and half-volleys from crosses — 3×8 each foot'],
+  passing:['Passing accuracy circuit hitting targets at 10/20/30m — 3×5min','One-two combination sequences — 4×3min','Long-range driven switches — 20 passes each foot to a moving target','Passing rondos under pressure (4v2) — 3×4min','Curved passes through gates — 3×10 each foot'],
+  firstTouch:['Wall work — 100 touches per foot at varying heights','Receive, control and move drill — 10 min continuous','Aerial control from lofted serves — 4×15 reps (chest/thigh/foot)','First touch under pressure in tight space — 10 min','Receive with back to goal and turn — 3×10 each direction'],
+  dribbling:['1v1 isolation: beat the defender, reset, repeat — 15 min','Cone weaving at pace — 6 sets, 20m each direction','Skill moves circuit: Cruyff/stepover/double touch × 10 each','Speed dribble in channels — 8×30m with ball','Change-of-direction with ball at speed — L-drill 4× each way'],
+  defending:['Jockeying and containment — 1v1 drill 4×5min','Tackling technique: standing and block tackles — 10 min','Defensive heading clearances from crosses — 3×15','Recovery run and tracking drill into box — 3×10','Pressing angles and blocking passing lanes — 3v2 defense 5×2min'],
+  heading:['Defensive headers from crosses — 3×15','Attacking runs and glancing headers from corners — 3×12','Aerial duel competition with partner — 4×10 contested','Flick-on headers at the near post — 3×10','Heading accuracy to targets from driven serves — 4×8'],
+  pace:['Acceleration starts — 10×20m (walk-back recovery)','Flying sprints — 6×40m at max effort (full rest)','Reaction starts on visual signal — 8×15m','Resisted sprints (band or sled) — 6×20m (full rest)','Sprint–decelerate–sprint — 5×(20m on, 5m off, 20m on)'],
+  positioning:['Shadow play without ball — positional movement patterns 15min','Pressing triggers and team compactness — walk-through 10min','Attacking movement patterns — third-man runs 15min','Zonal defensive shape — positional rondos 10min','Video review: note 3 positioning improvements'],
+  stamina:['Aerobic base run — 25 min at conversational pace (65% HR)','Tempo intervals — 6×4min at 80% HR, 2min jog recovery','Cardiac output session — 40 min at 70% HR with ball','Lactate threshold run — 20 min at 85% HR','Small-sided game endurance — continuous 5v5 for 20 min'],
+  strength:['Lower body circuit: squats/lunges/step-ups — 4×12','Upper body: push-up variations/dips — 4×15','Posterior chain: Romanian deadlifts/hip thrusts — 4×10','Core: plank series/dead bugs/pallof press — 3×15','Single-leg stability: pistol squats/single-leg RDL — 3×8 each'],
+  aerialDuels:['Contested aerial duels with partner — 4×10','Jump timing drill: approach runs to meet ball at peak height — 3×12','Body position shielding before header — 10 min','Goalkeeper kick challenges for long balls — 3×10','Back-post aerial runs: cross delivery, attack the ball — 3×12'],
+  setPieces:['Delivery practice: corners and free kicks — 30 each side','Set-piece movement choreography from corners — 15 min','Direct free kick accuracy — 20 efforts at goal from 20–25m','Penalty practice — 15 penalties (alternate power and placement)','Near-post flick-on runs timed to deliveries — 3×10']
+};
+const FITNESS_BLOCKS={
+  endurance:{light:['Easy jog — 20 min at 60% max HR (recovery run)','Dynamic stretching circuit — 10 min full body','Aerobic ball work: continuous passing and movement — 15 min'],moderate:['Tempo run — 25 min at 75% max HR','Aerobic intervals — 5×4min at 80% HR, 90s jog recovery','Cardiac output work — 30 min at 70% HR with ball'],intense:['Lactate threshold run — 20 min at 85% HR','VO₂ max intervals — 6×3min at 95% HR, 3min walk recovery','High-intensity SSG — 4×6min continuous, 2min rest']},
+  speed:{light:['Stride-outs — 6×60m at 75% max speed (full rest)','Acceleration technique — 8×20m focus on first 3 steps','Footwork speed: ladder drills 4×each pattern'],moderate:['Flying sprints — 8×30m at 90% speed (full rest)','Acceleration series — 6×(10+20+30m) full rest','Speed endurance — 6×60m at 95% speed, 90s rest'],intense:['Max velocity sprints — 8×40m (full rest each)','Resisted + free sprints — 5× pairs (band 20m + free 20m)','Repeated sprint ability — 10×30m max effort, 30s recovery']},
+  strength:{light:['Bodyweight circuit: squats/push-ups/lunges/dips — 3×15','Core stability: plank/side plank/dead bug — 3×30s','Resistance band work — 3×15 each exercise'],moderate:['Lower body: goblet squat/split squat/hip thrust — 4×10','Upper body: push-up variations/pike push-up/rows — 4×12','Core power: cable rotations/medicine ball throws — 3×10'],intense:['Plyometric strength: box jumps/depth jumps/broad jumps — 4×6','Heavy compound lifts: squat and deadlift variations — 5×5','Power circuit: kettlebell swings or jump squats — 4×8']},
+  agility:{light:['Ladder footwork — 4×each pattern','Cone change-of-direction: T-drill and 5-10-5 — 4 each','Ball agility: dribble through gates changing direction — 10 min'],moderate:['Reactive agility: partner signals direction, respond and sprint — 3×8','Multi-directional circuits: 5-cone star drill — 4×each direction','Sport-specific agility: mimic game movements at pace — 15 min'],intense:['Chaos drill: random signal changes at max speed — 4×45s','Reactive 1v1: shadow opponent at max intensity — 4×30s','Competition agility circuit: race partner through patterns — 5×']}
+};
+const MD_CHECKLIST={
+  'Night Before':[{id:'nb1',text:'Lay out your full kit — boots, shin guards, socks, water bottle, tape'},{id:'nb2',text:'Eat a carbohydrate-rich dinner (pasta, rice, or potatoes with lean protein)'},{id:'nb3',text:'Hydrate well — drink 500ml extra water before bed'},{id:'nb4',text:'Get 8–9 hours of sleep — it is the most important recovery tool'},{id:'nb5',text:'Set your alarm — leave time for a proper pre-match meal'},{id:'nb6',text:'Visualise your role in the game: key runs, defensive duties, set pieces'}],
+  '3 Hours Before':[{id:'3h1',text:'Eat your main pre-match meal (high carbs, moderate protein, low fat and fibre)'},{id:'3h2',text:'Drink 500ml of water with your meal'},{id:'3h3',text:'Avoid fried foods, high-fat meals, and excessive dairy'},{id:'3h4',text:'Example meal: pasta with chicken, rice with fish, or toast with scrambled eggs'}],
+  '90 Minutes Before':[{id:'90m1',text:'Arrive at the venue — inspect the pitch surface and conditions'},{id:'90m2',text:'Sip water steadily — 150–200ml every 20 minutes'},{id:'90m3',text:'Light snack if needed: banana, energy bar, or fruit'},{id:'90m4',text:'Begin mental preparation — focus on your game plan and key moments'},{id:'90m5',text:'Kit check: boots tied correctly, shin guards fitted, jersey ready'}],
+  '45 Minutes Before':[{id:'45m1',text:'Start dynamic warm-up: 5 min light jog with progressive intensity'},{id:'45m2',text:'Dynamic stretches: leg swings, hip circles, high knees, butt kicks — 5 min'},{id:'45m3',text:'Passing drills and ball work — short and medium range — 10 min'},{id:'45m4',text:'Position-specific activation: volleys, headers, or shooting warm-up — 5 min'},{id:'45m5',text:'Speed activation: 4–6 short sharp sprints at 80–90% max effort'},{id:'45m6',text:'Review set pieces and tactical instructions with teammates'}],
+  'Kickoff':[{id:'ko1',text:'Last sip of water before entering the pitch'},{id:'ko2',text:'Focus on your first 5 minutes — communicate and set the tempo early'},{id:'ko3',text:'Stay vocal and connected with your teammates throughout'},{id:'ko4',text:'Trust your preparation — commit to the game plan'}],
+  'Halftime':[{id:'ht1',text:'Rehydrate immediately — 250–400ml water or electrolyte drink'},{id:'ht2',text:'Quick carb top-up if needed: banana, gel, or orange slices'},{id:'ht3',text:'Light movement to prevent muscles from stiffening — short jog or dynamic stretches'},{id:'ht4',text:'Listen carefully to tactical adjustments from your coach'},{id:'ht5',text:'Address any minor niggles — retape, adjust boots or shin guards'}],
+  'Post-Match':[{id:'pm1',text:'Cool-down jog: 5–10 minutes of light movement to flush lactic acid'},{id:'pm2',text:'Rehydrate within 30 min: 500–750ml water or electrolyte drink'},{id:'pm3',text:'Recovery meal within 60 min: 4:1 carbohydrate-to-protein ratio'},{id:'pm4',text:'Static stretching: 10–15 min targeting quads, hamstrings, calves and hips'},{id:'pm5',text:'Ice any areas of discomfort — 15 min on, 45 min off'},{id:'pm6',text:'Log your performance: note what worked and what to improve next session'}]
+};
+const POS_NAMES={goalkeeper:'Goalkeeper',centerback:'Center Back',outsideback:'Outside Back / Fullback',cdm:'Center Defensive Midfielder',cm:'Central Midfielder',cam:'Central Attacking Midfielder',outsideMid:'Outside Midfielder',wing:'Winger',striker:'Striker / Forward'};
+const POS_FOCUS={goalkeeper:'Reflexes, Positioning, Distribution',centerback:'Strength, Aerial Ability, Tackling',outsideback:'Speed, Stamina, Crossing',cdm:'Tackling, Positioning, Short Passing',cm:'Endurance, Vision, Passing Range',cam:'Creativity, Technical Skills, Shooting',outsideMid:'Crossing, Stamina, Defensive Awareness',wing:'Speed, Dribbling, Crossing',striker:'Finishing, Movement, Strength'};
 
-function sevColor(s) {
-  if (!s) return '#1e1e30';
-  const t = s / 10;
-  const h = Math.round(50 - t * 50);
-  const sa = Math.round(85 + t * 12);
-  const l  = Math.round(60 - t * 20);
-  return `hsl(${h},${sa}%,${l}%)`;
+const SCHED_DRILLS={
+  goalkeeper:{individual:['Handling circuit: high/low/diving saves — 3×10 each','Distribution: driven throws, rolls, volleys — 20 reps each','1v1 angle closing — 10 repetitions each side','Reaction saves: partner serves from 8m — 3×15','Footwork: side-to-side posts drill — 4×30s'],activation:['Light footwork: lateral shuffles and forward-back — 5 min','Handling warm-up: easy catches and rolls — 5 min','4 short sharp dives each side at low intensity'],recovery:['Gentle ball rolls and light handling — 10 min','Goalkeeper-specific mobility: hip flexors and shoulders','Light footwork — no diving or jumping']},
+  centerback:{individual:['Heading clearances from crosses — 3×15','Long-range passing accuracy — 20 each foot to targets','Defensive footwork: jockey, contain, tackle — 15 min','Ball-playing drills: short and medium combinations under light pressure'],activation:['Passing warm-up: short/medium combinations — 8 min','Aerial duel jumps — 6 practice approaches','4 acceleration sprints over 15m'],recovery:['Light jogging: 15 min easy','Aerial mobility: gentle jump movements — no impact','Stretching: quads, hip flexors, calves']},
+  outsideback:{individual:['Crossing from wide positions — driven, whipped, cutback — 30 total','Overlapping run with ball carry and decision — 10 reps','1v1 defending: jockey and contain — 4×4min','Progressive passing sequences from deep'],activation:['Dynamic wide-area running: 3 overlapping runs at 70%','Crossing practice: 5 each side at reduced intensity','3 acceleration bursts over 20m'],recovery:['Easy jog: 15 min at 60% HR','Hip flexor and hamstring stretching — 15 min','Foam rolling: quads, calves, glutes']},
+  cdm:{individual:['Short passing accuracy under light pressure — 3×5min','Screening position drill: mirror the runner — 4×3min','Tackling and recovery: slide, recover, repeat — 10 min','Receiving under pressure and turning — 3×10 each direction'],activation:['Passing warm-up: one-twos and short combinations — 8 min','Positional movement: shadow play — 5 min','3 short sprint efforts over 15m'],recovery:['Light aerobic jog: 20 min easy','Rotation and spine mobility — 10 min','Core breathing and activation — 10 min']},
+  cm:{individual:['Passing range circuit: short/medium/long — 3×5min','Turning in tight spaces: Cruyff, inside, outside — 3×10 each','Box-to-box conditioning: 4×4min at 75% effort','Long-range shooting — 10 efforts each foot'],activation:['Combination passing with movement — 10 min','Directional change runs — 5 min','4 sprints at 80% over 20m'],recovery:['Easy jog: 20 min at 60% HR','Full-body static stretching — 20 min','Foam rolling: quads, hamstrings, upper back']},
+  cam:{individual:['Through-ball and creative passing — 3×5min','Shooting from various angles — 15 efforts each side','Dribbling in tight spaces: rondo 3v1 — 4×4min','Set-piece delivery practice — 20 corners and free kicks'],activation:['Ball mastery warm-up: 50 touches each foot — 8 min','Passing combinations: one-twos — 5 min','3 explosive changes of direction'],recovery:['Light ball work: juggling and gentle passing — 15 min','Hip flexor and quad stretching — 15 min','Mental review: 3 things to focus on']},
+  outsideMid:{individual:['Crossing from wide: ground, driven, lofted — 30 total','Cutting inside with ball to shoot — 3×10 each foot','Combination play with overlapping run simulation','Defensive pressing and tracking: 4×3min'],activation:['Wide-area dynamic runs at 70% intensity — 5 min','Crossing practice: 5 each side','4 sprint bursts over 25m at 80%'],recovery:['Easy jog: 15 min','Hip and hamstring mobility — 15 min','Light ball touches — 10 min']},
+  wing:{individual:['1v1 dribbling: beat and beat again — 20 min','Crossing from byline and cut-back position — 30 total','Cutting inside to shoot: 3×10 each foot','Speed dribble in channels — 8×30m with ball'],activation:['Dynamic wide runs: 3 runs each side at 70%','Speed dribble drill — 4×15m easy pace','4 explosive acceleration bursts over 20m'],recovery:['Light jog or walking: 15 min','Hamstring and hip flexor stretching — 20 min','Foam rolling: quads, calves, IT band']},
+  striker:{individual:['Finishing circuit: volleys, headers, 1v1 — 20 min','Hold-up play and shielding: back-to-goal drill — 10 min','One-touch finishing under pressure — 3×15','Movement patterns: curved runs, flick-ons — 15 min'],activation:['Light ball work: control and finish — 8 min','Aerial approach runs — 5 gentle headers','4 short explosive sprints from standing start'],recovery:['Easy jog: 15 min','Full-body stretching: legs, hips, core — 20 min','Icing of any soreness — 15 min']}
+};
+
+/* ═══════════════════════════════════════════════════════════
+   UTILS & DATE HELPERS
+═══════════════════════════════════════════════════════════ */
+function dk(d){const dt=new Date(d);dt.setHours(12,0,0,0);return dt.toISOString().slice(0,10)}
+function addD(d,n){const r=new Date(d);r.setDate(r.getDate()+n);return r}
+function monOf(d){const r=new Date(d);r.setDate(r.getDate()-(r.getDay()||7)+1);r.setHours(12,0,0,0);return r}
+function fmtDate(d,s={}){ return new Date(d).toLocaleDateString('en-US',{timeZone:'UTC',...s}) }
+function todayKey(){return dk(new Date())}
+
+/* ═══════════════════════════════════════════════════════════
+   STORAGE
+═══════════════════════════════════════════════════════════ */
+function getUsers(){try{return JSON.parse(localStorage.getItem('playr_users')||'{}')}catch{return{}}}
+function saveUsers(u){localStorage.setItem('playr_users',JSON.stringify(u))}
+function getMe(){return localStorage.getItem('playr_me')||null}
+function setMe(u){u?localStorage.setItem('playr_me',u):localStorage.removeItem('playr_me')}
+function getUser(){const me=getMe();return me?getUsers()[me]:null}
+function saveUserData(data){const me=getMe();if(!me)return;const us=getUsers();us[me]={...us[me],...data};saveUsers(us)}
+function getMdChecked(){try{return JSON.parse(localStorage.getItem('playr_md')||'{}')}catch{return{}}}
+function saveMdChecked(c){localStorage.setItem('playr_md',JSON.stringify(c))}
+
+/* ═══════════════════════════════════════════════════════════
+   AUTH
+═══════════════════════════════════════════════════════════ */
+function doLogin(){
+  const u=document.getElementById('li-u').value.trim().toLowerCase(),p=document.getElementById('li-p').value,e=document.getElementById('li-e');
+  e.classList.remove('show');if(!u||!p){e.textContent='Fill in all fields.';e.classList.add('show');return}
+  const us=getUsers();if(!us[u]||us[u].pw!==p){e.textContent='Invalid username or password.';e.classList.add('show');return}
+  setMe(u);closeModal('modal-auth');renderAuth();renderStreak();renderPlans();toast(`Welcome back, ${us[u].name}!`);
+  renderStreakBanner();
 }
-function sevTextColor(s) {
-  if (!s) return 'var(--muted)';
-  const t = s / 10;
-  const h = Math.round(50 - t * 50);
-  const sa = Math.round(85 + t * 12);
-  const l  = Math.round(60 - t * 20);
-  return `hsl(${h},${sa}%,${l}%)`;
+function doRegister(){
+  const n=document.getElementById('ru-n').value.trim(),u=document.getElementById('ru-u').value.trim().toLowerCase(),p=document.getElementById('ru-p').value,e=document.getElementById('ru-e');
+  e.classList.remove('show');if(!n||!u||!p){e.textContent='Fill in all fields.';e.classList.add('show');return}
+  if(u.length<3){e.textContent='Username: min 3 chars.';e.classList.add('show');return}
+  if(p.length<4){e.textContent='Password: min 4 chars.';e.classList.add('show');return}
+  const us=getUsers();if(us[u]){e.textContent='Username taken.';e.classList.add('show');return}
+  us[u]={pw:p,name:n,plans:[],schedule:{},streak:{count:0,lastActive:null,history:[]},improvements:[],weaknesses:[],fitnessGoal:null};
+  saveUsers(us);setMe(u);closeModal('modal-auth');renderAuth();renderStreak();renderPlans();toast(`Welcome, ${n}!`);
+  renderStreakBanner();
 }
-function updateAreaFill(id) {
-  const el = document.querySelector(`[data-area="${id}"]`);
-  if (!el) return;
-  const s = painData[id] || 0;
-  el.style.fill = sevColor(s);
-  el.classList.toggle('has-pain', s > 0);
+function doLogout(){setMe(null);renderAuth();renderStreak();renderPlans();renderStreakBanner();toast('Signed out.')}
+function renderAuth(){
+  const me=getMe(),box=document.getElementById('s-auth');
+  if(me){const u=getUsers()[me];box.innerHTML=`<div class="s-greeting">Signed in as</div><div class="s-name">${u?.name||me}</div><button class="sbn sbn-g" onclick="doLogout()">Sign Out</button>`}
+  else box.innerHTML=`<button class="sbn sbn-p" onclick="openModal('modal-auth')">Sign In</button><button class="sbn sbn-o" onclick="openModal('modal-auth','up')">Create Account</button>`
 }
-function setActive(id) {
-  document.querySelectorAll('.pain-area.selected').forEach(e => e.classList.remove('selected'));
-  if (activeArea === id) { activeArea = null; resetSl(); return; }
-  activeArea = id;
-  const el = document.querySelector(`[data-area="${id}"]`);
-  el?.classList.add('selected');
-  document.getElementById('active-lbl').textContent = `Adjusting: ${el?.dataset.label || id}`;
-  const s = painData[id] || 0;
-  slider.value = s;
-  updateSl(s);
+
+/* ═══════════════════════════════════════════════════════════
+   STREAK
+═══════════════════════════════════════════════════════════ */
+function bumpStreak(){
+  const me=getMe();if(!me)return;
+  const us=getUsers();const u=us[me];
+  const today=todayKey();
+  const str=u.streak||{count:0,lastActive:null,history:[]};
+  if(str.lastActive===today)return; // already counted
+  const yest=dk(addD(new Date(),- 1));
+  if(str.lastActive===yest){str.count++}else{str.count=1}
+  str.lastActive=today;
+  if(!str.history)str.history=[];
+  str.history.push(today);
+  if(str.history.length>30)str.history=str.history.slice(-30);
+  u.streak=str;us[me]=u;saveUsers(us);
+  renderStreak();renderStreakBanner();
 }
-function resetSl() {
-  slider.value = 0; updateSl(0);
-  document.getElementById('active-lbl').textContent = 'Select a body part to rate severity';
+function renderStreak(){
+  const box=document.getElementById('s-streak');
+  const me=getMe();
+  if(!me){box.innerHTML='<div style="padding:.75rem 1.4rem"><p class="no-plans" style="padding:.5rem 0">Sign in to track your streak</p></div>';return}
+  const u=getUser();const str=u?.streak||{count:0,lastActive:null,history:[]};
+  const today=todayKey();
+  // build last 7 days dots
+  const dots=[];for(let i=6;i>=0;i--){const d=dk(addD(new Date(),-i));const isToday=d===today;const active=(str.history||[]).includes(d);dots.push(`<div class="sdot${active?isToday?' today':' on':''}"></div>`)}
+  const active=str.count>0;
+  box.innerHTML=`<div style="padding:.75rem 1.4rem">${active?`<div class="streak-card"><div class="streak-top"><div><div class="streak-num">${str.count}</div><div class="streak-label">Day Streak</div></div><div class="streak-fire">🔥</div></div><div class="streak-dots">${dots.join('')}</div></div>`:`<div class="streak-card"><div class="streak-label" style="margin-bottom:.4rem">Start Your Streak</div><div class="no-streak">Generate a plan to begin</div></div>`}</div>`;
 }
-function updateSl(v) {
-  const p = v * 10;
-  slider.style.setProperty('--pct', p + '%');
-  slider.style.background = `linear-gradient(to right,var(--gold) ${p}%,var(--obs4) ${p}%)`;
-  sevEl.textContent = v;
-  sevEl.style.color = sevTextColor(v);
+function renderStreakBanner(){
+  const box=document.getElementById('home-streak-banner');
+  if(!box)return;
+  const me=getMe();
+  if(!me){box.innerHTML='';return}
+  const u=getUser();const str=u?.streak||{count:0,lastActive:null,history:[]};
+  if(!str.count){box.innerHTML='';return}
+  const today=todayKey();
+  const dots=[];for(let i=6;i>=0;i--){const d=dk(addD(new Date(),-i));const isToday=d===today;const active=(str.history||[]).includes(d);dots.push(`<div class="sbdot${active?isToday?' today':' on':''}"></div>`)}
+  box.innerHTML=`<div class="streak-banner"><div class="sb-fire">🔥</div><div class="sb-count">${str.count}</div><div class="sb-info"><div class="sb-title">${str.count} Day Training Streak</div><div class="sb-sub">${str.lastActive===today?'Already logged today — great work!':'Log a session today to keep your streak alive.'}</div><div class="sb-dots">${dots.join('')}</div></div></div>`;
 }
-function renderTags() {
-  const box = document.getElementById('pain-tags');
-  const entries = Object.entries(painData).filter(([, v]) => v > 0);
-  if (!entries.length) { box.innerHTML = '<span class="no-areas">No areas selected yet</span>'; return; }
-  box.innerHTML = entries.map(([a, v]) => {
-    const el = document.querySelector(`[data-area="${a}"]`);
-    return `<span class="ptag">${el?.dataset.label || a} <strong>${v}/10</strong><button class="ptag-x" onclick="removeArea('${a}')">✕</button></span>`;
-  }).join('');
+
+/* ═══════════════════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════════════════ */
+function goTo(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
+  document.getElementById('page-'+page).classList.remove('hidden');
+  document.querySelectorAll('.s-nav-btn').forEach(b=>{b.classList.toggle('active',b.dataset.page===page)});
+  document.getElementById('s-plans').style.display=page==='home'?'':'none';
+  if(page==='schedule')renderSchedule();
+  if(page==='matchday')renderMatchDay();
+  if(page==='history')renderHistory();
+  if(page==='home'){renderStreakBanner();renderSkillGrid()}
+  document.getElementById('sidebar').classList.remove('open');
 }
-function removeArea(id) {
-  delete painData[id]; updateAreaFill(id); renderTags();
-  if (activeArea === id) resetSl();
-}
-document.querySelectorAll('.pain-area').forEach(el => el.addEventListener('click', () => setActive(el.dataset.area)));
-slider.addEventListener('input', () => {
-  const v = +slider.value; updateSl(v);
-  if (!activeArea) return;
-  if (!v) delete painData[activeArea]; else painData[activeArea] = v;
-  updateAreaFill(activeArea); renderTags();
-});
+
+/* ═══════════════════════════════════════════════════════════
+   MODALS
+═══════════════════════════════════════════════════════════ */
+function openModal(id,tab){document.getElementById(id).classList.remove('hidden');if(id==='modal-auth')switchTab(tab||'in')}
+function closeModal(id){document.getElementById(id).classList.add('hidden')}
+function switchTab(t){['in','up'].forEach(x=>{document.getElementById('tab-'+x).classList.toggle('on',x===t);document.getElementById('form-'+x).classList.toggle('hidden',x!==t)})}
+document.querySelectorAll('.modal-bg').forEach(bg=>bg.addEventListener('click',e=>{if(e.target===bg)bg.classList.add('hidden')}));
+['li-u','li-p'].forEach(id=>document.getElementById(id)?.addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()}));
+['ru-n','ru-u','ru-p'].forEach(id=>document.getElementById(id)?.addEventListener('keydown',e=>{if(e.key==='Enter')doRegister()}));
+
+/* ═══════════════════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════════════════ */
+function toast(msg,type='ok'){document.querySelector('.toast')?.remove();const t=document.createElement('div');t.className=`toast t-${type}`;t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2900)}
+
+/* ═══════════════════════════════════════════════════════════
+   PAIN MAP
+═══════════════════════════════════════════════════════════ */
+const painData={};let activeArea=null;
+const slider=document.getElementById('sev-sl'),sevEl=document.getElementById('sev-num');
+function sevColor(s){if(!s)return'#1e1e30';const t=s/10,h=Math.round(50-t*50),sa=Math.round(85+t*12),l=Math.round(60-t*20);return`hsl(${h},${sa}%,${l}%)`}
+function sevTextColor(s){if(!s)return'var(--muted)';const t=s/10,h=Math.round(50-t*50),sa=Math.round(85+t*12),l=Math.round(60-t*20);return`hsl(${h},${sa}%,${l}%)`}
+function fillArea(id){const el=document.querySelector(`[data-area="${id}"]`);if(!el)return;const s=painData[id]||0;el.style.fill=sevColor(s);el.classList.toggle('has-pain',s>0)}
+function setActiveArea(id){document.querySelectorAll('.pain-area.selected').forEach(e=>e.classList.remove('selected'));if(activeArea===id){activeArea=null;resetSl();return}activeArea=id;const el=document.querySelector(`[data-area="${id}"]`);el?.classList.add('selected');document.getElementById('active-lbl').textContent=`Adjusting: ${el?.dataset.label||id}`;const s=painData[id]||0;slider.value=s;updateSl(s)}
+function resetSl(){activeArea=null;slider.value=0;updateSl(0);document.getElementById('active-lbl').textContent='Select a body part to rate severity'}
+function updateSl(v){const p=v*10;slider.style.setProperty('--pct',p+'%');slider.style.background=`linear-gradient(to right,var(--gold) ${p}%,var(--obs4) ${p}%)`;sevEl.textContent=v;sevEl.style.color=sevTextColor(v)}
+function renderPainTags(){const box=document.getElementById('pain-tags');const entries=Object.entries(painData).filter(([,v])=>v>0);if(!entries.length){box.innerHTML='<span class="no-areas">No areas selected</span>';return}box.innerHTML=entries.map(([a,v])=>{const el=document.querySelector(`[data-area="${a}"]`);return`<span class="ptag">${el?.dataset.label||a} <strong>${v}/10</strong><button class="ptag-x" onclick="removeArea('${a}')">✕</button></span>`}).join('')}
+function removeArea(id){delete painData[id];fillArea(id);renderPainTags();if(activeArea===id)resetSl()}
+document.querySelectorAll('.pain-area').forEach(el=>el.addEventListener('click',()=>setActiveArea(el.dataset.area)));
+slider.addEventListener('input',()=>{const v=+slider.value;updateSl(v);if(!activeArea)return;if(!v)delete painData[activeArea];else painData[activeArea]=v;fillArea(activeArea);renderPainTags()});
 updateSl(0);
 
-/* ══════════════════════════════════════════
-   AUTH — localStorage
-══════════════════════════════════════════ */
-function getUsers() { try { return JSON.parse(localStorage.getItem('playr_users') || '{}'); } catch { return {}; } }
-function saveUsers(u) { localStorage.setItem('playr_users', JSON.stringify(u)); }
-function getMe() { return localStorage.getItem('playr_me') || null; }
-function setMe(u) { u ? localStorage.setItem('playr_me', u) : localStorage.removeItem('playr_me'); }
+/* ═══════════════════════════════════════════════════════════
+   WEAKNESS + FITNESS SELECTORS
+═══════════════════════════════════════════════════════════ */
+let selectedWeaknesses=new Set();
+let fitnessOn=false,fitnessType=null,fitnessInt='moderate';
+function renderSkillGrid(){
+  const box=document.getElementById('skill-grid');if(!box)return;
+  const me=getMe();const u=me?getUser():null;
+  if(u?.weaknesses)selectedWeaknesses=new Set(u.weaknesses);
+  box.innerHTML=SKILL_AREAS.map(s=>`<button class="skill-btn${selectedWeaknesses.has(s.id)?' on':''}" onclick="toggleSkill('${s.id}',this)">${s.icon} ${s.label}</button>`).join('');
+}
+function toggleSkill(id,btn){if(selectedWeaknesses.has(id)){selectedWeaknesses.delete(id);btn.classList.remove('on')}else{selectedWeaknesses.add(id);btn.classList.add('on')}if(getMe())saveUserData({weaknesses:[...selectedWeaknesses]})}
+function toggleFitness(){fitnessOn=!fitnessOn;document.getElementById('fitness-toggle').classList.toggle('on',fitnessOn);document.getElementById('fitness-opts-wrap').classList.toggle('hidden',!fitnessOn)}
+function selectFitType(t,btn){fitnessType=t;document.querySelectorAll('#fitness-type-btns .fit-opt').forEach(b=>b.classList.remove('on'));btn.classList.add('on')}
+function selectFitInt(v,btn){fitnessInt=v;document.querySelectorAll('#fitness-int-btns .fit-opt').forEach(b=>b.classList.remove('on'));btn.classList.add('on')}
 
-function doLogin() {
-  const u = document.getElementById('li-u').value.trim().toLowerCase();
-  const p = document.getElementById('li-p').value;
-  const e = document.getElementById('li-e');
-  e.classList.remove('show');
-  if (!u || !p) { e.textContent = 'Please fill in all fields.'; e.classList.add('show'); return; }
-  const us = getUsers();
-  if (!us[u] || us[u].pw !== p) { e.textContent = 'Invalid username or password.'; e.classList.add('show'); return; }
-  setMe(u); closeModal(); renderAuth(); renderPlans(); toast(`Welcome back, ${us[u].name}!`);
-}
-function doRegister() {
-  const n = document.getElementById('ru-n').value.trim();
-  const u = document.getElementById('ru-u').value.trim().toLowerCase();
-  const p = document.getElementById('ru-p').value;
-  const e = document.getElementById('ru-e');
-  e.classList.remove('show');
-  if (!n || !u || !p) { e.textContent = 'Please fill in all fields.'; e.classList.add('show'); return; }
-  if (u.length < 3) { e.textContent = 'Username must be at least 3 characters.'; e.classList.add('show'); return; }
-  if (p.length < 4) { e.textContent = 'Password must be at least 4 characters.'; e.classList.add('show'); return; }
-  const us = getUsers();
-  if (us[u]) { e.textContent = 'Username already taken.'; e.classList.add('show'); return; }
-  us[u] = { pw: p, name: n, plans: [] }; saveUsers(us);
-  setMe(u); closeModal(); renderAuth(); renderPlans(); toast(`Welcome, ${n}! Account created.`);
-}
-function doLogout() { setMe(null); renderAuth(); renderPlans(); toast('Signed out successfully.'); }
-
-function renderAuth() {
-  const me = getMe();
-  const box = document.getElementById('s-auth');
-  if (me) {
-    const u = getUsers()[me];
-    box.innerHTML = `
-      <div class="s-greeting">Signed in as</div>
-      <div class="s-name">${u?.name || me}</div>
-      <button class="sbn sbn-g" onclick="doLogout()">Sign Out</button>`;
-  } else {
-    box.innerHTML = `
-      <button class="sbn sbn-p" onclick="openModal()">Sign In</button>
-      <button class="sbn sbn-o" onclick="openModal('up')">Create Account</button>`;
-  }
-}
-function savePlan() {
-  const me = getMe();
-  if (!me) { openModal(); toast('Sign in to save your plan', 'warn'); return; }
-  if (!lastPlan) return;
-  const us = getUsers();
-  const entry = {
-    id: Date.now().toString(),
-    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-    pos: lastPlan.summary.position,
-    intensity: lastPlan.summary.intensity,
-    plan: lastPlan,
-    painAreas: { ...lastPlan.summary.painAreas }
-  };
-  us[me].plans = [entry, ...(us[me].plans || [])].slice(0, 20);
-  saveUsers(us); renderPlans(); toast('Training plan saved!');
-}
-function deletePlan(id, ev) {
-  ev.stopPropagation();
-  const me = getMe(); if (!me) return;
-  const us = getUsers();
-  us[me].plans = (us[me].plans || []).filter(p => p.id !== id);
-  saveUsers(us); renderPlans();
-}
-function loadPlan(entry) {
-  lastPlan = entry.plan;
-  displayPlan(entry.plan);
-  showView('view-results');
-}
-function renderPlans() {
-  const me = getMe();
-  const box = document.getElementById('plans-list');
-  if (!me) { box.innerHTML = '<p class="no-plans">Sign in to save &amp; access your training history</p>'; return; }
-  const plans = getUsers()[me]?.plans || [];
-  if (!plans.length) { box.innerHTML = '<p class="no-plans">No saved plans yet — generate one to get started</p>'; return; }
-  box.innerHTML = plans.map(p => {
-    const painStr = Object.entries(p.painAreas || {}).filter(([,v]) => v > 0)
-      .slice(0, 2).map(([a]) => { const el = document.querySelector(`[data-area="${a}"]`); return el?.dataset.label || a; }).join(', ');
-    return `<div class="pc" onclick='loadPlan(${JSON.stringify(p).replace(/'/g,"&#39;")})'>
-      <button class="pc-del" onclick="deletePlan('${p.id}',event)">✕</button>
-      <div class="pc-title">${p.pos}</div>
-      <div class="pc-meta">${p.date}${painStr ? ' · ' + painStr : ''}</div>
-      <span class="pb pb-${p.intensity}">${p.intensity}</span>
-    </div>`;
-  }).join('');
-}
-
-/* ══════════════════════════════════════════
-   MODAL
-══════════════════════════════════════════ */
-function openModal(t) { document.getElementById('auth-modal').classList.remove('hidden'); switchTab(t || 'in'); }
-function closeModal() { document.getElementById('auth-modal').classList.add('hidden'); }
-function switchTab(t) {
-  ['in','up'].forEach(x => {
-    document.getElementById('tab-' + x).classList.toggle('on', x === t);
-    document.getElementById('form-' + x).classList.toggle('hidden', x !== t);
-  });
-}
-document.getElementById('modal-x').addEventListener('click', closeModal);
-document.getElementById('auth-modal').addEventListener('click', e => { if (e.target === document.getElementById('auth-modal')) closeModal(); });
-['li-u','li-p'].forEach(id => document.getElementById(id)?.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); }));
-['ru-n','ru-u','ru-p'].forEach(id => document.getElementById(id)?.addEventListener('keydown', e => { if (e.key === 'Enter') doRegister(); }));
-
-/* ══════════════════════════════════════════
-   TOAST
-══════════════════════════════════════════ */
-function toast(msg, type = 'ok') {
-  document.querySelector('.toast')?.remove();
-  const t = document.createElement('div');
-  t.className = `toast t-${type}`; t.textContent = msg;
-  document.body.appendChild(t);
-  setTimeout(() => t.remove(), 2900);
-}
-
-/* ══════════════════════════════════════════
-   MOBILE SIDEBAR
-══════════════════════════════════════════ */
-document.getElementById('mob-tog')?.addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
-if (window.innerWidth <= 760) document.getElementById('mob-tog').classList.remove('hidden');
-
-/* ══════════════════════════════════════════
-   VIEW MANAGEMENT
-══════════════════════════════════════════ */
-function showView(id) {
-  ['view-form', 'view-results'].forEach(v => document.getElementById(v).classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
-}
-
-/* ══════════════════════════════════════════
-   TRAINING PLAN LOGIC (v1 static)
-══════════════════════════════════════════ */
-let lastPlan = null;
-
-document.getElementById('gen-btn').addEventListener('click', () => {
-  const age      = parseInt(document.getElementById('f-age').value) || 0;
-  const position = document.getElementById('f-pos').value;
-  const fitness  = document.getElementById('f-fit').value;
-  const soreness = document.getElementById('f-sor').value;
-  if (!age || !position || !fitness || !soreness) {
-    toast('Please fill in Age, Position, Fitness Level & Soreness', 'warn'); return;
-  }
-  const entries = Object.entries(painData).filter(([,v]) => v > 0);
-  const maxSev  = entries.length ? Math.max(...entries.map(([,v]) => v)) : 0;
-  const primaryArea = entries.length
-    ? entries.reduce((a, b) => b[1] > a[1] ? b : a)[0]
-    : null;
-
-  const plan = buildPlan(age, position, fitness, soreness, painData, primaryArea, maxSev);
-  lastPlan = plan;
-  displayPlan(plan);
-  showView('view-results');
-  document.querySelector('.panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+/* ═══════════════════════════════════════════════════════════
+   HOME PLAN GENERATION
+═══════════════════════════════════════════════════════════ */
+let lastPlan=null;
+document.getElementById('gen-btn').addEventListener('click',()=>{
+  const age=parseInt(document.getElementById('f-age').value)||0,pos=document.getElementById('f-pos').value,fit=document.getElementById('f-fit').value,sor=document.getElementById('f-sor').value;
+  if(!age||!pos||!fit||!sor){toast('Please fill in Age, Position, Fitness Level & Soreness','warn');return}
+  const entries=Object.entries(painData).filter(([,v])=>v>0),maxSev=entries.length?Math.max(...entries.map(([,v])=>v)):0;
+  const primaryArea=entries.length?entries.reduce((a,b)=>b[1]>a[1]?b:a)[0]:null;
+  // Get user improvements from logs
+  const me=getMe(),userImprovements=me?(getUser()?.improvements||[]):[];
+  const plan=buildPlan(age,pos,fit,sor,painData,primaryArea,maxSev,[...selectedWeaknesses],fitnessOn?{type:fitnessType,intensity:fitnessInt}:null,userImprovements);
+  lastPlan=plan;displayPlan(plan);
+  document.getElementById('view-form').classList.add('hidden');
+  document.getElementById('view-results').classList.remove('hidden');
+  bumpStreak();
 });
+document.getElementById('back-btn').addEventListener('click',()=>{document.getElementById('view-form').classList.remove('hidden');document.getElementById('view-results').classList.add('hidden')});
+document.getElementById('save-btn').addEventListener('click',savePlan);
+document.getElementById('print-btn').addEventListener('click',()=>window.print());
 
-document.getElementById('back-btn').addEventListener('click', () => showView('view-form'));
-document.getElementById('save-btn').addEventListener('click', savePlan);
-document.getElementById('print-btn').addEventListener('click', () => window.print());
-
-/* ── helpers ── */
-const POS_NAMES = {
-  goalkeeper:'Goalkeeper', centerback:'Center Back', outsideback:'Outside Back / Fullback',
-  cdm:'Center Defensive Midfielder', cm:'Central Midfielder', cam:'Central Attacking Midfielder',
-  outsideMid:'Outside Midfielder', wing:'Winger', striker:'Striker / Forward'
-};
-const POS_FOCUS = {
-  goalkeeper:'Reflexes, Positioning, Distribution', centerback:'Strength, Aerial Ability, Tackling',
-  outsideback:'Speed, Stamina, Crossing', cdm:'Tackling, Positioning, Short Passing',
-  cm:'Endurance, Vision, Passing Range', cam:'Creativity, Technical Skills, Shooting',
-  outsideMid:'Crossing, Stamina, Defensive Awareness', wing:'Speed, Dribbling, Crossing',
-  striker:'Finishing, Movement, Strength'
-};
-function posName(p) { return POS_NAMES[p] || p; }
-function posFocus(p) { return POS_FOCUS[p] || 'All-around skills'; }
-function areaLabel(id) {
-  const el = document.querySelector(`[data-area="${id}"]`);
-  return el ? el.dataset.label : id;
+const stdW=['5 min light jogging & dynamic movement','Dynamic stretching (leg swings, hip circles, arm rotations)','Ball control warm-up — juggling, rondos, first-touch'];
+const stdC=['5 min light jogging & walking','Static stretching — hold each stretch 20–30s','Foam rolling for major muscle groups'];
+function buildPlan(age,pos,fit,sor,painAreas,primaryArea,maxSev,weaknesses,fitnessGoal,improvements){
+  let intensity='high';
+  if(sor==='severe'||maxSev>=7)intensity='recovery';
+  else if(sor==='moderate'||maxSev>=4)intensity='light';
+  else if(sor==='mild'||maxSev>=1)intensity='moderate';
+  return{summary:{position:POS_NAMES[pos]||pos,intensity,focus:POS_FOCUS[pos]||'All-around',painAreas:{...painAreas},primaryArea,maxSev,weaknesses:[...weaknesses],fitnessGoal,improvements:[...improvements]},training:buildTraining(pos,intensity,primaryArea,maxSev),recovery:buildRecovery(intensity,primaryArea,maxSev,painAreas),positionDrills:buildPosDrills(pos,intensity),weaknessDrills:buildWeaknessDrills(weaknesses,improvements),fitnessDrills:fitnessGoal&&fitnessGoal.type?buildFitnessDrills(fitnessGoal):null};
 }
-
-function buildPlan(age, pos, fitness, soreness, painAreas, primaryArea, maxSev) {
-  let intensity = 'high';
-  if (soreness === 'severe' || maxSev >= 7)       intensity = 'recovery';
-  else if (soreness === 'moderate' || maxSev >= 4) intensity = 'light';
-  else if (soreness === 'mild'     || maxSev >= 1) intensity = 'moderate';
-
-  return {
-    summary: {
-      position: posName(pos), intensity,
-      focus: posFocus(pos),
-      painAreas: { ...painAreas }, primaryArea, maxSev
-    },
-    training: buildTraining(pos, intensity, fitness, primaryArea, maxSev),
-    recovery: buildRecovery(intensity, primaryArea, maxSev, painAreas),
-    positionDrills: buildPositionDrills(pos, intensity)
-  };
-}
-
-function buildTraining(pos, intensity, fitness, painArea, maxSev) {
-  const stdWarm = [
-    '5 minutes light jogging & dynamic movement',
-    'Dynamic stretching sequence (leg swings, hip circles, arm rotations)',
-    'Ball control warm-up — juggling, rondos, first-touch drills'
-  ];
-  const stdCool = [
-    '5 minutes light jogging & walking',
-    'Static stretching — hold each stretch 20–30 seconds',
-    'Foam rolling for major muscle groups'
-  ];
-  const plan = { title:'', description:'', warmup:[], main:[], cooldown:[], duration:'', icon:'⚽' };
-
-  switch (intensity) {
-    case 'recovery':
-      plan.title = 'Recovery Session'; plan.icon = '🛌';
-      plan.description = 'Focus on active recovery and rehabilitation to promote healing.';
-      plan.warmup = ['5 minutes very light movement — gentle walking', 'Gentle full-body mobility & joint circles'];
-      plan.main   = [
-        '20 minutes of light technical work at low intensity',
-        'Non-impact cross-training — swimming or stationary bike (30 min)',
-        'Technique repetition at walking pace — passing, receiving, first touch',
-        'Breathing & relaxation exercises'
-      ];
-      plan.cooldown = ['Extended stretching session (25–30 minutes)', 'Foam rolling — full body, 90 seconds per area'];
-      plan.duration = '30–45 minutes (very low intensity)'; break;
-
-    case 'light':
-      plan.title = 'Light Training Session'; plan.icon = '🌤';
-      plan.description = 'Maintain fitness while giving your body space to recover.';
-      plan.warmup = stdWarm;
-      plan.main   = [
-        'Technical drills at 50–60% max effort',
-        'Positional work with limited high-intensity movement',
-        'Light ball work focusing on technique & decision-making',
-        'Short passing sequences — accuracy over speed'
-      ];
-      plan.cooldown = stdCool;
-      plan.duration = '45–60 minutes (low to moderate intensity)'; break;
-
-    case 'moderate':
-      plan.title = 'Moderate Training Session'; plan.icon = '⚡';
-      plan.description = 'Balanced session building technical sharpness and moderate fitness.';
-      plan.warmup = stdWarm;
-      plan.main   = [
-        'Technical drills at 70–80% intensity',
-        'Small-sided games — 4v4 or 5v5 (15 minutes)',
-        'Position-specific drills at moderate pace',
-        'Interval running — 1:1 work-to-rest ratio (6 × 30 seconds)'
-      ];
-      plan.cooldown = stdCool;
-      plan.duration = '60–75 minutes (moderate intensity)'; break;
-
-    case 'high':
-      plan.title = 'High Intensity Session'; plan.icon = '🔥';
-      plan.description = 'Full-intensity session to sharpen match fitness and decision-making under pressure.';
-      plan.warmup = stdWarm;
-      plan.main   = [
-        'Technical drills at 90–100% intensity',
-        'High-intensity small-sided games (8v8 or 11v11 segments)',
-        'Position-specific drills at full game speed',
-        'Sprint & agility circuit — 8 × 20m sprints, 4 × ladder drills',
-        'Tactical scenarios at match pace — set pieces, transitions'
-      ];
-      plan.cooldown = stdCool;
-      plan.duration = '75–90 minutes (high intensity)'; break;
+function buildTraining(pos,intensity,painArea,maxSev){
+  const plan={title:'',description:'',warmup:[],main:[],cooldown:[],duration:'',icon:'⚽'};
+  switch(intensity){
+    case 'recovery':plan.title='Recovery Session';plan.icon='🛌';plan.description='Active recovery focused on healing and preventing further injury.';plan.warmup=['5 min very light movement — gentle walking','Gentle full-body mobility & joint circles'];plan.main=['20 min light technical work at low intensity','Non-impact cross-training — swimming or stationary bike 30 min','Technique repetition at walking pace','Breathing & relaxation exercises'];plan.cooldown=['Extended stretching — 25 min','Foam rolling full body — 90s per area'];plan.duration='30–45 min (very low intensity)';break;
+    case 'light':plan.title='Light Training Session';plan.icon='🌤';plan.description='Maintain fitness while giving your body space to recover.';plan.warmup=stdW;plan.main=['Technical drills at 50–60% intensity','Positional work with limited movement','Light ball work focusing on technique','Short passing sequences — accuracy over speed'];plan.cooldown=stdC;plan.duration='45–60 min (low intensity)';break;
+    case 'moderate':plan.title='Moderate Session';plan.icon='⚡';plan.description='Balanced session building technical sharpness and moderate fitness.';plan.warmup=stdW;plan.main=['Technical drills at 70–80% intensity','Small-sided games 4v4 or 5v5 — 15 min','Position-specific drills at moderate pace','Intervals: 6×30s work, 30s rest'];plan.cooldown=stdC;plan.duration='60–75 min';break;
+    case 'high':plan.title='High Intensity Session';plan.icon='🔥';plan.description='Full intensity to sharpen match fitness and decision-making under pressure.';plan.warmup=stdW;plan.main=['Technical drills at 90–100% intensity','High-intensity small-sided games','Position-specific drills at game speed','Sprint & agility: 8×20m sprints, 4× ladder','Tactical scenarios at match pace'];plan.cooldown=stdC;plan.duration='75–90 min';break;
   }
-
-  if (painArea && maxSev > 0) modifyForPain(plan, painArea, maxSev);
+  if(painArea&&maxSev>0){
+    const mods=[];
+    if(['leftThigh','rightThigh','leftKnee','rightKnee','leftShin','rightShin'].includes(painArea)){mods.push('Reduce running/sprinting volume by 40–50%');mods.push('Avoid explosive jumping or plyometric work');if(['leftKnee','rightKnee'].includes(painArea))mods.push('No deep squatting or rapid lateral cuts');if(maxSev>5)mods.push('Non-weight-bearing cardio alternatives recommended')}
+    else if(['leftFoot','rightFoot'].includes(painArea)){mods.push('Supportive footwear with adequate arch support');mods.push('Reduce cutting and pivoting movements');mods.push('Consider kinesiology taping')}
+    else if(painArea==='back'||painArea==='core'){mods.push('Avoid heavy load-bearing exercises');mods.push('Core bracing with strict neutral spine');if(painArea==='back')mods.push('Limit rotation movements if painful')}
+    else if(['leftShoulder','rightShoulder'].includes(painArea)){mods.push('Limit throw-ins and diving drills');mods.push('Modify any overhead movements')}
+    if(mods.length){plan.main.push('--- Pain Modifications ---');plan.main=plan.main.concat(mods)}
+  }
   return plan;
 }
-
-function modifyForPain(plan, area, sev) {
-  const mods = [];
-  if (['leftThigh','rightThigh','leftKnee','rightKnee','leftShin','rightShin'].includes(area)) {
-    mods.push('Reduce running & sprinting volume by 40–50%');
-    mods.push('Avoid explosive jumping or plyometric drills');
-    if (['leftKnee','rightKnee'].includes(area)) mods.push('No deep squatting or rapid lateral cuts');
-    if (sev > 5) mods.push('Consider non-weight-bearing cardio — swimming or cycling');
-  } else if (['leftFoot','rightFoot'].includes(area)) {
-    mods.push('Wear footwear with adequate arch support & padding');
-    mods.push('Reduce cutting, pivoting and sharp-direction-change movements');
-    mods.push('Consider kinesiology taping for additional support');
-  } else if (area === 'back' || area === 'core') {
-    mods.push('Avoid all heavy load-bearing exercises');
-    mods.push('Focus on core bracing with strict neutral spine');
-    if (area === 'back') mods.push('Limit rotation-based movements if painful');
-  } else if (['leftShoulder','rightShoulder'].includes(area)) {
-    mods.push('Limit throw-ins and goalkeeper-specific diving drills');
-    mods.push('Modify any overhead or push movements as needed');
-  } else if (area === 'hips') {
-    mods.push('Avoid explosive lateral sprints and hip-hinge power movements');
-    mods.push('Add hip flexor & glute activation to the warm-up');
+function buildRecovery(intensity,primaryArea,maxSev,allPainAreas){
+  const plan={title:'Recovery Protocol',description:'Optimize recovery for your next session or match.',immediate:[],sameDay:[],nextDay:[],nutrition:[],icon:'🔄'};
+  const si=['10–15 min cool-down jog/walk','Hydrate: 500–600ml water or electrolyte drink','Light static stretching of all major muscle groups'];
+  const sd=['Full meal within 60 min — 4:1 carb:protein ratio','Compression garments if available','20 min foam rolling'];
+  const nd=['10–15 min mobility flow work','Light muscle activation drills','Self-assess soreness vs yesterday'];
+  const nu=['Daily hydration: 2.5–3 litres minimum','Protein: 1.6–1.8g/kg bodyweight per day','Complex carbohydrates at each meal','Anti-inflammatory foods: berries, fatty fish, turmeric, leafy greens'];
+  switch(intensity){
+    case 'recovery':plan.immediate=si;plan.sameDay=[...sd,'Extended stretching 30 min','Contrast therapy: 2min cold / 1min warm × 4'];plan.nextDay=[...nd,'Continue active recovery','Physiotherapy or sports massage'];plan.nutrition=[...nu,'Anti-inflammatory diet priority for 48–72h'];break;
+    case 'light':plan.immediate=si;plan.sameDay=sd;plan.nextDay=nd;plan.nutrition=nu;break;
+    case 'moderate':plan.immediate=si;plan.sameDay=[...sd,'Cold shower or ice bath 8–12 min at 12–15°C'];plan.nextDay=nd;plan.nutrition=nu;break;
+    case 'high':plan.immediate=si;plan.sameDay=[...sd,'Ice bath 10–15 min at 10–15°C','Compression boots 30–45 min'];plan.nextDay=[...nd,'Light recovery session 20–25 min','Sports massage recommended'];plan.nutrition=[...nu,'Tart cherry juice for muscle recovery','High-GI carbs immediately post-session'];break;
   }
-  if (mods.length) {
-    plan.main.push('--- Pain Management Modifications ---');
-    plan.main = plan.main.concat(mods);
-  }
+  const entries=Object.entries(allPainAreas||{}).filter(([,v])=>v>0);
+  if(entries.length){const extra=[];entries.forEach(([a,sev])=>{const lbl=document.querySelector(`[data-area="${a}"]`)?.dataset.label||a;if(['leftThigh','rightThigh'].includes(a))extra.push(`Elevate affected leg; ice ${lbl} 15min on/45min off`);if(['leftKnee','rightKnee'].includes(a)){extra.push(`RICE protocol for ${lbl}`);if(sev>5)extra.push(`Compression sleeve on ${lbl}`)}if(['leftShin','rightShin'].includes(a))extra.push(`Ice ${lbl} 15 min after activity`);if(['leftFoot','rightFoot'].includes(a))extra.push(`Ice foot bath 10–15 min; arch stretches`);if(['leftShoulder','rightShoulder'].includes(a))extra.push(`Ice shoulder 15min; gentle pendulum mobility`);if(a==='back')extra.push(`Cat-cow and child's pose; heat for relaxation`);if(a==='hips')extra.push(`Pigeon pose & hip flexor stretches; heat therapy`);if(a==='core')extra.push(`Diaphragmatic breathing; avoid forced compression`)});const unique=[...new Set(extra)];if(unique.length){plan.sameDay.push('--- Area-Specific Recovery ---');plan.sameDay=plan.sameDay.concat(unique)}}
+  return plan;
+}
+function buildPosDrills(pos,intensity){
+  const map={
+    goalkeeper:{t:['Handling circuit — high/low/diving saves 3×10','Shot-stopping footwork 3×10','Distribution: throws/rolls/kicks 20 reps each','1v1 angle-closing situations 10 reps'],p:['Explosive power: box jumps 4×8','Reaction drills: tennis ball drops 3×10','Core stability: plank series 3×45s','Plyometrics: broad jumps/lateral bounds'],ta:['Positioning for crosses and corners','Communication and backline organisation','Starting position by ball location','Distribution decision-making']},
+    centerback:{t:['Defensive heading — clearances 3×15','Tackling technique — standing and sliding 10min','Long-range passing — driven and lofted 20 each','Clearances under pressure'],p:['Upper/lower strength superset 4×10','Heading approach runs 5×5','Short burst acceleration 5–15m 6×','Physical duel shielding drill'],ta:['Defensive line management','Reading forward runs and anticipating','Cover shadow positioning','Building from the back — third-man combos']},
+    outsideback:{t:['Crossing: driven/whipped/cutback 30 total','1v1 defending: contain, jockey, tackle 4×4min','Overlapping run with ball carry 10 reps','Progressive passing from deep'],p:['Endurance intervals 4×5min at 80% HR','Repeated sprints 8×30m 30s recovery','Agility: 4×8 cone change-direction','Recovery run technique — backtrack at pace'],ta:['When to overlap vs hold width','Positioning vs attacking winger','Supporting the press in final third','Defensive shape when ball is switched']},
+    cdm:{t:['Short passing under pressure 3×5min','Receiving with back to goal and turning 3×10','Screening & interception positioning','Tackle and cover shadow exercises'],p:['Endurance: 20–25 min tempo run','Core circuit 3×15 each','Strength in duels: resistance pressing','Agility for transitions: mirror drill 4×45s'],ta:['Positioning between defensive/midfield lines','Screening key passing lanes','Dropping to support centre-backs','First action after winning the ball']},
+    cm:{t:['Passing range: short/medium/long 3×5min','Receiving and half-turn under pressure','Turning in tight spaces 3×10 each','Long-range shooting 10 each foot'],p:['Box-to-box endurance 3×8min','Repeated sprint ability 10×20m','Balance & coordination: single-leg work','Midfield duel strength: resistance pressing'],ta:['Space between lines','Switching play to free fullback','Supporting attack and defensive press','Tempo control — when to accelerate']},
+    cam:{t:['Creative passing & through balls 3×5min','Shooting from various angles 15 each','Dribbling tight spaces rondo 3v1 4×4min','Set-piece delivery 20 each'],p:['Agility: ladder footwork 4×30s','Acceleration 6×10m starts','Core: rotational medicine ball 3×10','Reaction: partner signal sprints 4×'],ta:['Half-spaces exploitation','Third-man runs to support striker','Immediate press on transition','Final third: dribble/pass/shoot decision']},
+    outsideMid:{t:['Crossing: ground/driven/lofted 30 total','Cutting inside to shoot 3×10 each','Combination with overlapping fullback','Defensive pressing & tracking 4×3min'],p:['Endurance for repeated runs 4×6min','Speed over 30–40m 6 runs full rest','Agility turns at speed: T-drill 4×','Recovery capacity 6×60m 85% + walk'],ta:['Maintaining width to stretch defence','When to come inside vs stay wide','Tracking back to help fullback','Positioning during opposition transitions']},
+    wing:{t:['1v1 dribbling circuits 20min','Crossing from byline & cut-back 30 total','Cutting inside to shoot 3×10 each','Quick combination & give-and-go'],p:['Explosive speed 6×30m full rest','Repeated sprint 10×20m 25s recovery','Agility: L-drill and 5-10-5 4×each','Balance under pressure: 1v1 shielding'],ta:['Timing the run behind the fullback','Dribble vs combine decision','Defensive press from the front','Set piece positioning: near post & 2nd ball']},
+    striker:{t:['Finishing circuit: volleys/headers/1v1 20min','Heading: attacking runs & flick-ons 3×12','Hold-up play & shielding back-to-goal 10min','One-touch finishing under pressure 3×15'],p:['Explosive power: squat jumps 4×8','Strength for hold-up: resistance duels','Acceleration 8×10m from standing','Jumping & heading approach runs 4×10'],ta:['Curved runs to stay onside','Timing with the passer shoulder check','Link-up with midfielders lay-off & move','Pressing from front: angle and trigger']}
+  };
+  const d=map[pos]||map.cm;let{t,p,ta}=d;
+  if(['recovery','light'].includes(intensity)){t=t.slice(0,2).map(x=>x+' (low intensity)');p=p.slice(0,2).map(x=>x+' (reduced volume)');ta=ta.slice(0,2).map(x=>x+' (walk-through)');}
+  return{title:`${POS_NAMES[pos]||pos} — Position Drills`,description:`Key skills for your position at ${intensity} intensity.`,technical:t,physical:p,tactical:ta,icon:'🎯'};
+}
+function buildWeaknessDrills(weaknesses,improvements){
+  const combined=[...new Set([...weaknesses,...improvements])].filter(w=>WEAKNESS_DRILLS[w]);
+  if(!combined.length)return null;
+  return{icon:'🎯',title:'Targeted Skill Work',description:'Drills focused on the areas you selected and feedback from previous sessions.',sections:combined.map(w=>{const area=SKILL_AREAS.find(s=>s.id===w);return{label:`${area?.icon||'•'} ${area?.label||w}`,drills:WEAKNESS_DRILLS[w],fromFeedback:improvements.includes(w)&&!weaknesses.includes(w)}})};
+}
+function buildFitnessDrills(fg){
+  if(!fg||!fg.type)return null;
+  const block=FITNESS_BLOCKS[fg.type]?.[fg.intensity];
+  if(!block)return null;
+  const typeLabel={endurance:'Endurance',speed:'Speed',strength:'Strength',agility:'Agility'}[fg.type]||fg.type;
+  const intLabel={light:'Light',moderate:'Moderate',intense:'Intense'}[fg.intensity]||fg.intensity;
+  return{icon:'💪',title:`Fitness Block — ${typeLabel}`,description:`${intLabel} conditioning exercises to develop your ${typeLabel.toLowerCase()}.`,drills:block};
 }
 
-function buildRecovery(intensity, primaryArea, maxSev, allPainAreas) {
-  const plan = { title: 'Recovery Protocol', description: 'Optimize recovery to be ready for your next session or match.', immediate: [], sameDay: [], nextDay: [], nutrition: [], icon: '🔄' };
-
-  const si = [
-    '10–15 minutes of cool-down jogging & walking',
-    'Hydrate immediately — 500–600ml water or electrolyte drink',
-    'Light static stretching of all major muscle groups'
-  ];
-  const sd = [
-    'Full meal within 60 minutes — 4:1 carbohydrate-to-protein ratio',
-    'Wear compression garments if available',
-    '20 minutes of foam rolling — quads, hamstrings, calves, glutes, upper back'
-  ];
-  const nd = [
-    '10–15 minutes of mobility flow work',
-    'Light muscle activation drills — glutes, core, shoulders',
-    'Self-assessment — rate soreness vs. yesterday; adjust intensity accordingly'
-  ];
-  const nu = [
-    'Daily hydration: 2.5–3 litres of water minimum',
-    'Protein: 1.6–1.8g per kg of bodyweight per day',
-    'Complex carbohydrates at each meal to maintain glycogen stores',
-    'Anti-inflammatory foods: berries, fatty fish, turmeric, leafy greens, walnuts'
-  ];
-
-  switch (intensity) {
-    case 'recovery':
-      plan.immediate = si;
-      plan.sameDay   = [...sd, 'Extended stretching — 30 minutes, prioritise tight areas', 'Contrast therapy: 2 minutes cold / 1 minute warm, 4 rounds'];
-      plan.nextDay   = [...nd, 'Continue active recovery — light walk or swim', 'Consider physiotherapy or sports massage'];
-      plan.nutrition = [...nu, 'Prioritise anti-inflammatory diet for 48–72 hours']; break;
-
-    case 'light':
-      plan.immediate = si; plan.sameDay = sd; plan.nextDay = nd; plan.nutrition = nu; break;
-
-    case 'moderate':
-      plan.immediate = si;
-      plan.sameDay   = [...sd, 'Ice bath or cold shower — 8–12 minutes at 12–15°C'];
-      plan.nextDay   = nd; plan.nutrition = nu; break;
-
-    case 'high':
-      plan.immediate = si;
-      plan.sameDay   = [...sd, 'Ice bath — 10–15 minutes at 10–15°C', 'Compression boots or garments for 30–45 minutes'];
-      plan.nextDay   = [...nd, 'Light recovery session — 20–25 minutes easy movement', 'Sports massage or physio session recommended'];
-      plan.nutrition  = [...nu, 'Tart cherry juice — 30ml concentrate for muscle recovery', 'High-GI carbohydrates (banana, rice, fruit) immediately post-session']; break;
-  }
-
-  // Area-specific recovery
-  const entries = Object.entries(allPainAreas || {}).filter(([,v]) => v > 0);
-  if (entries.length) {
-    const extra = [];
-    entries.forEach(([a, sev]) => {
-      const lbl = areaLabel(a);
-      if (['leftThigh','rightThigh'].includes(a)) extra.push(`Elevate affected leg when resting; ice ${lbl} — 15 min on, 45 min off`);
-      if (['leftKnee','rightKnee'].includes(a))   { extra.push(`RICE protocol for ${lbl}`); if (sev > 5) extra.push(`Compression sleeve on ${lbl} during activity`); }
-      if (['leftShin','rightShin'].includes(a))   extra.push(`Ice ${lbl} for 15 minutes after any activity`);
-      if (['leftFoot','rightFoot'].includes(a))   extra.push(`Ice foot bath 10–15 minutes; plantar fascia & arch stretches`);
-      if (['leftShoulder','rightShoulder'].includes(a)) extra.push(`Ice ${lbl} — 15 min on / 45 min off; gentle pendulum mobility drills`);
-      if (a === 'back') extra.push(`Cat-cow and child's pose stretches; heat pad for muscle relaxation; avoid prolonged sitting`);
-      if (a === 'hips') extra.push(`Pigeon pose & hip flexor stretches (90-second holds); heat therapy on hips`);
-      if (a === 'core') extra.push(`Gentle diaphragmatic breathing exercises; avoid forced abdominal compression`);
+/* ── DISPLAY PLAN ── */
+function areaLbl(id){return document.querySelector(`[data-area="${id}"]`)?.dataset.label||id}
+function displayPlan(plan){
+  const s=plan.summary;
+  const bClass={recovery:'pb-recovery',light:'pb-light',moderate:'pb-moderate',high:'pb-high'}[s.intensity];
+  const painEntries=Object.entries(s.painAreas||{}).filter(([,v])=>v>0);
+  const painHtml=painEntries.length?painEntries.map(([a,v])=>`<span style="color:#fca5a5">${areaLbl(a)}</span> <strong style="color:var(--ivory)">${v}/10</strong>`).join(' · '):'<span style="color:var(--muted)">None reported</span>';
+  document.getElementById('res-title').textContent=`${s.position} Training Plan`;
+  document.getElementById('res-meta').textContent=`${s.intensity.charAt(0).toUpperCase()+s.intensity.slice(1)} Intensity · ${s.focus}`;
+  document.getElementById('res-sumstrip').innerHTML=`<div class="sum-group"><div class="sum-label">Position</div><div class="sum-value">${s.position}</div></div><div class="sum-group"><div class="sum-label">Focus</div><div class="sum-value" style="font-style:italic;color:var(--gold2)">${s.focus}</div></div><div class="sum-group"><div class="sum-label">Pain Areas</div><div class="sum-value" style="font-size:.95rem">${painHtml}</div></div><div class="sum-group" style="text-align:right"><div class="sum-label">Intensity</div><span class="ibadge ${bClass}">${s.intensity}</span></div>`;
+  document.getElementById('card-training').innerHTML=buildCard(plan.training.icon,plan.training.title,plan.training.description,[['Warm-up',plan.training.warmup],['Main Session',plan.training.main],['Cool-down',plan.training.cooldown]]);
+  document.getElementById('card-recovery').innerHTML=buildCard(plan.recovery.icon,plan.recovery.title,plan.recovery.description,[['Immediate',plan.recovery.immediate],['Same Day',plan.recovery.sameDay],['Next Day',plan.recovery.nextDay],['Nutrition',plan.recovery.nutrition]]);
+  const dr=plan.positionDrills;
+  document.getElementById('card-position').innerHTML=`<div class="card-head"><div class="card-icon">${dr.icon}</div><div class="card-title">${dr.title}</div></div><div class="card-desc">${dr.description}</div><div class="drills-grid">${drillCol('Technical Drills',dr.technical)}${drillCol('Physical Focus',dr.physical)}${drillCol('Tactical Awareness',dr.tactical)}</div>`;
+  // Weakness card
+  const wbox=document.getElementById('card-weakness-wrap');
+  if(plan.weaknessDrills){
+    const wd=plan.weaknessDrills;
+    let html=`<div class="card" style="margin-bottom:1.35rem"><div class="card-head"><div class="card-icon">${wd.icon}</div><div class="card-title">${wd.title}</div></div><div class="card-desc">${wd.description}</div>`;
+    wd.sections.forEach(sec=>{
+      html+=`<div class="lhead${sec.fromFeedback?' feedback-head':''}">${sec.fromFeedback?'📝 From your feedback: ':''} ${sec.label}</div><ul class="clist">${sec.drills.map(d=>`<li${sec.fromFeedback?' class="feedback-item"':''}>${d}</li>`).join('')}</ul>`;
     });
-    const unique = [...new Set(extra)];
-    if (unique.length) {
-      plan.sameDay.push('--- Area-Specific Recovery ---');
-      plan.sameDay = plan.sameDay.concat(unique);
-    }
-  }
-  return plan;
+    html+='</div>';wbox.innerHTML=html;
+  } else wbox.innerHTML='';
+  // Fitness card
+  const fbox=document.getElementById('card-fitness-wrap');
+  if(plan.fitnessDrills){const fd=plan.fitnessDrills;fbox.innerHTML=`<div class="card" style="margin-bottom:1.35rem"><div class="card-head"><div class="card-icon">${fd.icon}</div><div class="card-title">${fd.title}</div></div><div class="card-desc">${fd.description}</div><div class="lhead">Exercises</div><ul class="clist">${fd.drills.map(d=>`<li>${d}</li>`).join('')}</ul></div>`}else fbox.innerHTML='';
+  // If feedback note
+  if(s.improvements&&s.improvements.length&&plan.weaknessDrills){const fb=s.improvements.filter(i=>WEAKNESS_DRILLS[i]);if(fb.length){const names=fb.map(i=>SKILL_AREAS.find(a=>a.id===i)?.label||i).join(', ');/* already integrated */}}
 }
-
-function buildPositionDrills(pos, intensity) {
-  const map = {
-    goalkeeper: {
-      t: ['Handling drills — high catches, low rolls, diving saves', 'Shot-stopping footwork (set position → dive)', 'Distribution — throws, rolls, driven kicks', '1v1 angle-closing situations'],
-      p: ['Explosive power: box jumps 4×8', 'Reaction time drills — tennis ball drops', 'Core stability: plank series & rotational work', 'Plyometric series: broad jumps, lateral bounds'],
-      ta: ['Positioning for crosses and corners', 'Communication & organisation of backline', 'Starting position based on ball location', 'Distribution decision-making — when to play short vs. long']
-    },
-    centerback: {
-      t: ['Defensive heading — flick-ons and clearances', 'Tackling technique — standing and sliding', 'Long-range passing — driven and lofted', 'Recovery clearances under pressure'],
-      p: ['Upper body strength: push/pull superset 4×10', 'Jump training: heading approach runs 5×5', 'Short burst acceleration over 5–15m', 'Physical duel shielding drill'],
-      ta: ['Defensive line management — hold vs. step', 'Reading forward runs and anticipating penetration', 'Cover shadow positioning behind pressing partner', 'Building from the back — third-man combinations']
-    },
-    outsideback: {
-      t: ['Crossing technique — driven, whipped, cutback', '1v1 defending — contain, jockey, tackle', 'Overlapping run with ball carry & decision', 'Progressive passing out from the back'],
-      p: ['Endurance intervals: 4×5min at 80% HR', 'Repeated sprint: 8×30m with 30s recovery', 'Agility: 4×8 cone change-of-direction runs', 'Recovery run technique — backtracking at pace'],
-      ta: ['When to overlap vs. hold width', 'Positioning vs. an attacking winger', 'Supporting the press in the final third', 'Defensive shape when the ball is switched']
-    },
-    cdm: {
-      t: ['Short passing under pressure — triangle drills', 'Receiving with back to goal & turning', 'Screening & interception positioning', 'Tackle and cover shadow exercises'],
-      p: ['Endurance base: 20–25 min tempo run', 'Core stability circuit — 3×15 each exercise', 'Strength in duels: resistance band pushing', 'Agility for transitions: mirror drill 4×45s'],
-      ta: ['Positioning between defensive and midfield lines', 'Screening key passing lanes from opposition', 'Dropping to support centre-backs in build-up', 'First action after winning the ball — protect or progress']
-    },
-    cm: {
-      t: ['Passing range — short, medium and long combinations', 'Receiving under pressure & half-turn', 'Turning in tight spaces — Cruyff, inside, outside', 'Long-range shooting — hit 10 shots each side'],
-      p: ['Box-to-box endurance: 3×8min reps', 'Repeated sprint ability: 10×20m efforts', 'Balance & coordination: single-leg stability work', 'Midfield duel strength: resistance pressing drills'],
-      ta: ['Creating and exploiting space between lines', 'Switching play to find free fullback', 'Supporting both attack and defensive press', 'Tempo control — when to slow down vs. accelerate play']
-    },
-    cam: {
-      t: ['Creative through-ball passing — curved & disguised', 'Shooting from various angles & distances', 'Dribbling in tight spaces — Rondo 3v1', 'Set-piece delivery — corners, free kicks'],
-      p: ['Agility & balance: 4×30s ladder footwork', 'Acceleration: 6×10m explosive starts', 'Core strength: rotational medicine ball work', 'Reaction drills: partner signal sprints'],
-      ta: ['Finding and exploiting half-spaces', 'Third-man runs to support the striker', 'Transition moments — immediate pressure on loss', 'Final third decision: dribble, pass or shoot']
-    },
-    outsideMid: {
-      t: ['Crossing from wide — ground, driven, lofted', 'Cutting inside onto strong foot to shoot', 'Combination play with overlapping fullback', 'Defensive pressing & tracking runs'],
-      p: ['Endurance for repeated wide runs: 4×6min', 'Speed over 30–40m: 6 runs with full rest', 'Agility turns at speed: T-drill 4×', 'Recovery capacity: 6×60m at 85% + walk back'],
-      ta: ['Maintaining width to stretch the defence', 'When to come inside vs. stay wide', 'Tracking back to help fullback defensively', 'Positioning during opposition transitions']
-    },
-    wing: {
-      t: ['1v1 dribbling circuits — beat & beat again', 'Crossing from byline and cut-back positions', 'Cutting inside to shoot — both feet', 'Quick combination & give-and-go sequences'],
-      p: ['Explosive speed: 6×30m sprint (full rest)', 'Repeated sprint: 10×20m (25s recovery)', 'Agility: L-drill and 5-10-5 shuttle (4×each)', 'Balance under pressure: 1v1 strength shielding'],
-      ta: ['Timing the run in behind the fullback', 'Recognising when to isolate vs. combine', 'Defensive press from the front on goal kicks', 'Positioning on set pieces — near post & second ball']
-    },
-    striker: {
-      t: ['Finishing circuit — volleys, headers, 1v1 vs. GK', 'Heading technique — attacking runs & flick-ons', 'Hold-up play & shielding — back-to-goal', 'One-touch finishing under pressure'],
-      p: ['Explosive power: squat jumps 4×8', 'Strength for hold-up: resistance duel training', 'Acceleration: 8×10m from standing start', 'Jumping & heading approach runs: 4×10'],
-      ta: ['Runs in behind — curved to stay onside', 'Timing with the passer — shoulder check habit', 'Link-up with midfielders — lay-off & move', 'Pressing from the front — angle and trigger']
-    }
-  };
-
-  const d = map[pos] || map.cm;
-  let { t, p, ta } = d;
-
-  if (['recovery','light'].includes(intensity)) {
-    t  = t.slice(0, 2).map(x => x + ' (low intensity)');
-    p  = p.slice(0, 2).map(x => x + ' (reduced volume)');
-    ta = ta.slice(0, 2).map(x => x + ' (walk-through / discussion)');
-  }
-
-  return { title: `${posName(pos)} — Position Drills`, description: `Key skills and attributes for your position, calibrated to ${intensity} intensity.`, technical: t, physical: p, tactical: ta, icon: '🎯' };
-}
-
-/* ══════════════════════════════════════════
-   DISPLAY PLAN
-══════════════════════════════════════════ */
-function displayPlan(plan) {
-  const s = plan.summary;
-
-  // Summary strip
-  const badgeClasses = { recovery:'pb-recovery', light:'pb-light', moderate:'pb-moderate', high:'pb-high' };
-  const painEntries = Object.entries(s.painAreas || {}).filter(([,v]) => v > 0);
-  const painHtml = painEntries.length
-    ? painEntries.map(([a,v]) => `<span style="color:#fca5a5">${areaLabel(a)}</span> <strong style="color:var(--ivory)">${v}/10</strong>`).join(' &nbsp;·&nbsp; ')
-    : '<span style="color:var(--muted)">None reported</span>';
-
-  document.getElementById('res-title').textContent = `${s.position} Training Plan`;
-  document.getElementById('res-meta').textContent  = `${s.intensity.charAt(0).toUpperCase() + s.intensity.slice(1)} Intensity · ${s.focus}`;
-
-  document.getElementById('res-sumstrip').innerHTML = `
-    <div class="sum-group">
-      <div class="sum-label">Position</div>
-      <div class="sum-value">${s.position}</div>
-    </div>
-    <div class="sum-group">
-      <div class="sum-label">Focus Areas</div>
-      <div class="sum-value italic">${s.focus}</div>
-    </div>
-    <div class="sum-group">
-      <div class="sum-label">Pain Areas</div>
-      <div class="sum-value" style="font-size:1rem">${painHtml}</div>
-    </div>
-    <div class="sum-group" style="text-align:right">
-      <div class="sum-label">Intensity</div>
-      <span class="ibadge ${badgeClasses[s.intensity]}">${s.intensity}</span>
-    </div>`;
-
-  // Training card
-  document.getElementById('card-training').innerHTML =
-    buildCard(plan.training.icon, plan.training.title, plan.training.description,
-      ['Warm-up', plan.training.warmup],
-      ['Main Session', plan.training.main],
-      ['Cool-down', plan.training.cooldown],
-      plan.training.duration);
-
-  // Recovery card
-  document.getElementById('card-recovery').innerHTML =
-    buildCard(plan.recovery.icon, plan.recovery.title, plan.recovery.description,
-      ['Immediate Post-Training', plan.recovery.immediate],
-      ['Same Day', plan.recovery.sameDay],
-      ['Next Day', plan.recovery.nextDay],
-      null,
-      ['Nutrition Focus', plan.recovery.nutrition]);
-
-  // Position drills
-  const dr = plan.positionDrills;
-  document.getElementById('card-position').innerHTML = `
-    <div class="card-head">
-      <div class="card-icon">${dr.icon}</div>
-      <div class="card-title">${dr.title}</div>
-    </div>
-    <div class="card-desc">${dr.description}</div>
-    <div class="drills-grid">
-      ${drillCol('Technical Drills', dr.technical)}
-      ${drillCol('Physical Focus', dr.physical)}
-      ${drillCol('Tactical Awareness', dr.tactical)}
-    </div>`;
-}
-
-function buildCard(icon, title, desc, ...sections) {
-  let html = `<div class="card-head"><div class="card-icon">${icon}</div><div class="card-title">${title}</div></div><div class="card-desc">${desc}</div>`;
-  sections.forEach(sec => {
-    if (!sec) return;
-    if (typeof sec[0] === 'string' && Array.isArray(sec[1])) {
-      html += `<div class="list-head">${sec[0]}</div><ul class="clist">` + sec[1].map(item =>
-        item.startsWith('---')
-          ? `<li class="special">${item.replace(/---/g,'').trim()}</li>`
-          : `<li>${item}</li>`
-      ).join('') + '</ul>';
-    }
-  });
+function buildCard(icon,title,desc,sections){
+  let html=`<div class="card-head"><div class="card-icon">${icon}</div><div class="card-title">${title}</div></div><div class="card-desc">${desc}</div>`;
+  sections.forEach(([lbl,items])=>{html+=`<div class="lhead">${lbl}</div><ul class="clist">${items.map(item=>item.startsWith('---')?`<li class="special">${item.replace(/---/g,'').trim()}</li>`:`<li>${item}</li>`).join('')}</ul>`;});
   return html;
 }
+function drillCol(heading,items){return`<div><div class="dcol-title">${heading}</div><ul class="clist">${items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`}
 
-function drillCol(heading, items) {
-  return `<div>
-    <div class="drills-col-title">${heading}</div>
-    <ul class="clist">${items.map(i => `<li>${i}</li>`).join('')}</ul>
-  </div>`;
+/* SAVED PLANS */
+function savePlan(){
+  const me=getMe();if(!me){openModal('modal-auth');toast('Sign in to save your plan','warn');return}
+  if(!lastPlan)return;
+  const us=getUsers();
+  us[me].plans=[{id:Date.now().toString(),date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),pos:lastPlan.summary.position,intensity:lastPlan.summary.intensity,focus:lastPlan.summary.focus,plan:lastPlan,painAreas:{...lastPlan.summary.painAreas}},...(us[me].plans||[])].slice(0,25);
+  saveUsers(us);renderPlans();toast('Plan saved!');
+}
+function deletePlan(id,ev){ev.stopPropagation();const me=getMe();if(!me)return;const us=getUsers();us[me].plans=(us[me].plans||[]).filter(p=>p.id!==id);saveUsers(us);renderPlans()}
+function loadPlan(p){lastPlan=p.plan;displayPlan(p.plan);document.getElementById('view-form').classList.add('hidden');document.getElementById('view-results').classList.remove('hidden');goTo('home')}
+function renderPlans(){
+  const me=getMe(),box=document.getElementById('plans-list');
+  if(!me){box.innerHTML='<p class="no-plans">Sign in to save plans</p>';return}
+  const plans=getUsers()[me]?.plans||[];
+  if(!plans.length){box.innerHTML='<p class="no-plans">No saved plans yet</p>';return}
+  box.innerHTML=plans.map(p=>`<div class="pc" onclick='loadPlan(${JSON.stringify(p).replace(/'/g,"&#39;")})'><button class="pc-del" onclick="deletePlan('${p.id}',event)">✕</button><div class="pc-title">${p.pos}</div><div class="pc-meta">${p.date}</div><span class="pb pb-${p.intensity}">${p.intensity}</span></div>`).join('')
 }
 
-/* ── INIT ── */
+/* ═══════════════════════════════════════════════════════════
+   SCHEDULE BUILDER
+═══════════════════════════════════════════════════════════ */
+let currentWeekStart=monOf(new Date());
+let addEventDate=null,addEventType='team';
+
+function changeWeek(dir){currentWeekStart=addD(currentWeekStart,dir*7);renderSchedule()}
+function renderSchedule(){
+  const days=[];for(let i=0;i<7;i++)days.push(addD(currentWeekStart,i));
+  const today=todayKey();
+  document.getElementById('sched-week-title').textContent='Weekly Schedule';
+  document.getElementById('sched-week-range').textContent=`${fmtDate(days[0],{month:'short',day:'numeric',timeZone:'UTC'})} – ${fmtDate(days[6],{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'})}`;
+  const me=getMe();const u=me?getUser():null;
+  const schedule=u?.schedule||{};
+  const pos=document.getElementById('f-pos').value||u?.position||'cm';
+  const improvements=u?.improvements||[];
+  const grid=document.getElementById('week-grid');
+  grid.innerHTML=days.map(d=>{
+    const dkey=dk(d);const isToday=dkey===today;const isPast=dkey<today;
+    const dayName=fmtDate(d,{weekday:'short',timeZone:'UTC'});const dayNum=fmtDate(d,{day:'numeric',timeZone:'UTC'});
+    const userEvs=(schedule[dkey]||[]);
+    const prescribed=getPrescribed(dkey,days,schedule,pos,improvements);
+    let evHtml=userEvs.map(ev=>`<div class="ev-card ${ev.type}${ev.logged?' logged':''}" onclick="openEvDetail('${dkey}','${ev.id}')"><div class="ev-title">${ev.type==='match'?'Match':'Team Training'}</div><div class="ev-sub">${ev.title}</div>${ev.type==='match'&&ev.mins?`<div class="ev-badge">${ev.mins} min played</div>`:`<div class="ev-badge">${ev.intensity}</div>`}${ev.logged?'<div class="ev-badge">✓ Logged</div>':isPast?'<div class="ev-badge" style="color:#fbbf24">Tap to log</div>':''}</div>`).join('');
+    if(!userEvs.length&&prescribed){evHtml+=`<div class="ev-card ${prescribed.type} prescribed" onclick="openPrescribedDetail('${dkey}')"><div class="ev-title">${prescribed.title}</div><div class="ev-sub">${prescribed.intensity} intensity</div>${isPast&&!prescribed.logged?'<div class="ev-badge" style="color:#fbbf24">Tap to log</div>':'<div class="ev-badge">Prescribed ✦</div>'}</div>`}
+    return`<div class="day-col${isToday?' today-col':''}"><div class="day-head"><div class="day-name">${dayName}</div><div class="day-num${isToday?' today-num':''}">${dayNum}</div></div>${evHtml}<button class="add-ev-btn" onclick="openAddEvent('${dkey}')">+ Add</button></div>`;
+  }).join('');
+}
+function getPrescribed(dkey,days,schedule,pos,improvements){
+  const prevKey=dk(addD(new Date(dkey+'T12:00:00Z'),-1));
+  const nextKey=dk(addD(new Date(dkey+'T12:00:00Z'),1));
+  const prev2Key=dk(addD(new Date(dkey+'T12:00:00Z'),-2));
+  const has=(k,type)=>(schedule[k]||[]).some(e=>e.type===type);
+  if(has(prevKey,'match')){
+    const drills=(SCHED_DRILLS[pos]||SCHED_DRILLS.cm).recovery;
+    return{type:'recovery',title:'Active Recovery',intensity:'recovery',drills,fromFeedback:improvements.length>0};
+  }
+  if(has(nextKey,'match')){
+    const drills=(SCHED_DRILLS[pos]||SCHED_DRILLS.cm).activation;
+    return{type:'individual',title:'Match Activation',intensity:'light',drills,fromFeedback:false};
+  }
+  if(has(prev2Key,'match')){
+    const drills=getSchedDrillsWithFeedback(pos,improvements,'moderate');
+    return{type:'individual',title:'Return to Training',intensity:'moderate',drills,fromFeedback:improvements.length>0};
+  }
+  // Regular day
+  const drills=getSchedDrillsWithFeedback(pos,improvements,'high');
+  return{type:'individual',title:'Individual Training',intensity:'high',drills,fromFeedback:improvements.length>0};
+}
+function getSchedDrillsWithFeedback(pos,improvements,intensity){
+  const base=(SCHED_DRILLS[pos]||SCHED_DRILLS.cm).individual.slice();
+  const extra=[];
+  improvements.slice(0,3).forEach(imp=>{if(WEAKNESS_DRILLS[imp])extra.push(...WEAKNESS_DRILLS[imp].slice(0,2))});
+  return extra.length?[...base,...extra]:base;
+}
+
+function openAddEvent(dkey){
+  if(!getMe()){openModal('modal-auth');return}
+  addEventDate=dkey;
+  document.getElementById('ae-date-display').textContent=fmtDate(new Date(dkey+'T12:00:00Z'),{weekday:'long',month:'long',day:'numeric'});
+  document.getElementById('ae-title').value='';
+  document.getElementById('ae-intensity').value='moderate';
+  document.getElementById('ae-mins').value='';
+  addEventType='team';
+  document.querySelectorAll('.ev-type-btn').forEach(b=>b.classList.remove('on'));
+  document.querySelector('.ev-type-btn.team').classList.add('on');
+  document.getElementById('ae-mins-wrap').classList.add('hidden');
+  openModal('modal-add-event');
+}
+function selectEvType(t,btn){
+  addEventType=t;
+  document.querySelectorAll('.ev-type-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('ae-mins-wrap').classList.toggle('hidden',t!=='match');
+}
+function saveEvent(){
+  if(!addEventDate)return;
+  const me=getMe();if(!me)return;
+  const title=document.getElementById('ae-title').value.trim()||( addEventType==='match'?'Match':'Team Training');
+  const intensity=document.getElementById('ae-intensity').value;
+  const mins=document.getElementById('ae-mins').value;
+  const us=getUsers();
+  if(!us[me].schedule)us[me].schedule={};
+  if(!us[me].schedule[addEventDate])us[me].schedule[addEventDate]=[];
+  us[me].schedule[addEventDate].push({id:Date.now().toString(),type:addEventType==='match'?'match':'team_training',title,intensity,mins:mins||null,logged:false,log:null});
+  saveUsers(us);closeModal('modal-add-event');renderSchedule();toast('Event added!');
+}
+
+let detailDateKey=null,detailEventId=null,detailIsPrescribed=false;
+let logStarRating=0,logImprovements=new Set();
+
+function openEvDetail(dkey,evId){
+  if(!getMe()){openModal('modal-auth');return}
+  detailDateKey=dkey;detailEventId=evId;detailIsPrescribed=false;
+  const us=getUsers(),me=getMe();
+  const ev=(us[me]?.schedule?.[dkey]||[]).find(e=>e.id===evId);
+  if(!ev)return;
+  const isPast=dkey<=todayKey();
+  const box=document.getElementById('med-content');
+  logStarRating=ev.log?.rating||0;logImprovements=new Set(ev.log?.improvements||[]);
+  if(ev.logged&&ev.log){
+    box.innerHTML=`<button class="mx" onclick="closeModal('modal-event-detail')">✕</button>
+    <div class="m-title">${ev.type==='match'?'🏟':'👥'} ${ev.title}</div>
+    <div class="m-date-badge">${fmtDate(new Date(dkey+'T12:00:00Z'),{weekday:'long',month:'long',day:'numeric'})} · ${ev.intensity}</div>
+    <div class="prescribed-note" style="background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.2);color:#a7f3d0">✓ Session Logged</div>
+    <div class="log-detail-row"><span class="log-detail-label">Rating</span><span class="log-detail-val">${'⭐'.repeat(ev.log.rating)}</span></div>
+    ${ev.type==='match'&&ev.log.minutesPlayed?`<div class="log-detail-row"><span class="log-detail-label">Minutes Played</span><span class="log-detail-val">${ev.log.minutesPlayed} min</span></div>`:''}
+    ${ev.log.wentWell?`<div class="log-detail-row" style="flex-direction:column;gap:.25rem;align-items:flex-start"><span class="log-detail-label">What Went Well</span><span class="log-detail-val">${ev.log.wentWell}</span></div>`:''}
+    ${ev.log.improvements?.length?`<div class="log-detail-row" style="flex-direction:column;gap:.35rem;align-items:flex-start"><span class="log-detail-label">Areas to Improve</span><div style="display:flex;flex-wrap:wrap;gap:.4rem">${ev.log.improvements.map(i=>{const a=SKILL_AREAS.find(s=>s.id===i);return`<span class="ptag">${a?.icon||''} ${a?.label||i}</span>`}).join('')}</div></div>`:''}
+    ${ev.log.notes?`<div class="log-detail-row" style="flex-direction:column;gap:.25rem;align-items:flex-start"><span class="log-detail-label">Notes</span><span class="log-detail-val">${ev.log.notes}</span></div>`:''}
+    <button class="m-btn m-btn-sec" onclick="reopenLog()">Edit Log</button>`;
+  } else if(isPast){
+    renderLogForm(box,ev,dkey);
+  } else {
+    // Future — show what the session includes
+    box.innerHTML=`<button class="mx" onclick="closeModal('modal-event-detail')">✕</button>
+    <div class="m-title">${ev.type==='match'?'🏟':'👥'} ${ev.title}</div>
+    <div class="m-date-badge">${fmtDate(new Date(dkey+'T12:00:00Z'),{weekday:'long',month:'long',day:'numeric'})} · ${ev.intensity}</div>
+    <div class="prescribed-note">📅 Upcoming ${ev.type==='match'?'Match':'Team Training'}</div>
+    ${ev.type==='match'?`<p style="color:var(--mut2);font-size:.95rem">Log your minutes played and performance notes after the match.</p>`:`<p style="color:var(--mut2);font-size:.95rem">Attend team training and log your session afterwards.</p>`}`;
+  }
+  openModal('modal-event-detail');
+}
+function reopenLog(){
+  const us=getUsers(),me=getMe();
+  const ev=(us[me]?.schedule?.[detailDateKey]||[]).find(e=>e.id===detailEventId);
+  if(!ev)return;
+  logStarRating=ev.log?.rating||0;logImprovements=new Set(ev.log?.improvements||[]);
+  renderLogForm(document.getElementById('med-content'),ev,detailDateKey);
+}
+function renderLogForm(box,ev,dkey){
+  const starsHtml=[1,2,3,4,5].map(n=>`<span class="star${logStarRating>=n?' on':''}" onclick="setStar(${n})">⭐</span>`).join('');
+  const tagsHtml=SKILL_AREAS.map(s=>`<button class="m-tag${logImprovements.has(s.id)?' on':''}" onclick="toggleLogImp('${s.id}',this)">${s.icon} ${s.label}</button>`).join('');
+  box.innerHTML=`<button class="mx" onclick="closeModal('modal-event-detail')">✕</button>
+  <div class="m-title">Log Session</div>
+  <div class="m-date-badge">${ev.title} · ${fmtDate(new Date(dkey+'T12:00:00Z'),{month:'short',day:'numeric'})}</div>
+  <div class="mf"><label>Session Rating</label><div class="stars" id="log-stars">${starsHtml}</div></div>
+  ${ev.type==='match'?`<div class="mf"><label>Minutes Played</label><input class="mi" id="log-mins" type="number" min="0" max="120" placeholder="e.g. 90" value="${ev.log?.minutesPlayed||''}"/></div>`:''}
+  <div class="mf"><label>What went well?</label><textarea class="mi" id="log-well" rows="2" placeholder="Describe your best moments…">${ev.log?.wentWell||''}</textarea></div>
+  <div class="mf"><label>Areas to Improve (select all that apply)</label><div class="m-tag-grid" id="log-imp-tags">${tagsHtml}</div></div>
+  <div class="mf"><label>Additional Notes</label><textarea class="mi" id="log-notes" rows="2" placeholder="Anything else to remember…">${ev.log?.notes||''}</textarea></div>
+  <button class="m-btn" onclick="saveSessionLog()">Save Log</button>`;
+}
+function setStar(n){logStarRating=n;document.querySelectorAll('#log-stars .star').forEach((s,i)=>s.classList.toggle('on',i<n))}
+function toggleLogImp(id,btn){if(logImprovements.has(id)){logImprovements.delete(id);btn.classList.remove('on')}else{logImprovements.add(id);btn.classList.add('on')}}
+function saveSessionLog(){
+  const me=getMe();if(!me)return;
+  const us=getUsers();const evArr=us[me].schedule?.[detailDateKey]||[];
+  const idx=evArr.findIndex(e=>e.id===detailEventId);if(idx===-1)return;
+  const mins=document.getElementById('log-mins')?.value;
+  const log={rating:logStarRating,wentWell:document.getElementById('log-well')?.value||'',improvements:[...logImprovements],notes:document.getElementById('log-notes')?.value||'',minutesPlayed:mins||null,loggedAt:new Date().toISOString()};
+  evArr[idx].logged=true;evArr[idx].log=log;if(mins)evArr[idx].mins=mins;
+  // Merge improvements into user profile
+  const existingImps=us[me].improvements||[];
+  const merged=[...new Set([...[...logImprovements],...existingImps])].slice(0,10);
+  us[me].improvements=merged;
+  saveUsers(us);closeModal('modal-event-detail');renderSchedule();bumpStreak();toast('Session logged!');
+}
+
+function openPrescribedDetail(dkey){
+  if(!getMe()){openModal('modal-auth');return}
+  detailDateKey=dkey;detailIsPrescribed=true;
+  const me=getMe(),u=getUser();
+  const pos=document.getElementById('f-pos').value||u?.position||'cm';
+  const improvements=u?.improvements||[];
+  const days=[];for(let i=0;i<7;i++)days.push(addD(currentWeekStart,i));
+  const schedule=u?.schedule||{};
+  const prescribed=getPrescribed(dkey,days,schedule,pos,improvements);
+  if(!prescribed)return;
+  const isPast=dkey<todayKey();
+  const fbNote=prescribed.fromFeedback&&improvements.length?`<div class="prescribed-note feedback-note">📝 Based on your feedback: working on ${improvements.slice(0,3).map(i=>SKILL_AREAS.find(a=>a.id===i)?.label||i).join(', ')}</div>`:'';
+  const box=document.getElementById('med-content');
+  logStarRating=0;logImprovements=new Set();
+  if(isPast){
+    // Show log form for prescribed
+    const starsHtml=[1,2,3,4,5].map(n=>`<span class="star" onclick="setStar(${n})">⭐</span>`).join('');
+    const tagsHtml=SKILL_AREAS.map(s=>`<button class="m-tag" onclick="toggleLogImp('${s.id}',this)">${s.icon} ${s.label}</button>`).join('');
+    box.innerHTML=`<button class="mx" onclick="closeModal('modal-event-detail')">✕</button>
+    <div class="m-title">${prescribed.title}</div>
+    <div class="m-date-badge">${fmtDate(new Date(dkey+'T12:00:00Z'),{weekday:'long',month:'long',day:'numeric'})} · ${prescribed.intensity}</div>
+    ${fbNote}
+    <div class="m-section-title">Prescribed Drills</div>
+    <ul class="clist" style="margin-bottom:1.5rem">${prescribed.drills.slice(0,5).map(d=>`<li>${d}</li>`).join('')}</ul>
+    <div class="m-section-title">Log This Session</div>
+    <div class="mf"><label>Session Rating</label><div class="stars" id="log-stars">${starsHtml}</div></div>
+    <div class="mf"><label>Areas to Improve</label><div class="m-tag-grid">${tagsHtml}</div></div>
+    <div class="mf"><label>Notes</label><textarea class="mi" id="log-notes" rows="2" placeholder="What to focus on next time…"></textarea></div>
+    <button class="m-btn" onclick="savePrescribedLog('${dkey}')">Save Log</button>`;
+  } else {
+    box.innerHTML=`<button class="mx" onclick="closeModal('modal-event-detail')">✕</button>
+    <div class="m-title">${prescribed.title}</div>
+    <div class="m-date-badge">${fmtDate(new Date(dkey+'T12:00:00Z'),{weekday:'long',month:'long',day:'numeric'})} · ${prescribed.intensity}</div>
+    ${fbNote}
+    <div class="prescribed-note">✦ Prescribed Session — recommended for this day</div>
+    <div class="m-section-title">Today's Drills</div>
+    <ul class="clist">${prescribed.drills.map(d=>`<li>${d}</li>`).join('')}</ul>`;
+  }
+  openModal('modal-event-detail');
+}
+function savePrescribedLog(dkey){
+  const me=getMe();if(!me)return;
+  const us=getUsers();
+  // Store as a prescribed log
+  if(!us[me].prescribedLogs)us[me].prescribedLogs={};
+  us[me].prescribedLogs[dkey]={rating:logStarRating,improvements:[...logImprovements],notes:document.getElementById('log-notes')?.value||'',loggedAt:new Date().toISOString()};
+  const existingImps=us[me].improvements||[];
+  const merged=[...new Set([[...logImprovements],...existingImps].flat())].slice(0,10);
+  us[me].improvements=merged;
+  saveUsers(us);closeModal('modal-event-detail');renderSchedule();bumpStreak();toast('Session logged!');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MATCH DAY
+═══════════════════════════════════════════════════════════ */
+function renderMatchDay(){
+  const checked=getMdChecked();
+  const allItems=Object.values(MD_CHECKLIST).flat();
+  const doneCount=allItems.filter(i=>checked[i.id]).length;
+  document.getElementById('md-prog-num').textContent=doneCount;
+  document.getElementById('md-prog-total').textContent=allItems.length;
+  document.getElementById('md-prog-bar').style.width=`${Math.round(doneCount/allItems.length*100)}%`;
+  const box=document.getElementById('md-sections');
+  box.innerHTML=Object.entries(MD_CHECKLIST).map(([timeLabel,items])=>`
+    <div class="matchday-time">
+      <div class="md-time-head"><span class="md-time-badge">${timeLabel}</span><div class="md-time-line"></div></div>
+      <div class="md-items">${items.map(item=>`<div class="md-item${checked[item.id]?' checked':''}" onclick="toggleMd('${item.id}')">
+        <div class="md-cb"><span class="md-cb-check">✓</span></div>
+        <div class="md-text">${item.text}</div>
+      </div>`).join('')}</div>
+    </div>`).join('');
+}
+function toggleMd(id){const c=getMdChecked();c[id]=!c[id];saveMdChecked(c);renderMatchDay()}
+function resetChecklist(){saveMdChecked({});renderMatchDay();toast('Checklist reset!')}
+
+/* ═══════════════════════════════════════════════════════════
+   HISTORY
+═══════════════════════════════════════════════════════════ */
+function renderHistory(){
+  const me=getMe(),box=document.getElementById('history-body');
+  if(!me){box.innerHTML='<div class="history-empty">Sign in to view your training history</div>';return}
+  const plans=(getUsers()[me]?.plans||[]);
+  if(!plans.length){box.innerHTML='<div class="history-empty">No saved plans yet — generate and save a plan to see it here</div>';return}
+  // Group by month
+  const byMonth={};
+  plans.forEach(p=>{
+    const mo=p.date.split(' ').slice(0,2).join(' ')||'This Month';
+    if(!byMonth[mo])byMonth[mo]=[];
+    byMonth[mo].push(p);
+  });
+  const bClass={recovery:'pb-recovery',light:'pb-light',moderate:'pb-moderate',high:'pb-high'};
+  box.innerHTML=Object.entries(byMonth).map(([mo,ps])=>`
+    <div class="hist-month">
+      <div class="hist-month-label">${mo}</div>
+      ${ps.map(p=>`<div class="hist-item" onclick="toggleHistDetail('${p.id}')">
+        <div class="hist-line"><div class="hist-dot"></div><div class="hist-vline"></div></div>
+        <div style="flex:1">
+          <div class="hist-card">
+            <div class="hist-top"><div class="hist-pos">${p.pos}</div><div class="hist-date">${p.date}</div></div>
+            <div class="hist-focus" style="color:var(--mut2)">${p.focus||''}</div>
+            <div class="hist-bottom"><span class="pb ${bClass[p.intensity]}">${p.intensity}</span>${Object.entries(p.painAreas||{}).filter(([,v])=>v>0).length?`<span class="hist-pain">Pain areas: ${Object.entries(p.painAreas).filter(([,v])=>v>0).map(([a])=>document.querySelector(`[data-area="${a}"]`)?.dataset.label||a).slice(0,3).join(', ')}</span>`:''}</div>
+            <div class="hist-detail" id="hd-${p.id}">
+              <div style="display:flex;gap:1rem;flex-wrap:wrap">
+                <div><div style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem">Warm-up</div><ul class="clist">${(p.plan?.training?.warmup||[]).map(i=>`<li>${i}</li>`).join('')}</ul></div>
+                <div><div style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem">Main Session</div><ul class="clist">${(p.plan?.training?.main||[]).slice(0,5).map(i=>i.startsWith('---')?`<li class="special">${i.replace(/---/g,'').trim()}</li>`:`<li>${i}</li>`).join('')}</ul></div>
+              </div>
+              <button class="rbtn rb-back" style="margin-top:1rem" onclick="loadAndView('${p.id}',event)">View Full Plan →</button>
+            </div>
+          </div>
+        </div>
+      </div>`).join('')}
+    </div>`).join('');
+}
+function toggleHistDetail(id){const el=document.getElementById('hd-'+id);el?.classList.toggle('open')}
+function loadAndView(id,ev){ev.stopPropagation();const me=getMe();if(!me)return;const p=(getUsers()[me]?.plans||[]).find(p=>p.id===id);if(p)loadPlan(p)}
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE + MISC
+═══════════════════════════════════════════════════════════ */
+document.getElementById('mob-tog')?.addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
+if(window.innerWidth<=860)document.getElementById('mob-tog').classList.remove('hidden');
+
+/* ═══════════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════════ */
 renderAuth();
+renderStreak();
+renderStreakBanner();
 renderPlans();
+renderSkillGrid();
+goTo('home');
+document.getElementById('s-plans').style.display='';
 </script>
 </body>
 </html>
