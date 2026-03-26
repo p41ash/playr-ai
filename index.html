@@ -233,6 +233,10 @@ ul.clist li.feedback-item::before{color:var(--blue)}
 .ev-card.recovery{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.25);color:#a7f3d0}
 .ev-card.prescribed{border-style:dashed;opacity:.8}
 .ev-card.logged::after{content:'✓';position:absolute;top:.3rem;right:.4rem;font-size:.65rem;opacity:.7}
+.ev-del-btn{position:absolute;top:.3rem;right:.35rem;background:none;border:none;color:currentColor;cursor:pointer;font-size:.75rem;opacity:0;transition:opacity .15s,transform .15s;line-height:1;padding:2px 4px;border-radius:4px;z-index:2}
+.ev-card:hover .ev-del-btn{opacity:.55}
+.ev-del-btn:hover{opacity:1!important;transform:scale(1.2)}
+.ev-card.logged .ev-del-btn{top:.3rem;right:1.1rem}
 .ev-title{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:1px;text-transform:uppercase;font-weight:400;margin-bottom:.15rem}
 .ev-sub{font-size:.78rem;opacity:.8}
 .ev-badge{font-size:.6rem;font-family:'DM Mono',monospace;opacity:.7;margin-top:.15rem}
@@ -241,6 +245,48 @@ ul.clist li.feedback-item::before{color:var(--blue)}
 .sched-legend{display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bdr2)}
 .leg-item{display:flex;align-items:center;gap:.45rem;font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:1px;color:var(--muted)}
 .leg-dot{width:10px;height:10px;border-radius:3px}
+
+/* LOAD INDICATOR */
+.load-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.load-card{border-radius:14px;padding:1.25rem 1.5rem;border:1px solid var(--bdr2);background:var(--obs3)}
+.load-card.green{background:rgba(16,185,129,.07);border-color:rgba(16,185,129,.25)}
+.load-card.amber{background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.25)}
+.load-card.red{background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.25)}
+.load-card.blue{background:rgba(96,165,250,.07);border-color:rgba(96,165,250,.2)}
+.load-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.65rem}
+.load-light{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+.load-light.green{background:#10b981;box-shadow:0 0 8px rgba(16,185,129,.5)}
+.load-light.amber{background:#fbbf24;box-shadow:0 0 8px rgba(251,191,36,.5)}
+.load-light.red{background:#ef4444;box-shadow:0 0 8px rgba(239,68,68,.5)}
+.load-light.blue{background:#60a5fa;box-shadow:0 0 8px rgba(96,165,250,.4)}
+.load-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700}
+.load-title.green{color:#6ee7b7}.load-title.amber{color:#fde68a}.load-title.red{color:#fca5a5}.load-title.blue{color:#bfdbfe}
+.load-sub{font-size:.9rem;color:var(--mut2);line-height:1.6}
+.load-bar-wrap{height:5px;background:var(--obs4);border-radius:3px;margin-top:.75rem;overflow:hidden}
+.load-bar{height:100%;border-radius:3px;transition:width .5s ease}
+.load-bar.green{background:#10b981}.load-bar.amber{background:#fbbf24}.load-bar.red{background:#ef4444}.load-bar.blue{background:#60a5fa}
+.load-score{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);margin-top:.3rem;letter-spacing:1px}
+
+/* INJURY FLAGS */
+.inj-flags{margin-bottom:1.5rem}
+.inj-flag{display:flex;align-items:flex-start;gap:.85rem;padding:1rem 1.25rem;border-radius:12px;border:1px solid rgba(239,68,68,.25);background:rgba(239,68,68,.06);margin-bottom:.6rem;animation:fadeIn .3s ease}
+.inj-flag.amber{border-color:rgba(251,191,36,.25);background:rgba(251,191,36,.06)}
+.inj-flag-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px}
+.inj-flag-body{flex:1}
+.inj-flag-title{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:#fca5a5;margin-bottom:.25rem}
+.inj-flag.amber .inj-flag-title{color:#fde68a}
+.inj-flag-text{font-size:.92rem;color:var(--mut2);line-height:1.65}
+
+/* MATCH STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:.35rem}
+.stat-input-wrap{display:flex;flex-direction:column;gap:.3rem}
+.stat-label{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.stat-input{width:100%;padding:.55rem .7rem;background:var(--obs4);border:1px solid var(--bdr2);border-radius:8px;color:var(--ivory);font-family:'Crimson Pro',serif;font-size:1rem;text-align:center;transition:border-color .2s}
+.stat-input:focus{outline:none;border-color:var(--gold);background:var(--obs3)}
+.stat-display-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.35rem}
+.stat-display-item{background:var(--obs4);border-radius:8px;padding:.6rem .5rem;text-align:center}
+.stat-display-val{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--gold2);line-height:1}
+.stat-display-lbl{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:.2rem}
 
 /* ── MATCH DAY PAGE ── */
 .matchday-time{margin-bottom:2rem}
@@ -638,6 +684,8 @@ textarea.mi{resize:vertical;min-height:70px;line-height:1.65}
         <button class="wk-btn" onclick="changeWeek(1)">Next →</button>
       </div>
     </div>
+    <div id="load-indicator-row" class="load-row"></div>
+    <div id="injury-flags-wrap" class="inj-flags"></div>
     <div class="week-grid" id="week-grid"></div>
     <div class="sched-legend">
       <div class="leg-item"><div class="leg-dot" style="background:rgba(249,115,22,.6)"></div>Match</div>
@@ -724,9 +772,9 @@ const FITNESS_BLOCKS={
   agility:{light:['Ladder footwork — 4×each pattern','Cone change-of-direction: T-drill and 5-10-5 — 4 each','Ball agility: dribble through gates changing direction — 10 min'],moderate:['Reactive agility: partner signals direction, respond and sprint — 3×8','Multi-directional circuits: 5-cone star drill — 4×each direction','Sport-specific agility: mimic game movements at pace — 15 min'],intense:['Chaos drill: random signal changes at max speed — 4×45s','Reactive 1v1: shadow opponent at max intensity — 4×30s','Competition agility circuit: race partner through patterns — 5×']}
 };
 const MD_CHECKLIST={
-  'Night Before':[{id:'nb1',text:'Lay out your full kit — boots, shin guards, socks, water bottle, tape'},{id:'nb2',text:'Eat a carbohydrate-rich dinner (pasta, rice, or potatoes with lean protein)'},{id:'nb3',text:'Hydrate well — drink 500ml extra water before bed'},{id:'nb4',text:'Get 8–9 hours of sleep — it is the most important recovery tool'},{id:'nb5',text:'Set your alarm — leave time for a proper pre-match meal'},{id:'nb6',text:'Visualise your role in the game: key runs, defensive duties, set pieces'}],
+  'Night Before':[{id:'nb2',text:'Eat a carbohydrate-rich dinner (pasta, rice, or potatoes with lean protein)'},{id:'nb3',text:'Hydrate well — drink 500ml extra water before bed'},{id:'nb4',text:'Get 8–9 hours of sleep — it is the most important recovery tool'},{id:'nb5',text:'Set your alarm — leave time for a proper pre-match meal'},{id:'nb6',text:'Visualise your role in the game: key runs, defensive duties, set pieces'}],
   '3 Hours Before':[{id:'3h1',text:'Eat your main pre-match meal (high carbs, moderate protein, low fat and fibre)'},{id:'3h2',text:'Drink 500ml of water with your meal'},{id:'3h3',text:'Avoid fried foods, high-fat meals, and excessive dairy'},{id:'3h4',text:'Example meal: pasta with chicken, rice with fish, or toast with scrambled eggs'}],
-  '90 Minutes Before':[{id:'90m1',text:'Arrive at the venue — inspect the pitch surface and conditions'},{id:'90m2',text:'Sip water steadily — 150–200ml every 20 minutes'},{id:'90m3',text:'Light snack if needed: banana, energy bar, or fruit'},{id:'90m4',text:'Begin mental preparation — focus on your game plan and key moments'},{id:'90m5',text:'Kit check: boots tied correctly, shin guards fitted, jersey ready'}],
+  '90 Minutes Before':[{id:'90m2',text:'Sip water steadily — 150–200ml every 20 minutes'},{id:'90m3',text:'Light snack if needed: banana, energy bar, or fruit'},{id:'90m4',text:'Begin mental preparation — focus on your game plan and key moments'}],
   '45 Minutes Before':[{id:'45m1',text:'Start dynamic warm-up: 5 min light jog with progressive intensity'},{id:'45m2',text:'Dynamic stretches: leg swings, hip circles, high knees, butt kicks — 5 min'},{id:'45m3',text:'Passing drills and ball work — short and medium range — 10 min'},{id:'45m4',text:'Position-specific activation: volleys, headers, or shooting warm-up — 5 min'},{id:'45m5',text:'Speed activation: 4–6 short sharp sprints at 80–90% max effort'},{id:'45m6',text:'Review set pieces and tactical instructions with teammates'}],
   'Kickoff':[{id:'ko1',text:'Last sip of water before entering the pitch'},{id:'ko2',text:'Focus on your first 5 minutes — communicate and set the tempo early'},{id:'ko3',text:'Stay vocal and connected with your teammates throughout'},{id:'ko4',text:'Trust your preparation — commit to the game plan'}],
   'Halftime':[{id:'ht1',text:'Rehydrate immediately — 250–400ml water or electrolyte drink'},{id:'ht2',text:'Quick carb top-up if needed: banana, gel, or orange slices'},{id:'ht3',text:'Light movement to prevent muscles from stiffening — short jog or dynamic stretches'},{id:'ht4',text:'Listen carefully to tactical adjustments from your coach'},{id:'ht5',text:'Address any minor niggles — retape, adjust boots or shin guards'}],
@@ -1064,13 +1112,15 @@ function renderSchedule(){
   const schedule=u?.schedule||{};
   const pos=document.getElementById('f-pos').value||u?.position||'cm';
   const improvements=u?.improvements||[];
+  renderLoadIndicator(days,schedule);
+  renderInjuryFlags(schedule,u);
   const grid=document.getElementById('week-grid');
   grid.innerHTML=days.map(d=>{
     const dkey=dk(d);const isToday=dkey===today;const isPast=dkey<today;
     const dayName=fmtDate(d,{weekday:'short',timeZone:'UTC'});const dayNum=fmtDate(d,{day:'numeric',timeZone:'UTC'});
     const userEvs=(schedule[dkey]||[]);
     const prescribed=getPrescribed(dkey,days,schedule,pos,improvements);
-    let evHtml=userEvs.map(ev=>`<div class="ev-card ${ev.type}${ev.logged?' logged':''}" onclick="openEvDetail('${dkey}','${ev.id}')"><div class="ev-title">${ev.type==='match'?'Match':'Team Training'}</div><div class="ev-sub">${ev.title}</div>${ev.type==='match'&&ev.mins?`<div class="ev-badge">${ev.mins} min played</div>`:`<div class="ev-badge">${ev.intensity}</div>`}${ev.logged?'<div class="ev-badge">✓ Logged</div>':isPast?'<div class="ev-badge" style="color:#fbbf24">Tap to log</div>':''}</div>`).join('');
+    let evHtml=userEvs.map(ev=>`<div class="ev-card ${ev.type}${ev.logged?' logged':''}" onclick="openEvDetail('${dkey}','${ev.id}')"><button class="ev-del-btn" onclick="deleteEvent('${dkey}','${ev.id}',event)" title="Delete">✕</button><div class="ev-title">${ev.type==='match'?'Match':'Team Training'}</div><div class="ev-sub">${ev.title}</div>${ev.type==='match'&&ev.mins?`<div class="ev-badge">${ev.mins} min played</div>`:`<div class="ev-badge">${ev.intensity}</div>`}${ev.logged?'<div class="ev-badge">✓ Logged</div>':isPast?'<div class="ev-badge" style="color:#fbbf24">Tap to log</div>':''}</div>`).join('');
     if(!userEvs.length&&prescribed){evHtml+=`<div class="ev-card ${prescribed.type} prescribed" onclick="openPrescribedDetail('${dkey}')"><div class="ev-title">${prescribed.title}</div><div class="ev-sub">${prescribed.intensity} intensity</div>${isPast&&!prescribed.logged?'<div class="ev-badge" style="color:#fbbf24">Tap to log</div>':'<div class="ev-badge">Prescribed ✦</div>'}</div>`}
     return`<div class="day-col${isToday?' today-col':''}"><div class="day-head"><div class="day-name">${dayName}</div><div class="day-num${isToday?' today-num':''}">${dayNum}</div></div>${evHtml}<button class="add-ev-btn" onclick="openAddEvent('${dkey}')">+ Add</button></div>`;
   }).join('');
@@ -1101,6 +1151,123 @@ function getSchedDrillsWithFeedback(pos,improvements,intensity){
   const extra=[];
   improvements.slice(0,3).forEach(imp=>{if(WEAKNESS_DRILLS[imp])extra.push(...WEAKNESS_DRILLS[imp].slice(0,2))});
   return extra.length?[...base,...extra]:base;
+}
+
+/* ── LOAD MANAGEMENT INDICATOR ── */
+function calcWeekLoad(days,schedule){
+  const scoreMap={recovery:.5,light:1,moderate:2,high:3};
+  let totalScore=0,sessionCount=0,matchCount=0,highCount=0,consecHigh=0,maxConsec=0,prev='';
+  days.forEach(d=>{
+    const dkey=dk(d);
+    const evs=schedule[dkey]||[];
+    evs.forEach(ev=>{
+      sessionCount++;
+      const base=ev.type==='match'?3:(scoreMap[ev.intensity]||2);
+      totalScore+=base;
+      if(ev.type==='match')matchCount++;
+      if(ev.intensity==='high'||ev.type==='match')highCount++;
+      if(ev.intensity==='high'||ev.type==='match'){consecHigh++;maxConsec=Math.max(maxConsec,consecHigh)}else consecHigh=0;
+    });
+    // also count prescribed (non-user) sessions for load
+    if(!evs.length){totalScore+=1.5;sessionCount++;} // prescribed individual training
+  });
+  return{totalScore,sessionCount,matchCount,highCount,maxConsec};
+}
+function renderLoadIndicator(days,schedule){
+  const box=document.getElementById('load-indicator-row');
+  if(!getMe()){box.innerHTML='';return}
+  const {totalScore,sessionCount,matchCount,highCount,maxConsec}=calcWeekLoad(days,schedule);
+  const maxScore=21; // 7 days × 3 max
+  const pct=Math.min(100,Math.round(totalScore/maxScore*100));
+  // Determine status
+  let color,label,advice;
+  if(sessionCount===0){
+    color='blue';label='No Sessions Yet';advice='Add your team trainings and matches to get a load assessment for this week.';
+  } else if(totalScore<=5){
+    color='blue';label='Under-Loaded';advice='Your training volume this week is lower than optimal. Consider adding an individual session to build match readiness.';
+  } else if(totalScore<=10&&maxConsec<3){
+    color='green';label='Optimal Load';advice='Your training load this week is well-balanced. You\'re in the ideal zone for performance and adaptation.';
+  } else if(totalScore<=15||maxConsec===2){
+    color='amber';label='Moderate Risk';advice='Load is building up. Ensure at least one full recovery session before your next match. Monitor fatigue closely.';
+  } else {
+    color='red';label='High Risk — Overload';advice='Training volume is very high. Reduce intensity on at least 2 days to avoid injury and burnout. Prioritise sleep and nutrition.';
+  }
+  // Consecutive high days flag
+  const consecNote=maxConsec>=3?`<div class="load-score" style="color:#fca5a5;margin-top:.5rem">⚠ ${maxConsec} consecutive high-intensity days detected</div>`:'';
+  // Match load note
+  const matchNote=matchCount>=2?`<div class="load-score" style="color:#fde68a;margin-top:.35rem">⚠ ${matchCount} matches this week — prioritise recovery between games</div>`:'';
+
+  box.innerHTML=`
+    <div class="load-card ${color}">
+      <div class="load-header">
+        <div class="load-light ${color}"></div>
+        <div class="load-title ${color}">${label}</div>
+      </div>
+      <div class="load-sub">${advice}</div>
+      <div class="load-bar-wrap"><div class="load-bar ${color}" style="width:${pct}%"></div></div>
+      <div class="load-score">Weekly load score: ${totalScore.toFixed(1)} / ${maxScore} · ${sessionCount} session${sessionCount!==1?'s':''} · ${matchCount} match${matchCount!==1?'es':''}</div>
+      ${consecNote}${matchNote}
+    </div>
+    <div class="load-card" style="background:var(--obs3);border-color:var(--bdr2)">
+      <div class="load-header" style="margin-bottom:.5rem">
+        <div style="font-size:1.1rem">📊</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--ivory)">This Week at a Glance</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+        <div class="stat-display-item"><div class="stat-display-val">${sessionCount}</div><div class="stat-display-lbl">Sessions</div></div>
+        <div class="stat-display-item"><div class="stat-display-val">${matchCount}</div><div class="stat-display-lbl">Matches</div></div>
+        <div class="stat-display-item"><div class="stat-display-val">${highCount}</div><div class="stat-display-lbl">High Intensity</div></div>
+        <div class="stat-display-item"><div class="stat-display-val">${maxConsec}</div><div class="stat-display-lbl">Max Consec.</div></div>
+      </div>
+    </div>`;
+}
+
+/* ── INJURY PREVENTION FLAGS ── */
+function renderInjuryFlags(schedule,user){
+  const box=document.getElementById('injury-flags-wrap');
+  if(!user){box.innerHTML='';return}
+  const flags=[];
+  // Scan pain logs from saved plans
+  const plans=user.plans||[];
+  const painCounter={};
+  plans.forEach(p=>{
+    const areas=p.painAreas||{};
+    Object.entries(areas).forEach(([area,sev])=>{
+      if(sev>3){if(!painCounter[area])painCounter[area]={count:0,maxSev:0};painCounter[area].count++;painCounter[area].maxSev=Math.max(painCounter[area].maxSev,sev);}
+    });
+  });
+  Object.entries(painCounter).forEach(([area,data])=>{
+    if(data.count>=2){
+      const lbl=document.querySelector(`[data-area="${area}"]`)?.dataset.label||area;
+      const severity=data.maxSev>=7?'red':'amber';
+      flags.push({severity,icon:'🚨',title:`Recurring ${lbl} Pain Detected`,text:`You've logged pain in your ${lbl} across ${data.count} training sessions (peak severity ${data.maxSev}/10). ${data.maxSev>=7?'This level of recurring pain warrants a rest day and evaluation from a physio or sports doctor before your next session.':'Consider reducing load on this area and monitoring closely over the next 48 hours.'}`});
+    }
+  });
+  // Scan schedule for back-to-back high/match days
+  const allDkeys=Object.keys(schedule).sort();
+  allDkeys.forEach((dkey,i)=>{
+    if(i===0)return;
+    const prev=allDkeys[i-1];
+    const prevDate=new Date(prev+'T12:00:00Z');const currDate=new Date(dkey+'T12:00:00Z');
+    const diffDays=(currDate-prevDate)/(1000*60*60*24);
+    if(diffDays>1)return;
+    const prevEvs=schedule[prev]||[];const currEvs=schedule[dkey]||[];
+    const prevHasMatch=prevEvs.some(e=>e.type==='match');
+    const currHasHigh=currEvs.some(e=>e.intensity==='high'||e.type==='match');
+    if(prevHasMatch&&currHasHigh){
+      flags.push({severity:'red',icon:'⚡',title:'High Load After Match',text:`You have a high-intensity session scheduled the day after a match (${fmtDate(new Date(prev+'T12:00:00Z'),{month:'short',day:'numeric'})}). This significantly increases injury risk. Replace with an active recovery session or reduce intensity to light.`});
+    }
+  });
+  // Improvement area repeating = possible physical pattern
+  const imps=user.improvements||[];
+  const physicalImps=['pace','stamina','strength','aerialDuels'];
+  const physMatch=imps.filter(i=>physicalImps.includes(i));
+  if(physMatch.length>=2){
+    const names=physMatch.map(i=>SKILL_AREAS.find(a=>a.id===i)?.label||i).join(' & ');
+    flags.push({severity:'amber',icon:'📋',title:'Physical Development Pattern',text:`You've consistently flagged ${names} as areas to improve across multiple sessions. Consider a dedicated physical conditioning block and speak to your coach about a structured programme.`});
+  }
+  if(!flags.length){box.innerHTML='';return}
+  box.innerHTML=flags.map(f=>`<div class="inj-flag ${f.severity==='amber'?'amber':''}"><div class="inj-flag-icon">${f.icon}</div><div class="inj-flag-body"><div class="inj-flag-title">${f.title}</div><div class="inj-flag-text">${f.text}</div></div></div>`).join('');
 }
 
 function openAddEvent(dkey){
@@ -1136,6 +1303,16 @@ function saveEvent(){
 }
 
 let detailDateKey=null,detailEventId=null,detailIsPrescribed=false;
+
+function deleteEvent(dkey,evId,e){
+  e.stopPropagation();
+  const me=getMe();if(!me)return;
+  const us=getUsers();
+  if(!us[me].schedule?.[dkey])return;
+  us[me].schedule[dkey]=(us[me].schedule[dkey]||[]).filter(ev=>ev.id!==evId);
+  if(us[me].schedule[dkey].length===0)delete us[me].schedule[dkey];
+  saveUsers(us);renderSchedule();toast('Event removed.');
+}
 let logStarRating=0,logImprovements=new Set();
 
 function openEvDetail(dkey,evId){
@@ -1148,12 +1325,25 @@ function openEvDetail(dkey,evId){
   const box=document.getElementById('med-content');
   logStarRating=ev.log?.rating||0;logImprovements=new Set(ev.log?.improvements||[]);
   if(ev.logged&&ev.log){
+    const ms=ev.log.matchStats;
+    const matchStatsDisplay=ev.type==='match'&&ms?`
+      <div class="m-section-title" style="margin-top:1rem">Match Statistics</div>
+      <div class="stat-display-grid">
+        ${ms.result?`<div class="stat-display-item" style="grid-column:1/-1;background:${ms.result==='Win'?'rgba(16,185,129,.12)':ms.result==='Draw'?'rgba(251,191,36,.12)':'rgba(239,68,68,.12)'}"><div class="stat-display-val" style="color:${ms.result==='Win'?'#6ee7b7':ms.result==='Draw'?'#fde68a':'#fca5a5'}">${ms.result}${ms.score?' '+ms.score:''}</div><div class="stat-display-lbl">Result</div></div>`:''}
+        ${ms.goals!==null&&ms.goals!==''?`<div class="stat-display-item"><div class="stat-display-val">${ms.goals}</div><div class="stat-display-lbl">Goals</div></div>`:''}
+        ${ms.assists!==null&&ms.assists!==''?`<div class="stat-display-item"><div class="stat-display-val">${ms.assists}</div><div class="stat-display-lbl">Assists</div></div>`:''}
+        ${ev.log.minutesPlayed?`<div class="stat-display-item"><div class="stat-display-val">${ev.log.minutesPlayed}'</div><div class="stat-display-lbl">Minutes</div></div>`:''}
+        ${ms.shotsOnTarget!==null&&ms.shotsOnTarget!==''?`<div class="stat-display-item"><div class="stat-display-val">${ms.shotsOnTarget}/${ms.shots||'?'}</div><div class="stat-display-lbl">Shots on Tgt</div></div>`:''}
+        ${ms.keyPasses!==null&&ms.keyPasses!==''?`<div class="stat-display-item"><div class="stat-display-val">${ms.keyPasses}</div><div class="stat-display-lbl">Key Passes</div></div>`:''}
+        ${ms.duelsWon!==null&&ms.duelsWon!==''?`<div class="stat-display-item"><div class="stat-display-val">${ms.duelsWon}/${ms.duelsTotal||'?'}</div><div class="stat-display-lbl">Duels Won</div></div>`:''}
+        ${ms.distance!==null&&ms.distance!==''?`<div class="stat-display-item"><div class="stat-display-val">${ms.distance}</div><div class="stat-display-lbl">Dist. (km)</div></div>`:''}
+      </div>`:'';
     box.innerHTML=`<button class="mx" onclick="closeModal('modal-event-detail')">✕</button>
     <div class="m-title">${ev.type==='match'?'🏟':'👥'} ${ev.title}</div>
     <div class="m-date-badge">${fmtDate(new Date(dkey+'T12:00:00Z'),{weekday:'long',month:'long',day:'numeric'})} · ${ev.intensity}</div>
     <div class="prescribed-note" style="background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.2);color:#a7f3d0">✓ Session Logged</div>
-    <div class="log-detail-row"><span class="log-detail-label">Rating</span><span class="log-detail-val">${'⭐'.repeat(ev.log.rating)}</span></div>
-    ${ev.type==='match'&&ev.log.minutesPlayed?`<div class="log-detail-row"><span class="log-detail-label">Minutes Played</span><span class="log-detail-val">${ev.log.minutesPlayed} min</span></div>`:''}
+    <div class="log-detail-row"><span class="log-detail-label">Rating</span><span class="log-detail-val">${'⭐'.repeat(ev.log.rating||0)}</span></div>
+    ${matchStatsDisplay}
     ${ev.log.wentWell?`<div class="log-detail-row" style="flex-direction:column;gap:.25rem;align-items:flex-start"><span class="log-detail-label">What Went Well</span><span class="log-detail-val">${ev.log.wentWell}</span></div>`:''}
     ${ev.log.improvements?.length?`<div class="log-detail-row" style="flex-direction:column;gap:.35rem;align-items:flex-start"><span class="log-detail-label">Areas to Improve</span><div style="display:flex;flex-wrap:wrap;gap:.4rem">${ev.log.improvements.map(i=>{const a=SKILL_AREAS.find(s=>s.id===i);return`<span class="ptag">${a?.icon||''} ${a?.label||i}</span>`}).join('')}</div></div>`:''}
     ${ev.log.notes?`<div class="log-detail-row" style="flex-direction:column;gap:.25rem;align-items:flex-start"><span class="log-detail-label">Notes</span><span class="log-detail-val">${ev.log.notes}</span></div>`:''}
@@ -1180,13 +1370,40 @@ function reopenLog(){
 function renderLogForm(box,ev,dkey){
   const starsHtml=[1,2,3,4,5].map(n=>`<span class="star${logStarRating>=n?' on':''}" onclick="setStar(${n})">⭐</span>`).join('');
   const tagsHtml=SKILL_AREAS.map(s=>`<button class="m-tag${logImprovements.has(s.id)?' on':''}" onclick="toggleLogImp('${s.id}',this)">${s.icon} ${s.label}</button>`).join('');
+  const matchStats=ev.log?.matchStats||{};
+  const matchStatsSection=ev.type==='match'?`
+    <div class="m-section-title">Match Statistics</div>
+    <div class="stats-grid">
+      <div class="stat-input-wrap"><div class="stat-label">Minutes Played</div><input class="stat-input" type="number" id="ms-mins" min="0" max="120" placeholder="90" value="${ev.log?.minutesPlayed||''}"/></div>
+      <div class="stat-input-wrap"><div class="stat-label">Goals</div><input class="stat-input" type="number" id="ms-goals" min="0" placeholder="0" value="${matchStats.goals??''}"/></div>
+      <div class="stat-input-wrap"><div class="stat-label">Assists</div><input class="stat-input" type="number" id="ms-assists" min="0" placeholder="0" value="${matchStats.assists??''}"/></div>
+      <div class="stat-input-wrap"><div class="stat-label">Shots on Target</div><input class="stat-input" type="number" id="ms-sot" min="0" placeholder="0" value="${matchStats.shotsOnTarget??''}"/></div>
+      <div class="stat-input-wrap"><div class="stat-label">Total Shots</div><input class="stat-input" type="number" id="ms-shots" min="0" placeholder="0" value="${matchStats.shots??''}"/></div>
+      <div class="stat-input-wrap"><div class="stat-label">Key Passes</div><input class="stat-input" type="number" id="ms-keypasses" min="0" placeholder="0" value="${matchStats.keyPasses??''}"/></div>
+      <div class="stat-input-wrap"><div class="stat-label">Duels Won</div><input class="stat-input" type="number" id="ms-duelswon" min="0" placeholder="0" value="${matchStats.duelsWon??''}"/></div>
+      <div class="stat-input-wrap"><div class="stat-label">Duels Total</div><input class="stat-input" type="number" id="ms-duelstot" min="0" placeholder="0" value="${matchStats.duelsTotal??''}"/></div>
+      <div class="stat-input-wrap"><div class="stat-label">Distance (km)</div><input class="stat-input" type="number" id="ms-dist" min="0" step="0.1" placeholder="9.5" value="${matchStats.distance??''}"/></div>
+    </div>
+    <div class="stats-grid" style="grid-template-columns:1fr 1fr;margin-top:.6rem">
+      <div class="stat-input-wrap"><div class="stat-label">Result</div>
+        <select class="stat-input" id="ms-result" style="cursor:pointer">
+          <option value="">—</option>
+          <option value="Win"${matchStats.result==='Win'?' selected':''}>Win</option>
+          <option value="Draw"${matchStats.result==='Draw'?' selected':''}>Draw</option>
+          <option value="Loss"${matchStats.result==='Loss'?' selected':''}>Loss</option>
+        </select>
+      </div>
+      <div class="stat-input-wrap"><div class="stat-label">Score</div><input class="stat-input" type="text" id="ms-score" placeholder="e.g. 2–1" value="${matchStats.score||''}"/></div>
+    </div>`:
+    `${ev.type!=='match'?`<div class="mf"><label>Duration (minutes)</label><input class="mi" id="log-mins" type="number" min="0" max="180" placeholder="e.g. 90" value="${ev.log?.minutesPlayed||''}"/></div>`:''}`;
+
   box.innerHTML=`<button class="mx" onclick="closeModal('modal-event-detail')">✕</button>
-  <div class="m-title">Log Session</div>
+  <div class="m-title">${ev.type==='match'?'🏟':'👥'} Log Session</div>
   <div class="m-date-badge">${ev.title} · ${fmtDate(new Date(dkey+'T12:00:00Z'),{month:'short',day:'numeric'})}</div>
   <div class="mf"><label>Session Rating</label><div class="stars" id="log-stars">${starsHtml}</div></div>
-  ${ev.type==='match'?`<div class="mf"><label>Minutes Played</label><input class="mi" id="log-mins" type="number" min="0" max="120" placeholder="e.g. 90" value="${ev.log?.minutesPlayed||''}"/></div>`:''}
-  <div class="mf"><label>What went well?</label><textarea class="mi" id="log-well" rows="2" placeholder="Describe your best moments…">${ev.log?.wentWell||''}</textarea></div>
-  <div class="mf"><label>Areas to Improve (select all that apply)</label><div class="m-tag-grid" id="log-imp-tags">${tagsHtml}</div></div>
+  ${matchStatsSection}
+  <div class="mf" style="margin-top:1rem"><label>What went well?</label><textarea class="mi" id="log-well" rows="2" placeholder="Describe your best moments…">${ev.log?.wentWell||''}</textarea></div>
+  <div class="mf"><label>Areas to Improve</label><div class="m-tag-grid" id="log-imp-tags">${tagsHtml}</div></div>
   <div class="mf"><label>Additional Notes</label><textarea class="mi" id="log-notes" rows="2" placeholder="Anything else to remember…">${ev.log?.notes||''}</textarea></div>
   <button class="m-btn" onclick="saveSessionLog()">Save Log</button>`;
 }
@@ -1196,10 +1413,27 @@ function saveSessionLog(){
   const me=getMe();if(!me)return;
   const us=getUsers();const evArr=us[me].schedule?.[detailDateKey]||[];
   const idx=evArr.findIndex(e=>e.id===detailEventId);if(idx===-1)return;
-  const mins=document.getElementById('log-mins')?.value;
-  const log={rating:logStarRating,wentWell:document.getElementById('log-well')?.value||'',improvements:[...logImprovements],notes:document.getElementById('log-notes')?.value||'',minutesPlayed:mins||null,loggedAt:new Date().toISOString()};
-  evArr[idx].logged=true;evArr[idx].log=log;if(mins)evArr[idx].mins=mins;
-  // Merge improvements into user profile
+  const ev=evArr[idx];
+  // Collect match stats if this is a match
+  let matchStats=null;
+  let minutesPlayed=document.getElementById('log-mins')?.value||null;
+  if(ev.type==='match'){
+    minutesPlayed=document.getElementById('ms-mins')?.value||null;
+    matchStats={
+      goals:document.getElementById('ms-goals')?.value||null,
+      assists:document.getElementById('ms-assists')?.value||null,
+      shotsOnTarget:document.getElementById('ms-sot')?.value||null,
+      shots:document.getElementById('ms-shots')?.value||null,
+      keyPasses:document.getElementById('ms-keypasses')?.value||null,
+      duelsWon:document.getElementById('ms-duelswon')?.value||null,
+      duelsTotal:document.getElementById('ms-duelstot')?.value||null,
+      distance:document.getElementById('ms-dist')?.value||null,
+      result:document.getElementById('ms-result')?.value||null,
+      score:document.getElementById('ms-score')?.value||null,
+    };
+  }
+  const log={rating:logStarRating,wentWell:document.getElementById('log-well')?.value||'',improvements:[...logImprovements],notes:document.getElementById('log-notes')?.value||'',minutesPlayed,matchStats,loggedAt:new Date().toISOString()};
+  evArr[idx].logged=true;evArr[idx].log=log;if(minutesPlayed)evArr[idx].mins=minutesPlayed;
   const existingImps=us[me].improvements||[];
   const merged=[...new Set([...[...logImprovements],...existingImps])].slice(0,10);
   us[me].improvements=merged;
