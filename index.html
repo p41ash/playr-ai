@@ -319,8 +319,11 @@ ul.clist li.feedback-item::before{color:var(--blue)}
 .hist-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
 .hist-dot{width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--obs2);flex-shrink:0;margin-top:.85rem}
 .hist-vline{width:2px;background:linear-gradient(180deg,var(--bdr),transparent);flex:1;margin-top:2px}
-.hist-card{flex:1;background:var(--obs3);border:1px solid var(--bdr2);border-radius:12px;padding:1.25rem 1.5rem;transition:all .2s}
+.hist-card{flex:1;background:var(--obs3);border:1px solid var(--bdr2);border-radius:12px;padding:1.25rem 1.5rem;transition:all .2s;position:relative}
 .hist-card:hover{border-color:var(--bdr);transform:translateX(4px)}
+.hist-del-btn{position:absolute;top:.85rem;right:.9rem;background:none;border:none;color:var(--muted);cursor:pointer;font-size:.82rem;opacity:0;transition:opacity .15s,color .15s;padding:3px 6px;border-radius:5px;line-height:1}
+.hist-card:hover .hist-del-btn{opacity:.6}
+.hist-del-btn:hover{opacity:1!important;color:#ff6b6b}
 .hist-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem}
 .hist-pos{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--ivory)}
 .hist-date{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:1px}
@@ -1538,6 +1541,7 @@ function renderHistory(){
         <div class="hist-line"><div class="hist-dot"></div><div class="hist-vline"></div></div>
         <div style="flex:1">
           <div class="hist-card">
+            <button class="hist-del-btn" onclick="deleteHistoryPlan('${p.id}',event)" title="Delete plan">✕</button>
             <div class="hist-top"><div class="hist-pos">${p.pos}</div><div class="hist-date">${p.date}</div></div>
             <div class="hist-focus" style="color:var(--mut2)">${p.focus||''}</div>
             <div class="hist-bottom"><span class="pb ${bClass[p.intensity]}">${p.intensity}</span>${Object.entries(p.painAreas||{}).filter(([,v])=>v>0).length?`<span class="hist-pain">Pain areas: ${Object.entries(p.painAreas).filter(([,v])=>v>0).map(([a])=>document.querySelector(`[data-area="${a}"]`)?.dataset.label||a).slice(0,3).join(', ')}</span>`:''}</div>
@@ -1555,6 +1559,7 @@ function renderHistory(){
 }
 function toggleHistDetail(id){const el=document.getElementById('hd-'+id);el?.classList.toggle('open')}
 function loadAndView(id,ev){ev.stopPropagation();const me=getMe();if(!me)return;const p=(getUsers()[me]?.plans||[]).find(p=>p.id===id);if(p)loadPlan(p)}
+function deleteHistoryPlan(id,ev){ev.stopPropagation();const me=getMe();if(!me)return;const us=getUsers();us[me].plans=(us[me].plans||[]).filter(p=>p.id!==id);saveUsers(us);renderHistory();renderPlans();toast('Plan deleted.');}
 
 /* ═══════════════════════════════════════════════════════════
    MOBILE + MISC
